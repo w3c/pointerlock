@@ -196,8 +196,8 @@
           <p>If the mouse is already locked to the same element, a repeated call to
           <code>lock</code> will succeed and the <code>successCallback</code>
           called.  If another element is locked a <a>user agent</a> must transfer
-          the mouse lock to the new <code>target</code> and call the
-          <a><code>pointerlocklost</code></a> callback for the previous target.</p>
+          the mouse lock to the new <code>target</code> and dispatch the
+          <a><code>pointerlocklost</code></a> event for the previous target.</p>
 
           <p>Once in the locked state the <a>user agent</a> must fire all relevant
           user generated <code>MouseEvent</code> events (for example:
