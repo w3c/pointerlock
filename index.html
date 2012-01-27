@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Mouse Lock</title>
+    <title>Pointer Lock</title>
     <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
     <meta name="viewport" content="width=device-width">
     <!--
@@ -16,7 +16,7 @@
         specStatus:           "ED",
 
         // the specification's short name, as in http://www.w3.org/TR/short-name/
-        shortName:            "mouse-lock",
+        shortName:            "pointerlock",
 
         // if your specification has a subtitle that goes below the main
         // formal title, define it here
@@ -35,7 +35,7 @@
         // previousMaturity:  "WD",
 
         // if there a publicly available Editor's Draft, this is the link
-        edDraftURI:           "http://dvcs.w3.org/hg/webevents/raw-file/default/mouse-lock.html",
+        edDraftURI:           "http://dvcs.w3.org/hg/pointerlock/raw-file/default/index.html",
 
         // if this is a LCWD, uncomment and set the end of its review period
         // lcEnd: "2009-08-05",
@@ -61,13 +61,13 @@
         //],
 
         // name of the WG
-        wg:           "Web Events Working Group",
+        wg:           "Web Applications Working Group",
 
         // URI of the public WG page
-        wgURI:        "http://www.w3.org/2010/webevents/",
+        wgURI:        "http://www.w3.org/2008/webapps/",
 
         // name (with the @w3c.org) of the public mailing to which comments are due
-        wgPublicList: "public-webevents",
+        wgPublicList: "public-webapps",
 
         // URI of the patent status for this WG, for Rec-track documents
         // !!!! IMPORTANT !!!!
@@ -111,19 +111,24 @@
 
       <h2>Introduction</h2>
 
-      <p>The Mouse Lock API provides for input methods of applications based on
+      <p>The Pointer Lock API provides for input methods of applications based on
       the movement of the mouse, not just the absolute position of a cursor.  A
       popular example is that of first person movement controls in three
       dimensional graphics applications such as games.  Movement of the mouse is
       interpreted for rotation of the view-port, there is no limit to how far
       movement can go, and no mouse cursor is displayed.</p>
 
-      <p>Mouse Lock is related to Mouse Capture [[MDN-SETCAPTURE]].  Capture provides
+      <p>Pointer Lock is related to Mouse Capture [[MDN-SETCAPTURE]].  Capture provides
       continued event delivery to a target element while a mouse is being
-      dragged, but ceases when the mouse button is released.  Mouse Lock differs
+      dragged, but ceases when the mouse button is released.  Pointer Lock differs
       by being persistent, not limited by screen boundaries, sending events
       regardless of mouse button state, hiding the cursor, and not releasing
       until an API call or specific release gesture by the user.</p>
+
+      <p>The Pointer Lock interaction mode was previously referred to as
+      pointer lock. The name was changed as many different controller types
+      besides mice can manipulate the on screen pointing cursor, and they are
+      all impacted.</p>
 
     </section>
 
@@ -167,7 +172,7 @@
       <h2><a>PointerLock</a> Interface</h2>
       <p>
         The <a>PointerLock</a> interface contains methods
-        providing the ability to enter, exit, and poll the state of mouse lock.
+        providing the ability to enter, exit, and poll the state of pointer lock.
       </p>
 
       <dl title='interface PointerLock' class='idl'>
@@ -175,35 +180,35 @@
         <dd>
           <dfn title="lock"></dfn>
 
-          <p>The <code>lock</code> method requests that the mouse be locked
+          <p>The <code>lock</code> method requests that the pointer be locked
           to a given DOM element <code><dfn>target</dfn></code>. It must immediately
           return. Two optional callback parameters provide asynchronous
           notification of success (<code>successCallback</code>) or failure
           (<code>failureCallback</code>) to acquire the locked state. The user
-          agent must determine if mouse lock state will be entered and call the
+          agent must determine if pointer lock state will be entered and call the
           appropriate callback if it was provided.  Because a <a>user agent</a> may
-          prompt a user for permission to enter mouse lock the response must be
+          prompt a user for permission to enter pointer lock the response must be
           asynchronous.</p>
 
-          <p>Mouse lock must succeed only if the window is in focus and the
+          <p>Pointer lock must succeed only if the window is in focus and the
           user-agent is the active application of the operating system. The
           <code>target</code> of <code>lock</code> need not be in focus.</p>
 
-          <p>Mouse lock must succeed only if the <code>target</code> is in the DOM
-          tree.  If the <code>target</code> is removed from the DOM tree after mouse
-          lock is entered then mouse lock will be lost.</p>
+          <p>Pointer lock must succeed only if the <code>target</code> is in the DOM
+          tree.  If the <code>target</code> is removed from the DOM tree after pointer
+          lock is entered then pointer lock will be lost.</p>
 
-          <p>If the mouse is already locked to the same element, a repeated call to
+          <p>If the pointer is already locked to the same element, a repeated call to
           <code>lock</code> will succeed and the <code>successCallback</code>
           called.  If another element is locked a <a>user agent</a> must transfer
-          the mouse lock to the new <code>target</code> and dispatch the
+          the pointer lock to the new <code>target</code> and dispatch the
           <a><code>pointerlocklost</code></a> event for the previous target.</p>
 
           <p>Once in the locked state the <a>user agent</a> must fire all relevant
           user generated <code>MouseEvent</code> events (for example:
           <code>mousemove</code>, <code>mousedown</code>, <code>mouseup</code>,
           <code>click</code>, <code>wheel</code>)[[!DOM-LEVEL-3-CORE]]
-          to the <code>target</code> of mouse lock, and not fire mouse events to
+          to the <code>target</code> of pointer lock, and not fire mouse events to
           other elements.  Events that require the concept of a mouse cursor must
           not be dispatched (for example: <code>mouseover</code>,
           <code>mouseout</code>).</p>
@@ -226,18 +231,18 @@
         <dd>
           <dfn title="unlock"></dfn>
 
-          <p>The <code>unlock</code> method cancels the mouse lock state.
+          <p>The <code>unlock</code> method cancels the pointer lock state.
           The system mouse cursor must be displayed again and positioned at
-          the same location that it was when mouse lock was entered (the same
+          the same location that it was when pointer lock was entered (the same
           location that is reported in <code>screenX</code>/<code>Y</code>
-          when the mouse is locked).</p>
+          when the pointer is locked).</p>
         </dd>
 
         <dt>readonly attribute bool isLocked</dt>
         <dd>
           <dfn title="isLocked"></dfn>
 
-          <p>The <code>isLocked</code> attribute is true if the mouse is
+          <p>The <code>isLocked</code> attribute is true if the pointer is
           currently locked and false otherwise.</p>
         </dd>
       </dl>
@@ -246,11 +251,11 @@
     <section>
       <h2><dfn><code>pointerlocklost</code></dfn> Event</h2>
 
-      <p>When mouse lock is lost or disabled for any reason <a>user agents</a>
+      <p>When pointer lock is lost or disabled for any reason <a>user agents</a>
       must <a
       href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire">fire
       an event</a> named <code>pointerlocklost</code> with its
-      <code>bubble</code> attribute set to true to the mouse lock
+      <code>bubble</code> attribute set to true to the pointer lock
       <a>target</a> element.</p>
     </section>
 
@@ -269,27 +274,27 @@
       </dl>
 
       <p>The members <code>movementX</code> and <code>movementY</code> must
-      provide the change in position of the mouse, as if the values of
+      provide the change in position of the pointer, as if the values of
       <code>screenX</code>/<code>Y</code> were stored between two subsequent
       <code>mousemove</code> events <code>eNow</code> and
       <code>ePrevious</code> and the difference taken
       <code>movementX = eNow.screenX-ePrevious.screenX</code>.</p>
 
-      <p><code>movementX</code>/<code>Y</code> must be valid regardless of mouse
+      <p><code>movementX</code>/<code>Y</code> must be valid regardless of pointer
       lock state.</p>
 
       <p>When unlocked, the system cursor can exit and re-enter the <a>user
       agent</a> window.  If it does so and the <a>user agent</a> was not the
-      target of operating system mouse move events then the most recent mouse
+      target of operating system mouse move events then the most recent pointer
       position will be unknown to the <a>user agent</a> and
       <code>movementX</code>/<code>Y</code> can not be computed and must be set
       to zero.</p>
 
-      <p>When mouse lock is enabled <code>clientX</code>, <code>clientY</code>,
+      <p>When pointer lock is enabled <code>clientX</code>, <code>clientY</code>,
       <code>screenX</code>, and <code>screenY</code> must hold constant values
-      as if the mouse did not move at all once mouse lock was entered.  But
+      as if the pointer did not move at all once pointer lock was entered.  But
       <code>movementX</code>/<code>Y</code> must continue to provide the change
-      in position of the mouse as when the mouse is unlocked.  There will be no
+      in position of the pointer as when the pointer is unlocked.  There will be no
       limit to <code>movementX</code>/<code>Y</code> values if the mouse is
       continuously moved in a single direction.  The concept of the mouse cursor
       will have been removed, and it will not move off the window or be clamped
@@ -311,13 +316,13 @@
     <section>
       <h2>Requirements</h2>
 
-      <p>The Mouse Lock API must provide a default system action to unlock the
-      mouse.</p>
+      <p>The Pointer Lock API must provide a default system action to unlock the
+      pointer.</p>
 
-      <p>The Mouse Lock API must be agnostic to the underlying system-specific
-      mouse locking mechanism.</p>
+      <p>The Pointer Lock API must be agnostic to the underlying system-specific
+      pointer locking mechanism.</p>
 
-      <p>The Mouse Lock API must exit the mouse lock state if the <a>user agent</a>,
+      <p>The Pointer Lock API must exit the pointer lock state if the <a>user agent</a>,
       window, or tab loses focus.</p>
     </section>
 
@@ -329,7 +334,7 @@
 
         <p>A player on a first/third person game will need to control the
         view-port orientation.  A widely used method is the use of mouse movements
-        to control the viewing angle.  This kind of application can use the Mouse
+        to control the viewing angle.  This kind of application can use the Pointer
         Lock API to allow a complete freedom of control over the viewport's yaw
         and pitch even when the user is not pressing mouse buttons.  Those buttons
         can be used for other actions while constantly providing navigation via
@@ -340,9 +345,9 @@
         <h2>Free rotation of 3D models or panning of 2D layers</h2>
 
         <p>Users of a three dimensional modeling application will need to rotate
-        models.  A application can use the Mouse Lock API to enable the author to
+        models.  A application can use the Pointer Lock API to enable the author to
         rotate the model freely in a drag operation without limiting motion.
-        Without mouse lock a drag would stop providing motion data when the mouse
+        Without pointer lock a drag would stop providing motion data when the mouse
         cursor is limited by the edge of the screen.</p>
 
         <p>Similarly, absolute motion panning of a large two dimensional image
@@ -356,7 +361,7 @@
         <p>A player on a fast reflexes game controls a paddle to bounce back a
         ball to the opponent, while allowing the same paddle to execute actions
         based on different mouse buttons being pressed.  The application can use
-        the Mouse Lock API to allow the player to react quickly without being
+        the Pointer Lock API to allow the player to react quickly without being
         concerned about the mouse cursor leaving the game play area and clicking
         another system application, thus breaking the game flow.</p>
       </section>
@@ -369,7 +374,7 @@
         increment or decrement the numeric value.  E.g. a spinner with a
         number entry text box and arrows pointing up and down that can be
         clicked or dragged on to change the value. An
-        application could use the Mouse Lock API to allow modifying the numeric
+        application could use the Pointer Lock API to allow modifying the numeric
         values beyond what the logical screen bounds allow.  The same could apply
         for a control that fast forwards or rewinds a video or audio stream like a
         "jog".</p>
@@ -380,12 +385,12 @@
 
         <p>Some games use a classical cursor, however they want it to be limited
         or controlled in some manner.  E.g.  limited to the bounds of the game, or
-        movable by the game.  Locking the mouse enables this if the application
+        movable by the game.  Locking the pointer enables this if the application
         creates their own cursor.  However HTML and DOM should still be available
         to use for user interface.  Synthetic mouse events should be permitted to
         allow an application defined cursor to interact with DOM.  E.g.  the
         following code should permit a custom cursor to send click events while
-        the mouse is locked:</p>
+        the pointer is locked:</p>
 
         <pre class='example' data-transform='escapeContents'>
             document.addEventListener("click", function (e) {
@@ -418,22 +423,22 @@
         view-port.</h2>
 
         <p>Real Time Strategy games often use this technique.  When the player
-        moves the mouse to the view-port borders, if they "push" the border
+        moves the pointer to the view-port borders, if they "push" the border
         with a mouse movement, the view-port is panned over the game area
         according to how much they move the mouse.  When moving the mouse cursor
         within the bounds of the view port it acts at is typically would on a
-        system.  Applications may choose to implement this using mouse lock and
+        system.  Applications may choose to implement this using pointer lock and
         the previous use case of "Synthetic cursor interaction with HTML DOM UI"
         to bring cursor behavior completely under their control.</p>
       </section>
 
       <section>
-        <h2>Game Lobby, timer based mouse lock</h2>
+        <h2>Game Lobby, timer based pointer lock</h2>
 
-        <p>Games that use mouse lock may desire a traditional UI and system cursor
+        <p>Games that use pointer lock may desire a traditional UI and system cursor
         while players prepare in a game lobby.  Games usually start after a short
         timer when all players are ready.  Ideally the game could then switch to
-        mouse lock mode without requiring a user gesture.  Players should be able
+        pointer lock mode without requiring a user gesture.  Players should be able
         to seamlessly move from the game lobby into game navigation.</p>
       </section>
 
@@ -443,7 +448,7 @@
         <p>Game portals, and other sites such as Facebook and Google Plus, host
         games for users to play.  These games may be hosted and served from a
         different origin from that of the portal site.  Embedded games should be
-        able to lock the mouse, even in non-full screen mode.</p>
+        able to lock the pointer, even in non-full screen mode.</p>
       </section>
 
     </section>
@@ -456,20 +461,20 @@
           <li>User gestures may be misdirected to elements the user did not intend
           to interact with.</li>
 
-          <li>Mouse Lock will remove the ability of a user to interact with user
+          <li>Pointer Lock will remove the ability of a user to interact with user
           agent and operating system controls</li>
 
-          <li>Mouse Lock can be called repeated by script after user exits mouse
+          <li>Pointer Lock can be called repeated by script after user exits pointer
           lock, blocking user from meaningful progress.</li>
 
           <li>Full screen exit instructions are displayed in some <a>user agents</a> when
-          the mouse is moved to the top of the screen.  During mouse lock that
+          the pointer is moved to the top of the screen.  During pointer lock that
           gesture is not possible.</li>
         </ul>
 
         <p>Responses:</p>
         <ul>
-          <li>User agents may limit what security origins may lock the mouse.</li>
+          <li>User agents may limit what security origins may lock the pointer.</li>
 
           <li>User agents may prompt for confirmation before locking, this
           preference may be saved as a content setting.</li>
@@ -478,30 +483,30 @@
 
           <li>Persistent display of escape instructions can be provided.</li>
 
-          <li>Repeated escapes of mouse lock can signal <a>user agent</a> to not re-lock
-          the mouse without more specific user intent gesture, e.g.  similar to how
+          <li>Repeated escapes of pointer lock can signal <a>user agent</a> to not re-lock
+          the pointer without more specific user intent gesture, e.g.  similar to how
           Chrome suppresses repeated alert() calls.</li>
 
           <li>Changing to new tabs, windows, or any other action that causes a page
-          to lose focus will exit mouse lock.</li>
+          to lose focus will exit pointer lock.</li>
 
-          <li>Mouse lock can only be engaged when the window is in focus in the user
+          <li>Pointer lock can only be engaged when the window is in focus in the user
           agent and operating system.</li>
         </ul>
 
         <p>Recommendations:</p>
         <ul>
-          <li>Esc key should exit mouse lock.</li>
+          <li>Esc key should exit pointer lock.</li>
 
-          <li>Preferences per sub-domain can be used to allow or block mouse lock,
+          <li>Preferences per sub-domain can be used to allow or block pointer lock,
           similar to pop-up, geolocation, and fullscreen.</li>
         </ul>
 
-        <p>Mouse Lock is a required user interaction mode for certain application
+        <p>pointer lock is a required user interaction mode for certain application
         types, but carries a usability concern if maliciously used.  An attacker
         could remove the ability for a user to control their mouse cursor on their
         system.  User agents will prevent this by always providing a mechanism to
-        exit mouse lock, by informing the user of how, and by limiting how mouse
+        exit pointer lock, by informing the user of how, and by limiting how pointer
         lock can be entered.</p>
 
         <p>User agents will determine their own appropriate policies, which may be
@@ -509,7 +514,7 @@
         discussion illustrates considerations and plausible implementations.</p>
 
         <dl>
-          <dt>Escape from mouse lock must always be possible.</dt>
+          <dt>Escape from pointer lock must always be possible.</dt>
           <dd>Based on device the mechanisms will vary, but obvious examples include
           the keyboard escape key "Esc" and any control that moves the system focus
           away from the web page (window management keystrokes that change windows,
@@ -517,14 +522,14 @@
 
           <dt>Escape instructions may be communicated.</dt>
           <dd>User agents can provide persistent on screen instructions, or
-          transitory instructions when mouse lock is entered.  If users are
+          transitory instructions when pointer lock is entered.  If users are
           particularly dissatisfied with the distraction of instructions <a>user agents</a>
           may offer to hide instructions after sufficient intent is expressed, e.g.
           by permissions.</dd>
 
           <dt>Escape can not be performed by mouse actions, including the use of the
           context menu.</dt>
-          <dd>The intent of the Mouse Lock feature is to enable rich applications
+          <dd>The intent of the pointer lock feature is to enable rich applications
           not currently available in browsers.  These applications have unbounded
           movement and button press consumption needs, including the use of the
           context menu.<dd>
@@ -534,7 +539,7 @@
 
         <dl>
           <dt>A conservative approach</dt>
-          <dd>May only permit mouse lock based on a user gesture such as a click
+          <dd>May only permit pointer lock based on a user gesture such as a click
           event.  The <a>user agent</a> would prompt the user with a confirmation dialog,
           with options to permit, dismiss, or block all repeated attempts.  That
           dialog may be a passive display instead of modal.  Instructions for escape
@@ -544,20 +549,20 @@
           escape gesture, e.g.  by pressing F10.</dd>
 
           <dt>A full screen approach</dt>
-          <dd>May permit mouse lock at any time, and cancel mouse lock when full
+          <dd>May permit pointer lock at any time, and cancel pointer lock when full
           screen mode is exited.  Instructions for exiting full screen mode may be
           shown, likely for a brief period of time to not detriment the full screen
-          experience.  Entry to mouse lock may be gated by a user explicitly
+          experience.  Entry to pointer lock may be gated by a user explicitly
           confirming the action via a dialog.</dd>
 
           <dt>A permissive approach</dt>
-          <dd>May permit mouse lock for the target or ancestor of a user gesture
+          <dd>May permit pointer lock for the target or ancestor of a user gesture
           target without prompt.  Escape instructions would likely be displayed
           persistently in a non full screen view.</dd>
         </dl>
 
         <p>Chrome / Chromium has a design document page for their implementation
-        of mouse lock: <a
+        of pointer lock: <a
         href="http://www.chromium.org/developers/design-documents/mouse-lock">http://www.chromium.org/developers/design-documents/mouse-lock</a></p>
 
     </section>
@@ -570,7 +575,7 @@
 
         <p>Mouse Capture [[MDN-SETCAPTURE]]
         handles low security risk mouse event target lock for the duration of a
-        mouse drag gesture.  Mouse Lock removes the concept of the cursor and
+        mouse drag gesture.  pointer lock removes the concept of the cursor and
         directs all events to a given target.  They are related, but
         different.</p>
 
@@ -579,7 +584,7 @@
         lock when mouse up" and the increased functionality of total control over
         mouse input and removal of the system cursor.  The security trait would
         allow more permissive use of the feature for applications that only
-        required a short burst of mouse lock during a drag event.</p>
+        required a short burst of pointer lock during a drag event.</p>
 
         <p>This functionality is omitted from the initial version of this spec
         because it helps the minor use cases in windowed mode but we still do not
@@ -602,7 +607,7 @@
       <section>
         <h2>Why use .movementX/Y instead of .deltaX/Y?</h2>
 
-        <p>When the mouse is locked 'wheel' events should be sent to the mouse
+        <p>When the pointer is locked 'wheel' events should be sent to the pointer
         lock <a>target</a> element just as 'mousemove' events are.  There is a naming
         conflict with .deltaX/Y/Z as defined in <a
         href="http://dev.w3.org/2006/webapi/DOM-Level-3-Events/html/DOM3-Events.html#events-wheelevents">DOM
@@ -657,7 +662,7 @@
         considered to date are limited to USB devices.</p>
 
         <p>It would be reasonable to consider adding these capabilities in the
-        future, as the currently specified mouse lock API would be easy to
+        future, as the currently specified pointer lock API would be easy to
         continue to support if the finer grained delta and confinement features
         were implemented.</p>
 
@@ -679,7 +684,7 @@
         <h2>Why modify MouseEvent and reuse existing mouse events instead of
         creating a mouse delta event?</h2>
 
-        <p>When under mouse lock many mouse events remain relevant, e.g.  click,
+        <p>When under pointer lock many mouse events remain relevant, e.g.  click,
         mousedown, etc.  These all share the same event data structure MouseEvent.
         If movement data were reported via a new data structure then a new event
         would be needed for reporting delta movement.  The new data structure
@@ -697,7 +702,7 @@
         use of delta motion of the mouse.</p>
 
         <p>The only negative of adding movementX/Y to MouseEvent appears to be the
-        unused values in clientX/Y and screenX/Y when under mouse lock.  This does
+        unused values in clientX/Y and screenX/Y when under pointer lock.  This does
         not seem to be a significant problem.</p>
 
         <p>Therefore the minimal change to add movementX/Y to MouseEvent is
@@ -705,7 +710,7 @@
       </section>
 
       <section>
-        <h2>Why separate targets for mouse events under mouse lock and keyboard
+        <h2>Why separate targets for mouse events under pointer lock and keyboard
         input focus?</h2>
 
         <p>Consider a game with a 3D view controlled by moving the mouse cursor,
