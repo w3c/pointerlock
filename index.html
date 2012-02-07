@@ -128,6 +128,12 @@
       regardless of mouse button state, hiding the cursor, and not releasing
       until an API call or specific release gesture by the user.</p>
 
+      <p>Pointer Lock deals with capturing a single resource and relating it to
+      a single element. This is similar to Fullscreen [[FULLSCREEN]], which
+      promotes a single element to be full screen. The Pointer Lock API chooses
+      to pattern the resource capture, state change, and release API as closely
+      as possible after the Fullscreen API.</p>
+
       <p>The Pointer Lock interaction mode was previously referred to as
       mouse lock. The name was changed as many different controller types
       besides mice can manipulate the on screen pointing cursor, and they are
@@ -172,22 +178,20 @@
     </section>
 
     <section>
-      <h2><a>PointerLock</a> Interface</h2>
+      <h2><a>Element</a> Interface</h2>
       <p>
-        The <a>PointerLock</a> interface contains methods
-        providing the ability to enter, exit, and poll the state of pointer lock.
+        The <a>Element</a> interface is extended to provide the ability to
+        request the the pointer be locked.
       </p>
 
-      <dl title='interface PointerLock' class='idl'>
-        <dt>void lock ()</dt>
+      <dl title='partial interface Element' class='idl'>
+        <dt>void requestPointerLock()</dt>
         <dd>
           <dfn title="lock"></dfn>
 
-          <p>The <code>lock</code> method requests that the pointer be locked
+          <p>The <code>requestPointerLock</code> method requests that the pointer be locked
           to a given DOM element <code><dfn>target</dfn></code>. It must immediately
-          return. Two optional callback parameters provide asynchronous
-          notification of success (<code>successCallback</code>) or failure
-          (<code>failureCallback</code>) to acquire the locked state. The user
+          return. The user
           agent must determine if pointer lock state will be entered and call the
           appropriate callback if it was provided.  Because a <a>user agent</a> may
           prompt a user for permission to enter pointer lock the response must be
