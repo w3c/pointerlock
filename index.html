@@ -128,6 +128,14 @@
       regardless of mouse button state, hiding the cursor, and not releasing
       until an API call or specific release gesture by the user.</p>
 
+      <p>Pointer Lock deals with capturing a single resource and relating it to
+      a single element. This is similar to Fullscreen [<a
+      href="http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html">
+      FULLSCREEN</a>], which
+      promotes a single element to be full screen. The Pointer Lock API chooses
+      to pattern the resource capture, state change, and release API as closely
+      as possible after the Fullscreen API.</p>
+
       <p>The Pointer Lock interaction mode was previously referred to as
       mouse lock. The name was changed as many different controller types
       besides mice can manipulate the on screen pointing cursor, and they are
@@ -156,62 +164,60 @@
     </section>
 
     <section>
-      <h2>Extensions to the <a>Navigator</a> Interface</h2>
-      <p>
-        The <a>Navigator</a> interface [[!NAVIGATOR]] contains a
-        <code>pointer</code> attribute providing access to the
-        <a>PointerLock</a> interface.
-      </p>
+      <h2><code>pointerlockchange</code> and <code>pointerlockerror</code> Events</h2>
 
-      <dl title='partial interface Navigator' class='idl'>
-        <dt>readonly attribute PointerLock pointer</dt>
-        <dd>
-          <dfn title="pointer"></dfn>
-        </dd>
-      </dl>
+      <p>Two events are used to communicate pointer lock state change or
+      an error in changing state. They are named <dfn>pointerlockchange</dfn>
+      and <dfn>pointerlockerror</dfn>.</p>
+
+      <p><a>User agents</a>
+      must deliver these events by <a
+      href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">
+      queuing a task</a> to <a class="external"
+      href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire">
+      fire an event</a> of the appropriate name with its
+      <code>bubble</code> attribute set to true to the pointer lock
+      <a>target</a> element's <a
+      href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document">
+      node document</a>.</p>
     </section>
 
     <section>
-      <h2><a>PointerLock</a> Interface</h2>
+      <h2><a>Element</a> Interface</h2>
       <p>
-        The <a>PointerLock</a> interface contains methods
-        providing the ability to enter, exit, and poll the state of pointer lock.
+        The <a>Element</a> interface is extended to provide the ability to
+        request the the pointer be locked.
       </p>
 
-      <dl title='interface PointerLock' class='idl'>
-        <dt>void lock ()</dt>
+      <dl title='partial interface Element' class='idl'>
+        <dt>void requestPointerLock()</dt>
         <dd>
-          <dfn title="lock"></dfn>
+          <dfn title="requestPointerLock"></dfn>
 
-          <p>The <code>lock</code> method requests that the pointer be locked
-          to a given DOM element <code><dfn>target</dfn></code>. It must immediately
-          return. Two optional callback parameters provide asynchronous
-          notification of success (<code>successCallback</code>) or failure
-          (<code>failureCallback</code>) to acquire the locked state. The user
-          agent must determine if pointer lock state will be entered and call the
-          appropriate callback if it was provided.  Because a <a>user agent</a> may
-          prompt a user for permission to enter pointer lock the response must be
-          asynchronous.</p>
+          <p>Requests that the pointer be locked to a DOM element
+          <dfn>target</dfn>. The <a>user agent</a> determines if pointer lock
+          state will be entered and upon lock state change or error must send
+          either a <a>pointerlockchange</a> or <a>pointerlockerror</a>
+          event respectively.
 
           <p>Pointer lock must succeed only if the window is in focus and the
           user-agent is the active application of the operating system. The
-          <code>target</code> of <code>lock</code> need not be in focus.</p>
+          <a>target</a> element need not be in focus.</p>
 
-          <p>Pointer lock must succeed only if the <code>target</code> is in the DOM
-          tree.  If the <code>target</code> is removed from the DOM tree after pointer
-          lock is entered then pointer lock will be lost.</p>
+          <p>Pointer lock must succeed only if the <a>target</a> is in the DOM
+          tree.  If the <a>target</a> is removed from the DOM tree after pointer
+          lock is entered then pointer lock will be lost and a
+           <a>pointerlockchange</a> event sent.</p>
 
-          <p>If the pointer is already locked to the same element, a repeated call to
-          <code>lock</code> will succeed and the <code>successCallback</code>
-          called.  If another element is locked a <a>user agent</a> must transfer
-          the pointer lock to the new <code>target</code> and dispatch the
-          <a><code>pointerlocklost</code></a> event for the previous target.</p>
+          <p>If any element is already locked (including this one) the pointer
+          lock <a>target</a> must be updated to this element and a
+          <a>pointerlockchange</a> event sent.</p>
 
           <p>Once in the locked state the <a>user agent</a> must fire all relevant
           user generated <code>MouseEvent</code> events (for example:
           <code>mousemove</code>, <code>mousedown</code>, <code>mouseup</code>,
           <code>click</code>, <code>wheel</code>)[[!DOM-LEVEL-3-CORE]]
-          to the <code>target</code> of pointer lock, and not fire mouse events to
+          to the <a>target</a> of pointer lock, and not fire mouse events to
           other elements.  Events that require the concept of a mouse cursor must
           not be dispatched (for example: <code>mouseover</code>,
           <code>mouseout</code>).</p>
@@ -222,44 +228,42 @@
 
           <p>Synthetic mouse events created by application script act the same
           regardless of lock state.<p>
-
-          <dl class='parameters'>
-            <dt>Element target</dt> <dd></dd>
-            <dt>optional VoidCallback successCallback</dt> <dd></dd>
-            <dt>optional VoidCallback failureCallback</dt> <dd></dd>
-          </dl>
-        </dd>
-
-        <dt>void unlock ()</dt>
-        <dd>
-          <dfn title="unlock"></dfn>
-
-          <p>The <code>unlock</code> method cancels the pointer lock state.
-          The system mouse cursor must be displayed again and positioned at
-          the same location that it was when pointer lock was entered (the same
-          location that is reported in <code>screenX</code>/<code>Y</code>
-          when the pointer is locked).</p>
-        </dd>
-
-        <dt>readonly attribute bool isLocked</dt>
-        <dd>
-          <dfn title="isLocked"></dfn>
-
-          <p>The <code>isLocked</code> attribute is true if the pointer is
-          currently locked and false otherwise.</p>
         </dd>
       </dl>
     </section>
 
     <section>
-      <h2><dfn><code>pointerlocklost</code></dfn> Event</h2>
+      <h2>Extensions to the <a>Document</a> Interface</h2>
 
-      <p>When pointer lock is lost or disabled for any reason <a>user agents</a>
-      must <a
-      href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire">fire
-      an event</a> named <code>pointerlocklost</code> with its
-      <code>bubble</code> attribute set to true to the pointer lock
-      <a>target</a> element.</p>
+      <dl title='partial interface Document' class='idl'>
+        <dt>readonly attribute Element pointerLockElement</dt>
+        <dd>
+          <dfn title="pointerLockElement"></dfn>
+
+          <p>Returns the element set as the <a>target</a> for mouse events while the pointer
+          is locked. Null if unlocked.</p>
+        </dd>
+
+        <dt>readonly attribute boolean pointerLockEnabled</dt>
+        <dd>
+          <dfn title="pointerLockEnabled"></dfn>
+
+          <p>Returns true if the pointer is currently locked.</p>
+        </dd>
+        <dt>void exitPointerLock ()</dt>
+        <dd>
+          <dfn title="exitPointerLock"></dfn>
+
+          <p>Initiates an exit from pointer lock state if currently locked,
+          and sends a <a>pointerlockchange</a> event when the lock state
+          has bene exited.</p>
+
+          <p>The system mouse cursor must be displayed again and positioned at
+          the same location that it was when pointer lock was entered (the same
+          location that is reported in <code>screenX</code>/<code>Y</code>
+          when the pointer is locked).</p>
+        </dd>
+      </dl>
     </section>
 
     <section>
@@ -302,18 +306,6 @@
       continuously moved in a single direction.  The concept of the mouse cursor
       will have been removed, and it will not move off the window or be clamped
       by a screen edge.</p>
-    </section>
-
-    <section>
-      <h2><a>VoidCallback</a> Interface</h2>
-      <p>
-        The <a>VoidCallback</a> interface is a generic callback with no parameters.
-      </p>
-      <dl title='[NoInterfaceObject] interface VoidCallback' class='idl'>
-        <dt>void handleEvent ()</dt>
-        <dd>
-        </dd>
-      </dl>
     </section>
 
     <section>
