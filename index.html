@@ -220,9 +220,13 @@
           lock is entered then pointer lock will be lost and a
            <a>pointerlockchange</a> event sent.</p>
 
-          <p>If any element is already locked (including this one) the pointer
+          <p>If any element in the same document
+          is already locked (including this one) the pointer
           lock <a>target</a> must be updated to this element and a
           <a>pointerlockchange</a> event sent.</p>
+
+          <p>If any element in another document is already locked the request
+          must fail and a <a>pointerlockerror</a> event be sent.</p>
 
           <p>Once in the locked state the <a>user agent</a> must fire all relevant
           user generated <code>MouseEvent</code> events (for example:
@@ -252,14 +256,15 @@
           <dfn title="pointerLockElement"></dfn>
 
           <p>Returns the element set as the <a>target</a> for mouse events while the pointer
-          is locked. Null if unlocked.</p>
+          is locked. Null if unlocked or if the target is in another document.</p>
         </dd>
 
         <dt>void exitPointerLock ()</dt>
         <dd>
           <dfn title="exitPointerLock"></dfn>
 
-          <p>Initiates an exit from pointer lock state if currently locked,
+          <p>Initiates an exit from pointer lock state if currently locked
+          to a target in this document,
           and sends a <a>pointerlockchange</a> event when the lock state
           has been exited.</p>
 
