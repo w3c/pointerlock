@@ -297,6 +297,14 @@
       <code>ePrevious</code> and the difference taken
       <code>movementX = eNow.screenX-ePrevious.screenX</code>.</p>
 
+      <p><code>movementX</code>/<code>Y</code> must be zero for all mouse events
+      except <code>mousemove</code>. All motion data must be delivered via
+      <code>mousemove</code> events such that between any two mouse events
+      <code>earlierEvent</code> and <code>currentEvent</code> the value of
+      <code>currentEvent.screenX-earlierEvent.screenX</code> is equivalent to
+      the sum of all <code>movementX</code> values received on
+      <code>mousemove</code> events after <code>earlierEvent</code>.</p>
+
       <p><code>movementX</code>/<code>Y</code> must be valid regardless of pointer
       lock state.</p>
 
