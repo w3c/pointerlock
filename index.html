@@ -220,8 +220,8 @@
           lock is entered then pointer lock will be lost and a
            <a>pointerlockchange</a> event sent.</p>
 
-          <p>If any element in the same document
-          is already locked (including this one) the pointer
+          <p>If any element (including this one) in the same document
+          is already locked (or pending lock) the pointer
           lock <a>target</a> must be updated to this element and a
           <a>pointerlockchange</a> event sent.</p>
 
@@ -255,8 +255,9 @@
         <dd>
           <dfn title="pointerLockElement"></dfn>
 
-          <p>Returns the element set as the <a>target</a> for mouse events while the pointer
-          is locked. Null if unlocked or if the target is in another document.</p>
+          <p>Returns the element set as the <a>target</a> for mouse events
+          while the pointer is locked. Null if lock is pending, pointer is
+          unlocked, or if the target is in another document.</p>
         </dd>
 
         <dt>void exitPointerLock ()</dt>
