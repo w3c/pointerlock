@@ -169,16 +169,6 @@
     </section>
 
     <section>
-      <h2>Terminology</h2>
-
-      <p><dfn>Sandboxed pointer lock flag</dfn> is IN PROGRESS OF BEING DEFINED
-      in <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=18647">
-      HTML</a> Sandboxing. In summary, pointer lock is disabled in sandboxed
-      iframe documents unless sandbox="allow-pointer-lock" is added.</p>
-
-    </section>
-
-    <section>
       <h2><code>pointerlockchange</code> and <code>pointerlockerror</code> Events</h2>
 
       <p>Two events are used to communicate pointer lock state change or
@@ -215,8 +205,10 @@
           either a <a>pointerlockchange</a> or <a>pointerlockerror</a>
           event respectively.
 
-          <p>Pointer lock must succeed only if the
-          <a>Sandboxed pointer lock flag</a> is not set.</p>
+          <p>Pointer lock must succeed only if the document object's
+          <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#active-sandboxing-flag-set">
+          active sandboxing flag set</a> does not have the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#sandboxed-pointer-lock-browsing-context-flag">
+          sandboxed pointer lock browsing context flag</a> set.
 
           <p>Pointer lock must succeed only if the window is in focus and the
           user-agent is the active application of the operating system. The
