@@ -173,7 +173,8 @@
 
       <p>Two events are used to communicate pointer lock state change or
       an error in changing state. They are named <dfn>pointerlockchange</dfn>
-      and <dfn>pointerlockerror</dfn>.</p>
+      and <dfn>pointerlockerror</dfn>. If pointer lock is entered or exited
+      for any reason a <a>pointerlockchange</a> event must be sent.</p>
 
       <p><a>User agents</a>
       must deliver these events by <a
@@ -210,14 +211,18 @@
           active sandboxing flag set</a> does not have the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#sandboxed-pointer-lock-browsing-context-flag">
           sandboxed pointer lock browsing context flag</a> set.
 
-          <p>Pointer lock must succeed only if the window is in focus and the
-          user-agent is the active application of the operating system. The
-          <a>target</a> element need not be in focus.</p>
-
-          <p>Pointer lock must succeed only if the <a>target</a> is in the DOM
-          tree.  If the <a>target</a> is removed from the DOM tree after pointer
-          lock is entered then pointer lock will be lost and a
-           <a>pointerlockchange</a> event sent.</p>
+          <p>Pointer lock must succeed only if the <a>target</a> is
+          <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#in-a-document">in</a>
+          the
+          <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#active-document">active document</a>
+          of a
+          <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a>
+          which is (or has an
+          <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>
+          which is) in focus by a window which is in focus by the
+          operating system's window manager. The <a>target</a> element and its
+          <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a>
+          need not be in focus.</p>
 
           <p>If any element (including this one) in the same document
           is already locked (or pending lock) the pointer
@@ -351,8 +356,14 @@
       <p>The Pointer Lock API must be agnostic to the underlying system-specific
       pointer locking mechanism.</p>
 
-      <p>The Pointer Lock API must exit the pointer lock state if the <a>user agent</a>,
-      window, or tab loses focus.</p>
+      <p>The Pointer Lock API must exit the pointer lock state if the
+      <a>target</a> is removed from its document, or the <a>user agent</a>,
+      window, or tab loses focus. Moving focus between elements of
+      <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#active-document">active documents</a>,
+      including between
+      <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing contexts</a>,
+      does not exit pointer lock. E.g. using the keyboard
+      to move focus between contents of frames or iframes will not exit.</p>
     </section>
 
     <section class='informative'>
