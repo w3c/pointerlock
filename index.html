@@ -108,13 +108,6 @@
       A history of changes to this document can be found at
       <a href="http://dvcs.w3.org/hg/pointerlock/log/default/index.html">
       http://dvcs.w3.org/hg/pointerlock/log/default/index.html</a>
-
-      <p>Outstanding <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&component=Pointer%20Lock&resolution=---">issues</a>:</p>
-
-      <div class="issue"><a
-      href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=19297">19297</a>
-      May user agents apply additional restrictions on entering pointer
-      lock?</div>
     </section>
 
     <section id='introduction' class='informative'>
@@ -223,6 +216,28 @@
           operating system's window manager. The <a>target</a> element and its
           <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a>
           need not be in focus.</p>
+
+          <p>If a user has exited pointer lock via the <a>default unlock user
+          gesture</a>, or pointer lock has not previously been entered for this
+          document, a user gesture must be received by the document before
+          <a>requestPointerLock</a> will succeed.</p>
+
+          <p class="note">
+            This ensures a user can leave a
+            document that constantly attempts to lock the pointer. The document
+            will be blocked from locking upon initial navigation or re-acquiring
+            lock unless the user re-engages directly with the document.<br><br>
+
+            Conversely, if pointer lock is exited via <a>exitPointerLock</a>
+            no user gesture is required to reenter pointer lock. This enables
+            applications that frequently move between interaction modes, and
+            ones that may do so based on a timer or remote network activity.
+            <br><br>
+
+            Pointer lock is commonly combined with fullscreen [[FULLSCREEN]], and
+            if a user gesture is used to enter fullscreen it is sufficient
+            for a subsequent requestPointerLock.
+          </p>
 
           <p>If any element (including this one) in the same document
           is already locked (or pending lock) the pointer
@@ -350,13 +365,14 @@
     <section>
       <h2>Requirements</h2>
 
-      <p>The Pointer Lock API must provide a default system action to unlock the
-      pointer.</p>
+      <p>A <dfn>default unlock user gesture</dfn> must always be available that
+      will exit pointer lock.</p>
+      <p class="note">The ESC key is the recommended <a>default unlock user
+      gesture</a> for user agents with keyboard input. It is recommended that
+      the unlock gesture also match any used to exit fullscreen
+      [[FULLSCREEN]].</p>
 
-      <p>The Pointer Lock API must be agnostic to the underlying system-specific
-      pointer locking mechanism.</p>
-
-      <p>The Pointer Lock API must exit the pointer lock state if the
+      <p>Pointer lock must be exited if the
       <a>target</a> is removed from its document, or the <a>user agent</a>,
       window, or tab loses focus. Moving focus between elements of
       <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#active-document">active documents</a>,
