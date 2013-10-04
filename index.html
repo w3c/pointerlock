@@ -383,7 +383,9 @@
 
       <p>Pointer lock must not be exited when fullscreen [[FULLSCREEN]] is
       entered or exited unless the pointer is required to enable interaction
-      with the user agent graphical user interface.</p>
+      with the user agent graphical user interface or the <a>default
+      unlock user gesture</a> was used to exit both fullscreen and pointer
+      lock.</p>
     </section>
 
     <section class='informative'>
@@ -539,7 +541,8 @@
           <li>User agents may prompt for confirmation before locking, this
           preference may be saved as a content setting.</li>
 
-          <li>Keyboard based escape will always be provided, e.g.  Esc key.</li>
+          <li>Escape will always be provided by a <a>default unlock user
+          gesture</a>, e.g.  Esc key.</li>
 
           <li>Persistent display of escape instructions can be provided.</li>
 
