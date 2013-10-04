@@ -565,7 +565,7 @@
           similar to pop-up, geolocation, and fullscreen.</li>
         </ul>
 
-        <p>pointer lock is a required user interaction mode for certain application
+        <p>Pointer lock is a required user interaction mode for certain application
         types, but carries a usability concern if maliciously used.  An attacker
         could remove the ability for a user to control their mouse cursor on their
         system.  User agents will prevent this by always providing a mechanism to
@@ -573,61 +573,7 @@
         lock can be entered.</p>
 
         <p>User agents will determine their own appropriate policies, which may be
-        specialized per device or differ based on user options.  The following
-        discussion illustrates considerations and plausible implementations.</p>
-
-        <dl>
-          <dt>Escape from pointer lock must always be possible.</dt>
-          <dd>Based on device the mechanisms will vary, but obvious examples include
-          the keyboard escape key "Esc" and any control that moves the system focus
-          away from the web page (window management keystrokes that change windows,
-          operating system buttons such as the Windows key).</dd>
-
-          <dt>Escape instructions may be communicated.</dt>
-          <dd>User agents can provide persistent on screen instructions, or
-          transitory instructions when pointer lock is entered.  If users are
-          particularly dissatisfied with the distraction of instructions <a>user agents</a>
-          may offer to hide instructions after sufficient intent is expressed, e.g.
-          by permissions.</dd>
-
-          <dt>Escape can not be performed by mouse actions, including the use of the
-          context menu.</dt>
-          <dd>The intent of the pointer lock feature is to enable rich applications
-          not currently available in browsers.  These applications have unbounded
-          movement and button press consumption needs, including the use of the
-          context menu.<dd>
-        </dl>
-
-        <p>Examples of user agent scenarios:</p>
-
-        <dl>
-          <dt>A conservative approach</dt>
-          <dd>May only permit pointer lock based on a user gesture such as a click
-          event.  The <a>user agent</a> would prompt the user with a confirmation dialog,
-          with options to permit, dismiss, or block all repeated attempts.  That
-          dialog may be a passive display instead of modal.  Instructions for escape
-          would be provided.  After acceptance, a succinct reminder notice of escape
-          instructions may persist.  In the extreme, a <a>user agent</a> may require the
-          user to perform an uncommon gesture demonstrating that they understand the
-          escape gesture, e.g.  by pressing F10.</dd>
-
-          <dt>A full screen approach</dt>
-          <dd>May permit pointer lock at any time, and cancel pointer lock when full
-          screen mode is exited.  Instructions for exiting full screen mode may be
-          shown, likely for a brief period of time to not detriment the full screen
-          experience.  Entry to pointer lock may be gated by a user explicitly
-          confirming the action via a dialog.</dd>
-
-          <dt>A permissive approach</dt>
-          <dd>May permit pointer lock for the target or ancestor of a user gesture
-          target without prompt.  Escape instructions would likely be displayed
-          persistently in a non full screen view.</dd>
-        </dl>
-
-        <p>Chrome / Chromium has a design document page for their implementation
-        of pointer lock: <a
-        href="http://www.chromium.org/developers/design-documents/mouse-lock">http://www.chromium.org/developers/design-documents/mouse-lock</a></p>
-
+        specialized per device or differ based on user options.
     </section>
 
     <section class='informative'>
@@ -787,7 +733,7 @@
     </section>
 
     <section class='appendix informative'>
-      <h2>Acknowledgements</h2>
+      <h2>Acknowledgments</h2>
 
       <p>Many have made contributions to the discussions of this
         specification:</p>
@@ -809,8 +755,6 @@
         <li>Robert O'Callahan</li>
         <li>Tab Atkins Jr.</li>
       </ul>
-
-      <p>Please let me know if I have inadvertently omitted your name.</p>
     </section>
   </body>
 </html>
