@@ -334,8 +334,8 @@
     <section>
       <h2>Extensions to the <a>MouseEvent</a> Interface</h2>
 
-      <p>User agents must extend the MouseEvent interface [<a
-      href="https://dvcs.w3.org/hg/dom3events/raw-file/tip/html/DOM3-Events.html#events-mouseevents">DOMMOUSE</a>]
+      <p>User agents must extend the MouseEvent interface
+      [[!DOM-LEVEL-3-EVENTS]]
       with two members:</p>
 
       <dl title='partial interface MouseEvent' class='idl'>
@@ -379,6 +379,22 @@
       continuously moved in a single direction.  The concept of the mouse cursor
       will have been removed, and it will not move off the window or be clamped
       by a screen edge.</p>
+    </section>
+
+    <section>
+      <h2>Extensions to the <a>MouseEventInit</a> Dictionary</h2>
+
+      <p>User agents must extend the MouseEventInit dictionary
+      [[!DOM-LEVEL-3-EVENTS]] with two members <code>movementX</code> and
+      <code>movementY</code> used to initialize respective members
+      of <code>MouseEvent</code>.</p>
+
+      <dl title='partial dictionary MouseEventInit' class='idl'>
+        <dt>attribute long movementX</dt>
+        <dd><dfn title="movementX"></dfn></dd>
+        <dt>attribute long movementY</dt>
+        <dd><dfn title="movementY"></dfn></dd>
+      </dl>
     </section>
 
     <section>
