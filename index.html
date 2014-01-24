@@ -40,10 +40,6 @@
         // if this is a LCWD, uncomment and set the end of its review period
         // lcEnd: "2009-08-05",
 
-        // if you want to have extra CSS, append them to this list
-        // it is recommended that the respec.css stylesheet be kept
-        extraCSS:             ["http://www.w3.org/StyleSheets/TR/W3C-TR.css", "http://dev.w3.org/2009/dap/ReSpec.js/css/respec.css"],
-
         // editors, add as many as you like
         // only "name" is required
         editors:  [
@@ -88,12 +84,6 @@
         white-space: pre-wrap;
       }
     </style>
-
-    <script>
-        function escapeContents(doc, content) {
-            return doc._esc(content);
-        }
-    </script>
   </head>
   <body>
     <section id='abstract'>
@@ -492,7 +482,7 @@
         following code should permit a custom cursor to send click events while
         the pointer is locked:</p>
 
-        <pre class='example' data-transform='escapeContents'>
+        <pre class='example highlight'>
             document.addEventListener("click", function (e) {
               if (e._isSynthetic)
                 return;
