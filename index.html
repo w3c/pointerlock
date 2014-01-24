@@ -192,7 +192,8 @@
       queuing a task</a> to <a class="external"
       href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire">
       fire an event</a> of the appropriate name with its
-      <code>bubble</code> attribute set to false to the pointer lock
+      <code>bubbles</code> attribute [[!DOM-LEVEL-2-EVENTS]]
+      set to false to the pointer lock
       <a>target</a> element's <a
       href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document">
       node document</a>.</p>
@@ -333,8 +334,8 @@
     <section>
       <h2>Extensions to the <a>MouseEvent</a> Interface</h2>
 
-      <p>User agents must extend the MouseEvent interface [<a
-      href="https://dvcs.w3.org/hg/dom3events/raw-file/tip/html/DOM3-Events.html#events-mouseevents">DOMMOUSE</a>]
+      <p>User agents must extend the MouseEvent interface
+      [[!DOM-LEVEL-3-EVENTS]]
       with two members:</p>
 
       <dl title='partial interface MouseEvent' class='idl'>
@@ -378,6 +379,25 @@
       continuously moved in a single direction.  The concept of the mouse cursor
       will have been removed, and it will not move off the window or be clamped
       by a screen edge.</p>
+
+      <p>The un-initialized value of <code>movementX</code>/<code>Y</code> must
+      be <code>0</code>.</p>
+    </section>
+
+    <section>
+      <h2>Extensions to the <a>MouseEventInit</a> Dictionary</h2>
+
+      <p>User agents must extend the MouseEventInit dictionary
+      [[!DOM-LEVEL-3-EVENTS]] with two members <code>movementX</code> and
+      <code>movementY</code> used to initialize respective members
+      of <code>MouseEvent</code>.</p>
+
+      <dl title='partial dictionary MouseEventInit' class='idl'>
+        <dt>attribute long movementX = 0</dt>
+        <dd><dfn title="movementX"></dfn></dd>
+        <dt>attribute long movementY = 0</dt>
+        <dd><dfn title="movementY"></dfn></dd>
+      </dl>
     </section>
 
     <section>
@@ -770,6 +790,7 @@
         <li>John Villar</li>
         <li>Jonas Sicking</li>
         <li>Klaas Heidstra</li>
+        <li>Ms2ger</li>
         <li>Olli Pettay</li>
         <li>Robert O'Callahan</li>
         <li>Tab Atkins Jr.</li>
