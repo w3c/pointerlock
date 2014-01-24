@@ -379,6 +379,9 @@
       continuously moved in a single direction.  The concept of the mouse cursor
       will have been removed, and it will not move off the window or be clamped
       by a screen edge.</p>
+
+      <p>The un-initialized value of <code>movementX</code>/<code>Y</code> must
+      be <code>0</code>.</p>
     </section>
 
     <section>
@@ -390,9 +393,9 @@
       of <code>MouseEvent</code>.</p>
 
       <dl title='partial dictionary MouseEventInit' class='idl'>
-        <dt>attribute long movementX</dt>
+        <dt>attribute long movementX = 0</dt>
         <dd><dfn title="movementX"></dfn></dd>
-        <dt>attribute long movementY</dt>
+        <dt>attribute long movementY = 0</dt>
         <dd><dfn title="movementY"></dfn></dd>
       </dl>
     </section>
