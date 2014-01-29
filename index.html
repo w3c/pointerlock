@@ -134,7 +134,7 @@
     <section id='conformance'>
       <p>
         This specification defines conformance criteria that apply to a single
-        product: the <dfn id="dfn-user-agent">user agent</dfn> that implements
+        product: the <dfn>user agent</dfn> that implements
         the interfaces that it contains.
       </p>
 
@@ -176,7 +176,7 @@
       and <dfn>pointerlockerror</dfn>. If pointer lock is entered or exited
       for any reason a <a>pointerlockchange</a> event must be sent.</p>
 
-      <p><a>User agent</a>s
+      <p><a title="User Agent">User agents</a>
       must deliver these events by <a
       href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">
       queuing a task</a> to <a class="external"
@@ -324,7 +324,7 @@
     <section>
       <h2>Extensions to the <a>MouseEvent</a> Interface</h2>
 
-      <p><a>User agent</a>s must extend the MouseEvent interface
+      <p><a title="User Agent">User agents</a> must extend the MouseEvent interface
       [[!DOM-LEVEL-3-EVENTS]]
       with two members:</p>
 
@@ -377,7 +377,7 @@
     <section>
       <h2>Extensions to the <a>MouseEventInit</a> Dictionary</h2>
 
-      <p><a>User agent</a>s must extend the MouseEventInit dictionary
+      <p><a title="User Agent">User agents</a> must extend the MouseEventInit dictionary
       [[!DOM-LEVEL-3-EVENTS]] with two members <code>movementX</code> and
       <code>movementY</code> used to initialize respective members
       of <code>MouseEvent</code>.</p>
@@ -396,7 +396,7 @@
       <p>A <dfn>default unlock gesture</dfn> must always be available that
       will exit pointer lock.</p>
       <p class="note">The ESC key is the recommended <a>default unlock
-      gesture</a> for <a>user agent</a>s with keyboard input. It is recommended that
+      gesture</a> for <a title="User Agent">user agents</a> with keyboard input. It is recommended that
       the unlock gesture also match any used to exit fullscreen
       [[FULLSCREEN]].</p>
 
@@ -558,16 +558,16 @@
           <li>Pointer Lock can be called repeated by script after user exits pointer
           lock, blocking user from meaningful progress.</li>
 
-          <li>Full screen exit instructions are displayed in some <a>user agent</a>s when
+          <li>Full screen exit instructions are displayed in some <a title="User Agent">user agents</a> when
           the pointer is moved to the top of the screen.  During pointer lock that
           gesture is not possible.</li>
         </ul>
 
         <p>Responses:</p>
         <ul>
-          <li><a>User agent</a>s may limit what security origins may lock the pointer.</li>
+          <li><a title="User Agent">User agents</a> may limit what security origins may lock the pointer.</li>
 
-          <li><a>User agent</a>s may prompt for confirmation before locking, this
+          <li><a title="User Agent">User agents</a> may prompt for confirmation before locking, this
           preference may be saved as a content setting.</li>
 
           <li>Escape will always be provided by a <a>default unlock
@@ -597,11 +597,11 @@
         <p>Pointer lock is a required user interaction mode for certain application
         types, but carries a usability concern if maliciously used.  An attacker
         could remove the ability for a user to control their mouse cursor on their
-        system.  <a>User agent</a>s will prevent this by always providing a mechanism to
+        system.  <a title="User Agent">User agents</a> will prevent this by always providing a mechanism to
         exit pointer lock, by informing the user of how, and by limiting how pointer
         lock can be entered.</p>
 
-        <p><a>User agent</a>s will determine their own appropriate policies, which may be
+        <p><a title="User Agent">User agents</a> will determine their own appropriate policies, which may be
         specialized per device or differ based on user options.
     </section>
 
@@ -676,7 +676,7 @@
         approach.  The first is a concern of specifying what units mouse movement
         data are provided in.  This specification defines .movementX/Y precisely
         as the same values that could be recorded when the mouse is not under lock
-        by changes in .screenX/Y.  Implementations across multiple <a>user agent</a>s and
+        by changes in .screenX/Y.  Implementations across multiple <a title="User Agent">user agents</a> and
         operating systems will easily be able to meet that requirement and provide
         application developers and users with a consistent experience.  Further,
         users are expected to have already configured the full system of hardware
