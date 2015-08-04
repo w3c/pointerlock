@@ -1,4 +1,4 @@
 # pointerlock
 Pointer Lock
 
-This repository is for the [Pointer Lock](https://w3c.github.io/pointerlock/).
+The Web Applications Working Group's [Pointer Lock Specification](https://w3c.github.io/pointerlock/).
