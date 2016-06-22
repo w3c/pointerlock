@@ -136,6 +136,11 @@
             feedback from timeless</a>.
          </li>
          <li>
+            Magnification software note added to
+            <a href="#pointerlockchange-and-pointerlockerror-events">
+            pointerlockchange and pointerlockerror Events</a>.
+         </li>
+         <li>
             Numerous reference updates, spelling, grammar, and typos.
          </li>
       </p>
@@ -236,6 +241,14 @@
       <a>target</a> element's <a
       href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document">
       node document</a>.</p>
+
+      <p class="note">Magnification software increases the size of content on
+      the screen.  It uses the mouse to move the magnified point of focus
+      around.  When a pointer lock is initiated, the magnification software
+      needs to switch to using the keyboard to move the magnified point of
+      focus around instead.  When a pointerlockchange event is fired, web
+      browsers therefore need to make sure the event is communicated to
+      assistive technologies like screen magnifiers.</p>
     </section>
 
     <section>
@@ -836,6 +849,7 @@
         <li>John Villar</li>
         <li>Jonas Sicking</li>
         <li>Klaas Heidstra</li>
+        <li>Léonie Watson</li>
         <li>Ms2ger</li>
         <li>Olli Pettay</li>
         <li>Philip Jägenstedt</li>
