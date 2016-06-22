@@ -209,7 +209,7 @@
       queuing a task</a> to <a class="external"
       href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire">
       fire an event</a> of the appropriate name with its
-      <code>bubbles</code> attribute [[!DOM-LEVEL-3-EVENTS]]
+      <code>bubbles</code> attribute [[!DOM4]]
       set to false to the pointer lock
       <a>target</a> element's <a
       href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document">
@@ -286,7 +286,7 @@
           <p>Once in the locked state the <a>user agent</a> must fire all relevant
           user generated <code>MouseEvent</code> events (for example:
           <code>mousemove</code>, <code>mousedown</code>, <code>mouseup</code>,
-          <code>click</code>, and <code>wheel</code>)[[!DOM-LEVEL-3-EVENTS]]
+          <code>click</code>, and <code>wheel</code>)[[!UIEVENTS]]
           to the <a>target</a> of pointer lock, and not fire mouse events to
           other elements.  Events that require the concept of a mouse cursor must
           not be dispatched (for example: <code>mouseover</code>,
@@ -352,7 +352,7 @@
       <h2>Extensions to the <a>MouseEvent</a> Interface</h2>
 
       <p><a>User agent</a>s must extend the MouseEvent interface
-      [[!DOM-LEVEL-3-EVENTS]]
+      [[!UIEVENTS]]
       with two members:</p>
 
       <dl title='partial interface MouseEvent' class='idl'>
@@ -407,7 +407,7 @@
       <h2>Extensions to the <a>MouseEventInit</a> Dictionary</h2>
 
       <p><a>User agent</a>s must extend the MouseEventInit dictionary
-      [[!DOM-LEVEL-3-EVENTS]] with two members <code>movementX</code> and
+      [[!UIEVENTS]] with two members <code>movementX</code> and
       <code>movementY</code> used to initialize respective members
       of <code>MouseEvent</code>.</p>
 
