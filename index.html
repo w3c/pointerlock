@@ -276,9 +276,9 @@
           active sandboxing flag set</a> does not have the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#sandboxed-pointer-lock-browsing-context-flag">
           sandboxed pointer lock browsing context flag</a> set.
 
-          <p>Pointer lock must succeed only if the <a>target</a> is
-          <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#in-a-document">in</a>
-          the
+          <p>Pointer lock must succeed only if the <a>target</a>'s
+          <a href="https://dom.spec.whatwg.org/#concept-shadow-including-root">shadow-including root</a>
+          is the
           <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#active-document">active document</a>
           of a
           <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a>
@@ -312,12 +312,16 @@
             for a subsequent requestPointerLock.
           </p>
 
-          <p>If any element (including this one) in the same document
-          is already locked (or pending lock) the pointer
-          lock <a>target</a> must be updated to this element and a
-          <a>pointerlockchange</a> event sent.</p>
+          <p>If any element (including this one), whose
+          <a href="https://dom.spec.whatwg.org/#concept-shadow-including-root">shadow-including root</a>
+          is same as this element's
+          <a href="https://dom.spec.whatwg.org/#concept-shadow-including-root">shadow-including root</a>,
+          is already locked (or pending lock) the pointer lock <a>target</a> must be updated
+          to this element and a <a>pointerlockchange</a> event sent.</p>
 
-          <p>If any element in another document is already locked the request
+          <p>If any element, whose
+          <a href="https://dom.spec.whatwg.org/#concept-shadow-including-root">shadow-including root</a>
+          is a different document, is already locked the request
           must fail and a <a>pointerlockerror</a> event be sent.</p>
 
           <p>Once in the locked state the <a>user agent</a> must fire all relevant
@@ -359,28 +363,62 @@
           for <a>pointerlockerror</a> events.</p>
         </dd>
 
-        <dt>readonly attribute Element? pointerLockElement</dt>
-        <dd>
-          <dfn title="pointerLockElement"></dfn>
-
-          <p>Returns the element set as the <a>target</a> for mouse events
-          while the pointer is locked. Null if lock is pending, pointer is
-          unlocked, or if the target is in another document.</p>
-        </dd>
-
         <dt>void exitPointerLock ()</dt>
         <dd>
           <dfn title="exitPointerLock"></dfn>
 
-          <p>Initiates an exit from pointer lock state if currently locked
-          to a target in this document,
-          and sends a <a>pointerlockchange</a> event when the lock state
+          <p>Initiates an exit from pointer lock state if currently locked to a target whose
+          <a href="https://dom.spec.whatwg.org/#concept-shadow-including-root">shadow-including root</a>
+          is this document, and sends a <a>pointerlockchange</a> event when the lock state
           has been exited.</p>
 
           <p>The system mouse cursor must be displayed again and positioned at
           the same location that it was when pointer lock was entered (the same
           location that is reported in <code>screenX</code>, <code>screenY</code>,
           when the pointer is locked).</p>
+        </dd>
+      </dl>
+    </section>
+
+    <section>
+      <h2>Extensions to the <a>DocumentOrShadowRoot</a> Mixin</h2>
+
+      <dl title='partial interface DocumentOrShadowRoot' class='idl'>
+        <dt>readonly attribute Element? pointerLockElement</dt>
+        <dd>
+          <dfn title="pointerLockElement"></dfn>
+
+          <p>While the pointer is locked, returns the result of the
+          <a href="https://w3c.github.io/webcomponents/spec/shadow/#dfn-retargeting-algorithm">retargeting algorithm</a>
+          with the <a href="https://dom.spec.whatwg.org/#context-object">context object</a> and
+          the element, which is the target for mouse events, as input, if the result and the
+          <a href="https://dom.spec.whatwg.org/#context-object">context object</a> are in the
+          same tree, otherwise returns null.</p>
+          <p>Returns null if lock is pending or if pointer is unlocked.</p>
+          <pre class='example highlight' id="example-retarget-pointerlock">
+              &lt;body&gt;
+                &lt;div id=&quot;host1&quot;&gt;
+                  &lt;shadow-root id=&quot;root1&quot;&gt;
+                    &lt;canvas id=&quot;canvas1&quot;&gt;&lt;/canvas&gt;
+                  &lt;/shadow-root&gt;
+                &lt;/div&gt;
+                &lt;div id=&quot;host2&quot;&gt;
+                  &lt;shadow-root id=&quot;root2&quot;&gt;
+                    &lt;canvas id=&quot;canvas2&quot;&gt;&lt;/canvas&gt;
+                  &lt;/shadow-root&gt;
+                &lt;/div&gt;
+              &lt;/body&gt;
+          </pre>
+          <p>Note: the example uses fictional <code>shadow-root</code> element to denote a
+          <a href="https://dom.spec.whatwg.org/#concept-shadow-root">shadow root</a> instance.</p>
+          <p>If <code>#canvas1</code> is the target,
+          <code>document.pointerLockElement</code> returns <code>#host1</code>, and
+          <code>root1.pointerLockElement</code> returns <code>#canvas1</code>.
+          The result of
+          <a href="https://w3c.github.io/webcomponents/spec/shadow/#dfn-retargeting-algorithm">retargeting algorithm</a>
+          with <code>#root2</code> and <code>#canvas1</code> as input is
+          <code>#host1</code>, but as <code>#host1</code> is not in the same tree as
+          <code>#root2</code>, null will be returned for <code>root2.pointerLockElement</code>.</p>
         </dd>
       </dl>
     </section>
@@ -466,8 +504,9 @@
       the unlock gesture also match any used to exit fullscreen
       [[FULLSCREEN]].</p>
 
-      <p>Pointer lock must be exited if the
-      <a>target</a> is removed from its document, or the <a>user agent</a>,
+      <p>Pointer lock must be exited if the <a>target</a>
+      <a href="https://html.spec.whatwg.org/#node-is-disconnected">is disconnected</a>,
+      or the <a>user agent</a>,
       window, or tab loses focus. Moving focus between elements of
       <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#active-document">active documents</a>,
       including between
