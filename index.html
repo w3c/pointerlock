@@ -122,28 +122,17 @@
         http://dvcs.w3.org/hg/pointerlock/log/default/index.html</a>
       </p>
       <p>
-        Summary of changes:
+        Summary of changes since <a href="https://www.w3.org/TR/2016/CR-pointerlock-20160705/">
+          https://www.w3.org/TR/2016/CR-pointerlock-20160705</a>:
         <ul>
           <li>
-            movementX/Y <a href="#extensions-to-the-mouseeventinit-dictionary">
-            extensions to the MouseEventInit Dictionary</a>.
-         </li>
-         <li>
-            Uninitialized value of movementX/Y is 0.
-         </li>
-         <li>
-            <a href="https://github.com/w3c/pointerlock/commit/28a82c5b197d24b8b9a66bc8430dcfe5503a05b4">
-            Miscellaneous updates that add specificity</a>, based on
-            <a href="http://lists.w3.org/Archives/Public/public-webapps/2014OctDec/0543.html">
-            feedback from timeless</a>.
-         </li>
-         <li>
-            Magnification software note added to
-            <a href="#pointerlockchange-and-pointerlockerror-events">
-            pointerlockchange and pointerlockerror Events</a>.
-         </li>
-         <li>
-            Numerous reference updates, spelling, grammar, and typos.
+            Shadow DOM accomodating changes. Document.pointerLockElement split
+            into Document.pointerLockElement and ShadowRoot.pointerLockElement.
+            References to document replaced with Shadow DOM-aware vocabulary
+            such as 'shadow-including root'. See
+            <a href="https://github.com/w3c/pointerlock/commit/efc77b2ea4379d79bcdd2d6f01d7ef9b8798cd18">
+              Change
+            </a>.
          </li>
       </p>
     </section>
@@ -896,6 +885,7 @@
         <li>Philip Jägenstedt</li>
         <li>Robert O'Callahan</li>
         <li>Tab Atkins Jr.</li>
+        <li>Takayoshi Kochi</li>
         <li>Timeless</li>
         <li>Xiaoqian Wu</li>
       </ul>
