@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script src="http://w3c-test.org/resources/testharness.js"></script>
+<script src="http://w3c-test.org/resources/testharnessreport.js"></script>
+<meta name='flags' content='interact'>
+<meta name="timeout" content="long">
+<style type="text/css">
+    #status-log {
+        margin: 10px 0;
+        color: green;
+        color: green;
+    }
+
+    .data-log span {
+        color: blue;
+    }
+</style>
+</head>
+<body>
+    <h2>Description</h2>
+    <p>This test if movementX/Y can provide the change in position of the pointer (approximately), as if movementX/Y = eNow.screenX/Y-ePrevious.screenX/Y (+/- 10), with the exception of when screenX can not be updated because the pointer is clipped by the user agent screen boundaries.</p>
+    <hr/>
+
+    <h2>Manual Test Steps:</h2>
+    <p>
+        <ol>
+            <li>Make sure the window is not maximized.</li>
+            <li>Click to start logging mouse data.</li>
+            <li>Move the mouse within the window.</li>
+            <li>Click again to end the log.</li>
+            <li>Click to start logging mouse data.</li>
+            <li>Move the mouse outside the window.</li>
+            <li>Click again to end the log.</li>
+        </ol>
+    </p>
+    <hr/>
+
+    <div id="status-log">Waiting... Click to start loging.</div>
+    <div class="data-log">
+        <p>movementX: <span id="movementX-log">NaN</span>, movementX_sum: <span id="movementX_sum-log">NaN</span>, movementY: <span id="movementY-log">NaN</span>, movementY_sum: <span id="movementY_sum-log">NaN</span></p>
+        <p>clientX_init: <span id="clientX_init-log">NaN</span>, clientY_init: <span id="clientY_init-log">NaN</span></p>
+        <p>clientX_last: <span id="clientX_last-log">NaN</span>, clientY_last: <span id="clientY_last-log">NaN</span></p>
+    </div>
+    <hr/>
+
+    <div id="log"></div>
+
+    <script type="text/javascript" >
+        var status_log = document.querySelector('#status-log'),
+            movementX_log = document.querySelector('#movementX-log'),
+            movementY_log = document.querySelector('#movementY-log'),
+            movementX_sum_log = document.querySelector('#movementX_sum-log'),
+            movementY_sum_log = document.querySelector('#movementY_sum-log'),
+            clientX_init_log = document.querySelector('#clientX_init-log'),
+            clientY_init_log = document.querySelector('#clientY_init-log'),
+            clientX_last_log = document.querySelector('#clientX_last-log'),
+            clientY_last_log = document.querySelector('#clientY_last-log');
+
+        var click_counter = 0;
+
+        var clientX_init, clientY_init, movementX, movementY, movementX_sum, movementY_sum, clientX_last, clientY_last;
+
+        var movementX_Y_inside_window_Test = async_test("Test that movementX/Y = eNow.screenX/Y-ePrevious.screenX/Y.");
+        var movementX_Y_outside_window_Test = async_test("Test that movementX/Y not equals to eNow.screenX/Y-ePrevious.screenX/Y when the pointer is clipped by the screen boundary.");
+
+        document.addEventListener("click", function (e) {
+            click_counter++;
+
+            switch(click_counter) {
+                case 1:
+                    status_log.innerHTML = "inside window: logging...";
+                break;
+                case 2:
+                    status_log.innerHTML = "inside window: done";
+
+                    // approximately(+/- 10)
+                    // a little drift should be tollerated
+                    movementX_Y_inside_window_Test.step(function() {
+                        assert_approx_equals(movementX_sum, clientX_last - clientX_init, 10, "sum of movementX = clientX_init - clientX_last");
+                        assert_approx_equals(movementY_sum, clientY_last - clientY_init, 10, "sum of movementY = clientY_init - clientY_last");
+                    });
+                    movementX_Y_inside_window_Test.done();
+                break;
+                case 3:
+                    status_log.innerHTML = "outside window: logging...";
+                    clientX_init = null;
+                    clientY_init = null;
+                break;
+                case 4:
+                    status_log.innerHTML = "outside window: done";
+
+                    // differ from the approximate calculation in the previous case
+                    assert_greater_than(Math.abs(movementX_sum - clientX_last + clientX_init), 10, "movementX can't provide the change in position of the pointer when the pointer crosses window boundary");
+                    assert_greater_than(Math.abs(movementY_sum - clientY_last + clientY_init), 10, "movementY can't provide the change in position of the pointer when the pointer crosses window boundary");
+                    movementX_Y_outside_window_Test.done();
+                break;
+            }
+        });
+
+        document.addEventListener("mousemove", function (e) {
+            movementX = e.movementX;
+            movementY = e.movementY;
+
+            if(click_counter === 1 || click_counter === 3) {
+                if(!clientX_init) {
+                    clientX_init = e.clientX;
+                    clientY_init = e.clientY;
+                    movementX_sum = movementX;
+                    movementY_sum = movementY;
+                }
+
+                movementX_sum += movementX;
+                movementY_sum += movementY;
+
+                clientX_last = e.clientX;
+                clientY_last = e.clientY;
+
+                updateData();
+            }
+        });
+
+        function updateData() {
+            movementX_log.innerHTML = movementX;
+            movementY_log.innerHTML = movementY;
+            movementX_sum_log.innerHTML = movementX_sum;
+            movementY_sum_log.innerHTML = movementY_sum;
+            clientX_init_log.innerHTML = clientX_init;
+            clientY_init_log.innerHTML = clientY_init;
+            clientX_last_log.innerHTML = clientX_last;
+            clientY_last_log.innerHTML = clientY_last;
+        }
+        </script>
+    </body>
+</html>

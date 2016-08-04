@@ -69,8 +69,6 @@
         document.addEventListener("pointerlockchange", function() {
             event_counter ++;
 
-            console.log(event_counter);
-
             if(event_counter === 1) {
                 pointerlockchangeIsFiredonRequest = true;
                 runRequestPointerLockTest();
