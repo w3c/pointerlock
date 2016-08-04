@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <body>
-<script src="http://w3c-test.org/resources/testharness.js"></script>
-<script src="http://w3c-test.org/resources/testharnessreport.js"></script>
+<script src="resources/testharness.js"></script>
+<script src="resources/testharnessreport.js"></script>
 <meta name='flags' content='interact'>
 <meta name="timeout" content="long">
 <style type="text/css">
@@ -55,8 +55,9 @@
 
     <script type="text/javascript" >
         var locktarget = document.querySelector('#locktarget'),
-            lock_log = document.getElementById('basic-log'),
-            pointerlockchangeIsFiredonRequest = false;
+            lock_log = document.querySelector('#basic-log');
+
+        var pointerlockchangeIsFiredonRequest = false;
         var posX = posY = 0;
         var event_counter = 0;
         var request_counter = 0;
@@ -88,7 +89,7 @@
             requestPointerLockTest.step(function() {
                 assert_true(pointerlockchangeIsFiredonRequest === true, "pointerlockchange is fired when requesting pointerlock");
                 assert_true(document.pointerLockElement === locktarget, "pointer is locked at the target element");
-                });
+            });
 
             lock_log.innerHTML = "Pointer is locked on the target element;";
 
