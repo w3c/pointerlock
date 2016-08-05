@@ -141,12 +141,14 @@
 
       <h2>Introduction</h2>
 
-      <p>The Pointer Lock API provides for input methods of applications based on
-      the movement of the mouse, not just the absolute position of a cursor.  A
+      <p>The Pointer Lock API provides applications with the ability to directly interpret mouse movements
+      as an input method, rather than being limited to only read the position of the mouse cursor. A
       popular example is that of first person movement controls in three
-      dimensional graphics applications such as games.  Movement of the mouse is
-      interpreted for rotation of the view-port, there is no limit to how far
-      movement can go, and no mouse cursor is displayed.</p>
+      dimensional graphics applications such as games: movement of the mouse is interpreted
+      to control the rotation/direction of the player's camera; no mouse cursor is displayed,
+      and the movement is not limited to the traditional boundaries (such as the user agent's
+      window, or the overall screen) that the mouse cursor is usually subject to, meaning that any
+      mouse movements can be tracked indefinitely in any direction.</p>
 
       <p>Pointer Lock is related to
       Mouse Capture [[MSDN-SETCAPTURE]] [[MDN-SETCAPTURE]]
