@@ -15,18 +15,18 @@
 </head>
 <body>
     <h2>Description</h2>
-    <p>This test if movementX/Y can provide the change in position of the pointer (approximately), as if movementX/Y = eNow.screenX/Y-ePrevious.screenX/Y (+/- 10), with the exception of when screenX can not be updated because the pointer is clipped by the user agent screen boundaries.</p>
+    <p>This test if movementX/Y can provide the change in position of the pointer, as if movementX/Y = eNow.screenX/Y-ePrevious.screenX/Y, with the exception of when screenX can not be updated because the pointer is clipped by the user agent screen boundaries.</p>
     <hr/>
 
     <h2>Manual Test Steps:</h2>
     <p>
         <ol>
             <li>Make sure the window is not maximized.</li>
-            <li>Click to start logging mouse data.</li>
-            <li>Move the mouse within the window.</li>
+            <li>Click to start Test1.</li>
+            <li>Move the mouse within the window, slow and fast, like a scribble.</li>
             <li>Click again to end Test1 and start Test2.</li>
-            <li>Move the mouse outside the window.</li>
-            <li>Click again to end the log.</li>
+            <li>Move the mouse outside the window, and then re-enter the window at a different location at least 100 pixels away.</li>
+            <li>Click again to end tests.</li>
         </ol>
     </p>
     <hr/>
@@ -64,7 +64,7 @@
         var clientX_init, clientY_init, movementX, movementY, movementX_sum, movementY_sum, clientX_last, clientY_last;
 
         var movementX_Y_inside_window_Test = async_test("Test that movementX/Y = eNow.screenX/Y-ePrevious.screenX/Y.");
-        var movementX_Y_outside_window_Test = async_test("Test that movementX/Y not equals to eNow.screenX/Y-ePrevious.screenX/Y when the pointer is clipped by the screen boundary.");
+        var movementX_Y_outside_window_Test = async_test("Test that movementX/Y not equals to eNow.screenX/Y-ePrevious.screenX/Y when the pointer moves outside the window.");
 
         document.addEventListener("click", function (e) {
             click_counter++;
@@ -79,8 +79,8 @@
                     // approximately(+/- 10)
                     // a little drift should be tollerated
                     movementX_Y_inside_window_Test.step(function() {
-                        assert_approx_equals(movementX_sum, clientX_last - clientX_init, 10, "sum of movementX = clientX_init - clientX_last");
-                        assert_approx_equals(movementY_sum, clientY_last - clientY_init, 10, "sum of movementY = clientY_init - clientY_last");
+                        assert_equals(movementX_sum, clientX_last - clientX_init, "sum of movementX = clientX_init - clientX_last");
+                        assert_equals(movementY_sum, clientY_last - clientY_init, "sum of movementY = clientY_init - clientY_last");
                     });
                     movementX_Y_inside_window_Test.done();
 
@@ -92,8 +92,8 @@
                     status_log.innerHTML = "outside window: done";
 
                     // differ from the approximate calculation in the previous case
-                    assert_greater_than(Math.abs(movementX_sum - clientX_last + clientX_init), 10, "movementX can't provide the change in position of the pointer when the pointer crosses window boundary");
-                    assert_greater_than(Math.abs(movementY_sum - clientY_last + clientY_init), 10, "movementY can't provide the change in position of the pointer when the pointer crosses window boundary");
+                    assert_greater_than(Math.abs(movementX_sum - clientX_last + clientX_init), 100, "movementX can't provide the change in position of the pointer when the pointer crosses window boundary");
+                    assert_greater_than(Math.abs(movementY_sum - clientY_last + clientY_init), 100, "movementY can't provide the change in position of the pointer when the pointer crosses window boundary");
                     movementX_Y_outside_window_Test.done();
                 break;
             }
