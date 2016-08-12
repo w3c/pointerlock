@@ -38,9 +38,11 @@
 
     <div id="status-log">Waiting... Click to start loging.</div>
     <div class="data-log">
-        <p>movementX: <span id="movementX-log">NaN</span>, movementX_sum: <span id="movementX_sum-log">NaN</span>, movementY: <span id="movementY-log">NaN</span>, movementY_sum: <span id="movementY_sum-log">NaN</span></p>
         <p>clientX_init: <span id="clientX_init-log">NaN</span>, clientY_init: <span id="clientY_init-log">NaN</span></p>
         <p>clientX_last: <span id="clientX_last-log">NaN</span>, clientY_last: <span id="clientY_last-log">NaN</span></p>
+        <p>clientX_delta: <span id="clientX_delta-log">NaN</span>, clientY_delta: <span id="clientY_delta-log">NaN</span></p>
+        <p>movementX: <span id="movementX-log">NaN</span>, movementY: <span id="movementY-log">NaN</span></p>
+        <p>movementX_sum: <span id="movementX_sum-log">NaN</span>, movementY_sum: <span id="movementY_sum-log">NaN</span></p>
     </div>
     <hr/>
 
@@ -56,6 +58,8 @@
             clientY_init_log = document.querySelector('#clientY_init-log'),
             clientX_last_log = document.querySelector('#clientX_last-log'),
             clientY_last_log = document.querySelector('#clientY_last-log');
+            clientX_delta_log = document.querySelector('#clientX_delta-log'),
+            clientY_delta_log = document.querySelector('#clientY_delta-log');
 
         var click_counter = 0;
 
@@ -115,20 +119,24 @@
 
                 clientX_last = e.clientX;
                 clientY_last = e.clientY;
+                clientX_delta = clientX_last - clientX_init;
+                clientY_delta = clientY_last - clientY_init;
 
                 updateData();
             }
         });
 
         function updateData() {
-            movementX_log.innerHTML = movementX;
-            movementY_log.innerHTML = movementY;
-            movementX_sum_log.innerHTML = movementX_sum;
-            movementY_sum_log.innerHTML = movementY_sum;
             clientX_init_log.innerHTML = clientX_init;
             clientY_init_log.innerHTML = clientY_init;
             clientX_last_log.innerHTML = clientX_last;
             clientY_last_log.innerHTML = clientY_last;
+            clientX_delta_log.innerHTML = clientX_delta;
+            clientY_delta_log.innerHTML = clientY_delta;
+            movementX_log.innerHTML = movementX;
+            movementY_log.innerHTML = movementY;
+            movementX_sum_log.innerHTML = movementX_sum;
+            movementY_sum_log.innerHTML = movementY_sum;
         }
         </script>
     </body>
