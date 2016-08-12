@@ -11,10 +11,6 @@
         color: green;
         color: green;
     }
-
-    .data-log span {
-        color: blue;
-    }
 </style>
 </head>
 <body>
@@ -28,8 +24,7 @@
             <li>Make sure the window is not maximized.</li>
             <li>Click to start logging mouse data.</li>
             <li>Move the mouse within the window.</li>
-            <li>Click again to end the log.</li>
-            <li>Click to start logging mouse data.</li>
+            <li>Click again to end Test1 and start Test2.</li>
             <li>Move the mouse outside the window.</li>
             <li>Click again to end the log.</li>
         </ol>
@@ -38,11 +33,14 @@
 
     <div id="status-log">Waiting... Click to start loging.</div>
     <div class="data-log">
-        <p>clientX_init: <span id="clientX_init-log">NaN</span>, clientY_init: <span id="clientY_init-log">NaN</span></p>
-        <p>clientX_last: <span id="clientX_last-log">NaN</span>, clientY_last: <span id="clientY_last-log">NaN</span></p>
-        <p>clientX_delta: <span id="clientX_delta-log">NaN</span>, clientY_delta: <span id="clientY_delta-log">NaN</span></p>
-        <p>movementX: <span id="movementX-log">NaN</span>, movementY: <span id="movementY-log">NaN</span></p>
-        <p>movementX_sum: <span id="movementX_sum-log">NaN</span>, movementY_sum: <span id="movementY_sum-log">NaN</span></p>
+	    <table>
+	    	<tr><td></td><td>X</td><td>Y</td></tr>
+	    	<tr><td>client_init:</td><td id="clientX_init-log">X</td><td id="clientY_init-log">Y</td></tr>
+	    	<tr><td>client_last:</td><td id="clientX_last-log">X</td><td id="clientY_last-log">Y</td></tr>
+	    	<tr><td>client_delta:</td><td id="clientX_delta-log">X</td><td id="clientY_delta-log">Y</td></tr>
+	    	<tr><td>movement_sum:</td><td id="movementX_sum-log">X</td><td id="movementY_sum-log">Y</td></tr>
+	    	<tr><td>movement:</td><td id="movementX-log">X</td><td id="movementY-log">Y</td></tr>
+	    </table>
     </div>
     <hr/>
 
@@ -85,13 +83,12 @@
                         assert_approx_equals(movementY_sum, clientY_last - clientY_init, 10, "sum of movementY = clientY_init - clientY_last");
                     });
                     movementX_Y_inside_window_Test.done();
-                break;
-                case 3:
+
                     status_log.innerHTML = "outside window: logging...";
                     clientX_init = null;
                     clientY_init = null;
                 break;
-                case 4:
+                case 3:
                     status_log.innerHTML = "outside window: done";
 
                     // differ from the approximate calculation in the previous case
