@@ -15,15 +15,18 @@
 </head>
 <body>
     <h2>Description</h2>
-    <p>This test if movementX/Y can provide the change in position of the pointer, as if movementX/Y = eNow.screenX/Y-ePrevious.screenX/Y</p>
+    <p>This test that movementX/Y do not jump by a large value when exiting and re-entering the window.</p>
     <hr/>
 
     <h2>Manual Test Steps:</h2>
     <p>
         <ol>
-            <li>Click to start Test1.</li>
-            <li>Move the mouse within the window, slow and fast, like a scribble.</li>
-            <li>Click again to end test.</li>
+            <li>Make sure the window is not maximized.</li>
+            <li>Click to start Test.</li>
+            <li>Move the mouse slowly out of the window.
+            <li>Move as fast as needed to a different location outside the window at least 100 pixels away</li>
+            <li>Slowly re-enter the window.</li>
+            <li>Click again to end tests.</li>
         </ol>
     </p>
     <hr/>
@@ -60,25 +63,25 @@
 
         var clientX_init, clientY_init, movementX, movementY, movementX_sum, movementY_sum, clientX_last, clientY_last;
 
-        var movementX_Y_inside_window_Test = async_test("Test that movementX/Y = eNow.screenX/Y-ePrevious.screenX/Y.");
+        var movementX_Y_outside_window_Test = async_test("Test that movementX/Y do not have large values when re-entering from outside the window.");
 
         document.addEventListener("click", function (e) {
             click_counter++;
 
             switch(click_counter) {
                 case 1:
-                    status_log.innerHTML = "inside window: logging...";
+                    status_log.innerHTML = "logging...";
                 break;
                 case 2:
-                    status_log.innerHTML = "inside window: done";
+                    status_log.innerHTML = "done";
 
                     // approximately(+/- 10)
                     // a little drift should be tollerated
-                    movementX_Y_inside_window_Test.step(function() {
+                    movementX_Y_outside_window_Test.step(function() {
                         assert_equals(movementX_sum, clientX_last - clientX_init, "sum of movementX = clientX_init - clientX_last");
                         assert_equals(movementY_sum, clientY_last - clientY_init, "sum of movementY = clientY_init - clientY_last");
                     });
-                    movementX_Y_inside_window_Test.done();
+                    movementX_Y_outside_window_Test.done();
                 break;
             }
         });
@@ -95,6 +98,11 @@
                     movementY_sum = movementY;
                 }
 
+	            movementX_Y_outside_window_Test.step(function() {
+	            	assert_less_than(Math.abs(movementX), 50, "movementX should not have large jumps in value.");
+	            	assert_less_than(Math.abs(movementY), 50, "movementY should not have large jumps in value.");
+	            });
+
                 movementX_sum += movementX;
                 movementY_sum += movementY;
 
@@ -105,6 +113,15 @@
 
                 updateData();
             }
+        });
+
+        document.addEventListener("mouseenter", function (e) {
+            if(click_counter === 1) {
+	            movementX_Y_outside_window_Test.step(function() {
+	            	assert_greater_than(Math.abs(e.clientX-clientX_last) + Math.abs(e.clientY-clientY_last), 
+	            		100, "Test requires mouse to be moved at least 100 pixels outside of window.");
+	            });
+	        }
         });
 
         function updateData() {
