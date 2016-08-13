@@ -467,6 +467,18 @@
 
       <p>The un-initialized value of <code>movementX</code>/<code>Y</code> must
       be <code>0</code>.</p>
+
+      <p>Large movement values must not appear in situations when mouse input
+      is interupted, such as the mouse cursor leaving the window and then
+      re-entering at another location. 
+      If a <a>User agent</a> experiences a gap in receiving mouse input data from
+      the operating system then the next generated <code>mousemove</code>
+      event must have <code>movementX</code>/<code>Y</code> set to
+      <code>0</code>.
+      These gaps may appear for example when the <a>User agent</a>
+      receives a mouse leaving event at the window system API. As an exception
+      mouse capture may allow the <a>User agent</a> to continue receiving mouse
+      events when the cursor moves outside the window.</p>
     </section>
 
     <section>
