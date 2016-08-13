@@ -24,54 +24,54 @@
 <li><a href='#test-file-8'>/pointerlock/pointerlock_remove_target-manual.html</a></li>
 </ol>
       <table class='table persist-area'>
-        <thead><tr class='persist-header'><th>Test</th><th>Ch53</th><th>Ff51</th></tr></thead>
-<tr class='test' id='test-file-0'><td><a href='http://www.w3c-test.org/pointerlock/constructor.html' target='_blank'>/pointerlock/constructor.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
-<tr class='subtest'><td>Default event values for mouse event interface and its pointer lock extensions.</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>Default event values for pointerlockerror using a dictionary</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='test' id='test-file-1'><td><a href='http://www.w3c-test.org/pointerlock/idlharness.html' target='_blank'>/pointerlock/idlharness.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
-<tr class='subtest'><td>Element interface: operation requestPointerLock()</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>Element must be primary interface of window.document.documentElement</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td></tr>
-<tr class='subtest'><td>Stringification of window.document.documentElement</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td></tr>
-<tr class='subtest'><td>Element interface: window.document.documentElement must inherit property "requestPointerLock" with the proper type (0)</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>Document interface: attribute onpointerlockchange</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>Document interface: attribute onpointerlockerror</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>Document interface: attribute pointerLockElement</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>Document interface: operation exitPointerLock()</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>Document must be primary interface of window.document</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td></tr>
-<tr class='subtest'><td>Stringification of window.document</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td></tr>
-<tr class='subtest'><td>Document interface: window.document must inherit property "onpointerlockchange" with the proper type (0)</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td></tr>
-<tr class='subtest'><td>Document interface: window.document must inherit property "onpointerlockerror" with the proper type (1)</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td></tr>
-<tr class='subtest'><td>Document interface: window.document must inherit property "pointerLockElement" with the proper type (2)</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>Document interface: window.document must inherit property "exitPointerLock" with the proper type (3)</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>MouseEvent interface: attribute movementX</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>MouseEvent interface: attribute movementY</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>MouseEvent must be primary interface of new MouseEvent('mousemove')</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>Stringification of new MouseEvent('mousemove')</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>MouseEvent interface: new MouseEvent('mousemove') must inherit property "movementX" with the proper type (0)</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>MouseEvent interface: new MouseEvent('mousemove') must inherit property "movementY" with the proper type (1)</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>MouseEvent must be primary interface of new MouseEvent('pointerlockchange')</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>Stringification of new MouseEvent('pointerlockchange')</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>MouseEvent interface: new MouseEvent('pointerlockchange') must inherit property "movementX" with the proper type (0)</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>MouseEvent interface: new MouseEvent('pointerlockchange') must inherit property "movementY" with the proper type (1)</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='test' id='test-file-2'><td><a href='http://www.w3c-test.org/pointerlock/movementX_Y_basic-manual.html' target='_blank'>/pointerlock/movementX_Y_basic-manual.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
-<tr class='subtest'><td>Test that movementX/Y = eNow.screenX/Y-ePrevious.screenX/Y</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>Test that movementX/Y not equals to eNow.screenX/Y-ePrevious.screenX/Y when the pointer is clipped by the screen boundary</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='test' id='test-file-3'><td><a href='http://www.w3c-test.org/pointerlock/pointerlock_basic-manual.html' target='_blank'>/pointerlock/pointerlock_basic-manual.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
-<tr class='subtest'><td>Test that the pointer properly be locked in a DOM element</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>Test that the pointer lock properly be exited, the cursor is at the same location when exited</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>Test that no engagement gesture is required to reenter pointer lock if pointer lock is exited via exitPointerLock</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>Test validates that each requestPointerLock() will fire a pointerlockchange event</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='test' id='test-file-4'><td><a href='http://www.w3c-test.org/pointerlock/pointerlock_fullscreen-manual.html' target='_blank'>/pointerlock/pointerlock_fullscreen-manual.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
-<tr class='subtest'><td>Test that pointer lock won't be exited when fullscreen is entered or exited with script</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='subtest'><td>Test that pointer lock is exited when fullscreen is entered or exited with the same user gesture</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='test' id='test-file-5'><td><a href='http://www.w3c-test.org/pointerlock/pointerlock_indefinite-manual.html' target='_blank'>/pointerlock/pointerlock_indefinite-manual.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
-<tr class='subtest'><td>Test that movementX/Y provided indefinitely even when the mouse cursor would have otherwise hit the edge of a screen</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='test' id='test-file-6'><td><a href='http://www.w3c-test.org/pointerlock/pointerlock_leave_Tab-manual.html' target='_blank'>/pointerlock/pointerlock_leave_Tab-manual.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
-<tr class='subtest'><td>Test that pointer lock will be lost when the current Tab loses focus</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='test' id='test-file-7'><td><a href='http://www.w3c-test.org/pointerlock/pointerlock_leave_UA-manual.html' target='_blank'>/pointerlock/pointerlock_leave_UA-manual.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
-<tr class='subtest'><td>Test that pointer lock will be lost when the user agent / window loses focus</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
-<tr class='test' id='test-file-8'><td><a href='http://www.w3c-test.org/pointerlock/pointerlock_remove_target-manual.html' target='_blank'>/pointerlock/pointerlock_remove_target-manual.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
-<tr class='subtest'><td>Test that pointer lock will be lost when taking the target element out of the DOM</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+        <thead><tr class='persist-header'><th>Test</th><th>Ch53</th><th>Ed25</th><th>Ff51</th></tr></thead>
+<tr class='test' id='test-file-0'><td><a href='http://www.w3c-test.org/pointerlock/constructor.html' target='_blank'>/pointerlock/constructor.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
+<tr class='subtest'><td>Default event values for mouse event interface and its pointer lock extensions.</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>Default event values for pointerlockerror using a dictionary</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-1'><td><a href='http://www.w3c-test.org/pointerlock/idlharness.html' target='_blank'>/pointerlock/idlharness.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
+<tr class='subtest'><td>Element interface: operation requestPointerLock()</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>Element must be primary interface of window.document.documentElement</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td></tr>
+<tr class='subtest'><td>Stringification of window.document.documentElement</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td></tr>
+<tr class='subtest'><td>Element interface: window.document.documentElement must inherit property "requestPointerLock" with the proper type (0)</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>Document interface: attribute onpointerlockchange</td><td class='PASS'>PASS</td><td class='FAIL'>FAIL</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>Document interface: attribute onpointerlockerror</td><td class='PASS'>PASS</td><td class='FAIL'>FAIL</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>Document interface: attribute pointerLockElement</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>Document interface: operation exitPointerLock()</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>Document must be primary interface of window.document</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td></tr>
+<tr class='subtest'><td>Stringification of window.document</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td></tr>
+<tr class='subtest'><td>Document interface: window.document must inherit property "onpointerlockchange" with the proper type (0)</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td></tr>
+<tr class='subtest'><td>Document interface: window.document must inherit property "onpointerlockerror" with the proper type (1)</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td><td class='FAIL'>FAIL</td></tr>
+<tr class='subtest'><td>Document interface: window.document must inherit property "pointerLockElement" with the proper type (2)</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>Document interface: window.document must inherit property "exitPointerLock" with the proper type (3)</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>MouseEvent interface: attribute movementX</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>MouseEvent interface: attribute movementY</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>MouseEvent must be primary interface of new MouseEvent('mousemove')</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>Stringification of new MouseEvent('mousemove')</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>MouseEvent interface: new MouseEvent('mousemove') must inherit property "movementX" with the proper type (0)</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>MouseEvent interface: new MouseEvent('mousemove') must inherit property "movementY" with the proper type (1)</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>MouseEvent must be primary interface of new MouseEvent('pointerlockchange')</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>Stringification of new MouseEvent('pointerlockchange')</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>MouseEvent interface: new MouseEvent('pointerlockchange') must inherit property "movementX" with the proper type (0)</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>MouseEvent interface: new MouseEvent('pointerlockchange') must inherit property "movementY" with the proper type (1)</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-2'><td><a href='http://www.w3c-test.org/pointerlock/movementX_Y_basic-manual.html' target='_blank'>/pointerlock/movementX_Y_basic-manual.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
+<tr class='subtest'><td>Test that movementX/Y = eNow.screenX/Y-ePrevious.screenX/Y</td><td class='PASS'>PASS</td><td class='NOTRUN'>NOTRUN</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>Test that movementX/Y not equals to eNow.screenX/Y-ePrevious.screenX/Y when the pointer is clipped by the screen boundary</td><td class='PASS'>PASS</td><td class='NOTRUN'>NOTRUN</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-3'><td><a href='http://www.w3c-test.org/pointerlock/pointerlock_basic-manual.html' target='_blank'>/pointerlock/pointerlock_basic-manual.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
+<tr class='subtest'><td>Test that the pointer properly be locked in a DOM element</td><td class='PASS'>PASS</td><td class='NOTRUN'>NOTRUN</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>Test that the pointer lock properly be exited, the cursor is at the same location when exited</td><td class='PASS'>PASS</td><td class='NOTRUN'>NOTRUN</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>Test that no engagement gesture is required to reenter pointer lock if pointer lock is exited via exitPointerLock</td><td class='PASS'>PASS</td><td class='NOTRUN'>NOTRUN</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>Test validates that each requestPointerLock() will fire a pointerlockchange event</td><td class='PASS'>PASS</td><td class='NOTRUN'>NOTRUN</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-4'><td><a href='http://www.w3c-test.org/pointerlock/pointerlock_fullscreen-manual.html' target='_blank'>/pointerlock/pointerlock_fullscreen-manual.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
+<tr class='subtest'><td>Test that pointer lock won't be exited when fullscreen is entered or exited with script</td><td class='PASS'>PASS</td><td class='NOTRUN'>NOTRUN</td><td class='PASS'>PASS</td></tr>
+<tr class='subtest'><td>Test that pointer lock is exited when fullscreen is entered or exited with the same user gesture</td><td class='PASS'>PASS</td><td class='NOTRUN'>NOTRUN</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-5'><td><a href='http://www.w3c-test.org/pointerlock/pointerlock_indefinite-manual.html' target='_blank'>/pointerlock/pointerlock_indefinite-manual.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
+<tr class='subtest'><td>Test that movementX/Y provided indefinitely even when the mouse cursor would have otherwise hit the edge of a screen</td><td class='PASS'>PASS</td><td class='NOTRUN'>NOTRUN</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-6'><td><a href='http://www.w3c-test.org/pointerlock/pointerlock_leave_Tab-manual.html' target='_blank'>/pointerlock/pointerlock_leave_Tab-manual.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
+<tr class='subtest'><td>Test that pointer lock will be lost when the current Tab loses focus</td><td class='PASS'>PASS</td><td class='NOTRUN'>NOTRUN</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-7'><td><a href='http://www.w3c-test.org/pointerlock/pointerlock_leave_UA-manual.html' target='_blank'>/pointerlock/pointerlock_leave_UA-manual.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
+<tr class='subtest'><td>Test that pointer lock will be lost when the user agent / window loses focus</td><td class='PASS'>PASS</td><td class='NOTRUN'>NOTRUN</td><td class='PASS'>PASS</td></tr>
+<tr class='test' id='test-file-8'><td><a href='http://www.w3c-test.org/pointerlock/pointerlock_remove_target-manual.html' target='_blank'>/pointerlock/pointerlock_remove_target-manual.html</a></td><td class='OK'>OK</td><td class='OK'>OK</td><td class='OK'>OK</td></tr>
+<tr class='subtest'><td>Test that pointer lock will be lost when taking the target element out of the DOM</td><td class='PASS'>PASS</td><td class='NOTRUN'>NOTRUN</td><td class='PASS'>PASS</td></tr>
 
       </table>
     </div>

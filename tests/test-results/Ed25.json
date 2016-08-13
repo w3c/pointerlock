@@ -1,0 +1,257 @@
+{
+  "results": [
+    {
+      "test": "/pointerlock/constructor.html",
+      "subtests": [
+        {
+          "name": "Default event values for mouse event interface and its pointer lock extensions.",
+          "status": "PASS",
+          "message": null
+        },
+        {
+          "name": "Default event values for pointerlockerror using a dictionary",
+          "status": "PASS",
+          "message": null
+        }
+      ],
+      "status": "OK",
+      "message": null
+    },
+    {
+      "test": "/pointerlock/idlharness.html",
+      "subtests": [
+        {
+          "name": "Element interface: operation requestPointerLock()",
+          "status": "PASS",
+          "message": null
+        },
+        {
+          "name": "Element must be primary interface of window.document.documentElement",
+          "status": "FAIL",
+          "message": "assert_equals: window.document.documentElement's prototype is not Element.prototype expected object \"[object Element]\" but got object \"[object HTMLHtmlElement]\""
+        },
+        {
+          "name": "Stringification of window.document.documentElement",
+          "status": "FAIL",
+          "message": "assert_equals: class string of window.document.documentElement expected \"[object Element]\" but got \"[object HTMLHtmlElement]\""
+        },
+        {
+          "name": "Element interface: window.document.documentElement must inherit property \"requestPointerLock\" with the proper type (0)",
+          "status": "PASS",
+          "message": null
+        },
+        {
+          "name": "Document interface: attribute onpointerlockchange",
+          "status": "FAIL",
+          "message": "assert_equals: setter length must be 1 expected 1 but got 0"
+        },
+        {
+          "name": "Document interface: attribute onpointerlockerror",
+          "status": "FAIL",
+          "message": "assert_equals: setter length must be 1 expected 1 but got 0"
+        },
+        {
+          "name": "Document interface: attribute pointerLockElement",
+          "status": "PASS",
+          "message": null
+        },
+        {
+          "name": "Document interface: operation exitPointerLock()",
+          "status": "PASS",
+          "message": null
+        },
+        {
+          "name": "Document must be primary interface of window.document",
+          "status": "FAIL",
+          "message": "assert_equals: window.document's prototype is not Document.prototype expected object \"[object Document]\" but got object \"[object HTMLDocument]\""
+        },
+        {
+          "name": "Stringification of window.document",
+          "status": "FAIL",
+          "message": "assert_equals: class string of window.document expected \"[object Document]\" but got \"[object HTMLDocument]\""
+        },
+        {
+          "name": "Document interface: window.document must inherit property \"onpointerlockchange\" with the proper type (0)",
+          "status": "FAIL",
+          "message": "Unrecognized type EventHandler"
+        },
+        {
+          "name": "Document interface: window.document must inherit property \"onpointerlockerror\" with the proper type (1)",
+          "status": "FAIL",
+          "message": "Unrecognized type EventHandler"
+        },
+        {
+          "name": "Document interface: window.document must inherit property \"pointerLockElement\" with the proper type (2)",
+          "status": "PASS",
+          "message": null
+        },
+        {
+          "name": "Document interface: window.document must inherit property \"exitPointerLock\" with the proper type (3)",
+          "status": "PASS",
+          "message": null
+        },
+        {
+          "name": "MouseEvent interface: attribute movementX",
+          "status": "PASS",
+          "message": null
+        },
+        {
+          "name": "MouseEvent interface: attribute movementY",
+          "status": "PASS",
+          "message": null
+        },
+        {
+          "name": "MouseEvent must be primary interface of new MouseEvent('mousemove')",
+          "status": "PASS",
+          "message": null
+        },
+        {
+          "name": "Stringification of new MouseEvent('mousemove')",
+          "status": "PASS",
+          "message": null
+        },
+        {
+          "name": "MouseEvent interface: new MouseEvent('mousemove') must inherit property \"movementX\" with the proper type (0)",
+          "status": "PASS",
+          "message": null
+        },
+        {
+          "name": "MouseEvent interface: new MouseEvent('mousemove') must inherit property \"movementY\" with the proper type (1)",
+          "status": "PASS",
+          "message": null
+        },
+        {
+          "name": "MouseEvent must be primary interface of new MouseEvent('pointerlockchange')",
+          "status": "PASS",
+          "message": null
+        },
+        {
+          "name": "Stringification of new MouseEvent('pointerlockchange')",
+          "status": "PASS",
+          "message": null
+        },
+        {
+          "name": "MouseEvent interface: new MouseEvent('pointerlockchange') must inherit property \"movementX\" with the proper type (0)",
+          "status": "PASS",
+          "message": null
+        },
+        {
+          "name": "MouseEvent interface: new MouseEvent('pointerlockchange') must inherit property \"movementY\" with the proper type (1)",
+          "status": "PASS",
+          "message": null
+        }
+      ],
+      "status": "OK",
+      "message": null
+    },
+    {
+      "test": "/pointerlock/movementX_Y_basic-manual.html",
+      "subtests": [
+        {
+          "name": "Test that movementX/Y = eNow.screenX/Y-ePrevious.screenX/Y",
+          "status": "NOTRUN",
+          "message": null
+        },
+        {
+          "name": "Test that movementX/Y not equals to eNow.screenX/Y-ePrevious.screenX/Y when the pointer is clipped by the screen boundary",
+          "status": "NOTRUN",
+          "message": null
+        }
+      ],
+      "status": "OK",
+      "message": null
+    },
+    {
+      "test": "/pointerlock/pointerlock_basic-manual.html",
+      "subtests": [
+        {
+          "name": "Test that the pointer properly be locked in a DOM element",
+          "status": "NOTRUN",
+          "message": null
+        },
+        {
+          "name": "Test that the pointer lock properly be exited, the cursor is at the same location when exited",
+          "status": "NOTRUN",
+          "message": null
+        },
+        {
+          "name": "Test that no engagement gesture is required to reenter pointer lock if pointer lock is exited via exitPointerLock",
+          "status": "NOTRUN",
+          "message": null
+        },
+        {
+          "name": "Test validates that each requestPointerLock() will fire a pointerlockchange event",
+          "status": "NOTRUN",
+          "message": null
+        }
+      ],
+      "status": "OK",
+      "message": null
+    },
+    {
+      "test": "/pointerlock/pointerlock_fullscreen-manual.html",
+      "subtests": [
+        {
+          "name": "Test that pointer lock won't be exited when fullscreen is entered or exited with script",
+          "status": "NOTRUN",
+          "message": null
+        },
+        {
+          "name": "Test that pointer lock is exited when fullscreen is entered or exited with the same user gesture",
+          "status": "NOTRUN",
+          "message": null
+        }
+      ],
+      "status": "OK",
+      "message": null
+    },
+    {
+      "test": "/pointerlock/pointerlock_indefinite-manual.html",
+      "subtests": [
+        {
+          "name": "Test that movementX/Y provided indefinitely even when the mouse cursor would have otherwise hit the edge of a screen",
+          "status": "NOTRUN",
+          "message": null
+        }
+      ],
+      "status": "OK",
+      "message": null
+    },
+    {
+      "test": "/pointerlock/pointerlock_leave_Tab-manual.html",
+      "subtests": [
+        {
+          "name": "Test that pointer lock will be lost when the current Tab loses focus",
+          "status": "NOTRUN",
+          "message": null
+        }
+      ],
+      "status": "OK",
+      "message": null
+    },
+    {
+      "test": "/pointerlock/pointerlock_leave_UA-manual.html",
+      "subtests": [
+        {
+          "name": "Test that pointer lock will be lost when the user agent / window loses focus",
+          "status": "NOTRUN",
+          "message": null
+        }
+      ],
+      "status": "OK",
+      "message": null
+    },
+    {
+      "test": "/pointerlock/pointerlock_remove_target-manual.html",
+      "subtests": [
+        {
+          "name": "Test that pointer lock will be lost when taking the target element out of the DOM",
+          "status": "NOTRUN",
+          "message": null
+        }
+      ],
+      "status": "OK",
+      "message": null
+    }
+  ]
+}
