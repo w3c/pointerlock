@@ -383,10 +383,11 @@
         <dd>
           <dfn title="pointerLockElement"></dfn>
 
-          <p>While the pointer is locked, returns the result of the
-          <a href="https://w3c.github.io/webcomponents/spec/shadow/#dfn-retargeting-algorithm">retargeting algorithm</a>
-          with the <a href="https://dom.spec.whatwg.org/#context-object">context object</a> and
-          the element, which is the target for mouse events, as input, if the result and the
+          <p>While the pointer is locked, returns the result of
+          <a href="https://dom.spec.whatwg.org/#retarget">retargeting</a>
+          the element, which is the target for mouse events, against
+          the <a href="https://dom.spec.whatwg.org/#context-object">context object</a>
+          if the result and the
           <a href="https://dom.spec.whatwg.org/#context-object">context object</a> are in the
           same tree, otherwise returns null.</p>
           <p>Returns null if lock is pending or if pointer is unlocked.</p>
@@ -410,8 +411,8 @@
           <code>document.pointerLockElement</code> returns <code>#host1</code>, and
           <code>root1.pointerLockElement</code> returns <code>#canvas1</code>.
           The result of
-          <a href="https://w3c.github.io/webcomponents/spec/shadow/#dfn-retargeting-algorithm">retargeting algorithm</a>
-          with <code>#root2</code> and <code>#canvas1</code> as input is
+          <a href="https://dom.spec.whatwg.org/#retarget">retargeting</a>
+          <code>#canvas1</code> against <code>#root2</code> is
           <code>#host1</code>, but as <code>#host1</code> is not in the same tree as
           <code>#root2</code>, null will be returned for <code>root2.pointerLockElement</code>.</p>
         </dd>
