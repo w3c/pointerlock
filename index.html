@@ -266,12 +266,13 @@
           either a <a>pointerlockchange</a> or <a>pointerlockerror</a>
           event respectively.
 
-          <p>Pointer lock must succeed only if the document object's
-          <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#active-sandboxing-flag-set">
-          active sandboxing flag set</a> does not have the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#sandboxed-pointer-lock-browsing-context-flag">
+          <p>Pointer lock must not succeed if the document object's
+          <a href="https://developers.whatwg.org/origin-0.html#active-sandboxing-flag-set">
+          active sandboxing flag set</a> has the <a
+          href="https://developers.whatwg.org/origin-0.html#sandboxed-pointer-lock-browsing-context-flag">
           sandboxed pointer lock browsing context flag</a> set.
 
-          <p>Pointer lock must succeed only if the <a>target</a>'s
+          <p>Pointer lock must not succeed unless the <a>target</a>'s
           <a href="https://dom.spec.whatwg.org/#concept-shadow-including-root">shadow-including root</a>
           is the
           <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#active-document">active document</a>
