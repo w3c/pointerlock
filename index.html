@@ -177,7 +177,7 @@
     <section id='conformance'>
       <p>
         This specification defines conformance criteria that apply to a single
-        product: the <dfn id="dfn-user-agent">user agent</dfn> that implements
+        product: the <dfn>user agent</dfn> that implements
         the interfaces that it contains.
       </p>
 
@@ -244,18 +244,21 @@
       assistive technologies like screen magnifiers.</p>
     </section>
 
-    <section>
+    <section data-dfn-for="Element">
       <h2>Extensions to the <a>Element</a> Interface</h2>
       <p>
         The <a>Element</a> interface is extended to provide the ability to
         request the the pointer be locked.
       </p>
 
-      <dl title='partial interface Element' class='idl'>
-        <dt>void requestPointerLock()</dt>
+      <pre class="idl">
+        partial interface Element {
+          void requestPointerLock();
+        };
+      </pre>
+      <dl>
+        <dt><dfn>requestPointerLock</dfn></dt>
         <dd>
-          <dfn title="requestPointerLock"></dfn>
-
           <p>Requests that the pointer be locked to a DOM element
           <dfn>target</dfn>. The <a>user agent</a> determines if pointer lock
           state will be entered and upon lock state change or error must send
@@ -281,11 +284,11 @@
           <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a>
           need not be in focus.</p>
 
-          <p>If a user has exited pointer lock via the <a>default unlock user
+          <p>If a user has exited pointer lock via the <a>default unlock
           gesture</a>, or pointer lock has not previously been entered for this
           document, an event generated as a result of an
           <a>engagement gesture</a> must be received by the document before
-          <a>requestPointerLock</a> will succeed.</p>
+          <a data-lt="Element.requestpointerlock">requestPointerLock</a> will succeed.</p>
 
           <p class="note">
             This ensures a user can leave a
@@ -293,7 +296,7 @@
             will be blocked from locking upon initial navigation or re-acquiring
             lock unless the user re-engages directly with the document.<br><br>
 
-            Conversely, if pointer lock is exited via <a>exitPointerLock</a>
+            Conversely, if pointer lock is exited via <a data-lt="Document.exitpointerlock">exitPointerLock</a>
             no <a>engagement gesture</a> is required to reenter pointer lock. This enables
             applications that frequently move between interaction modes, and
             ones that may do so based on a timer or remote network activity.
@@ -335,30 +338,31 @@
       </dl>
     </section>
 
-    <section>
+    <section data-dfn-for="Document">
       <h2>Extensions to the <a>Document</a> Interface</h2>
 
-      <dl title='partial interface Document' class='idl'>
-        <dt>attribute EventHandler onpointerlockchange</dt>
+      <pre class="idl">
+        partial interface Document {
+          attribute EventHandler onpointerlockchange;
+          attribute EventHandler onpointerlockerror;
+          void exitPointerLock();
+        };
+      </pre>
+      <dl>
+        <dt><dfn>onpointerlockchange</dfn></dt>
         <dd>
-          <dfn title="onpointerlockchange"></dfn>
-
           <p>An <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#event-handlers">event handler</a>
           for <a>pointerlockchange</a> events.</p>
         </dd>
 
-        <dt>attribute EventHandler onpointerlockerror</dt>
+        <dt><dfn>onpointerlockerror</dfn></dt>
         <dd>
-          <dfn title="onpointerlockerror"></dfn>
-
           <p>An <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#event-handlers">event handler</a>
           for <a>pointerlockerror</a> events.</p>
         </dd>
 
-        <dt>void exitPointerLock ()</dt>
+        <dt><dfn>exitPointerLock</dfn></dt>
         <dd>
-          <dfn title="exitPointerLock"></dfn>
-
           <p>Initiates an exit from pointer lock state if currently locked to a target whose
           <a href="https://dom.spec.whatwg.org/#concept-shadow-including-root">shadow-including root</a>
           is this document, and sends a <a>pointerlockchange</a> event when the lock state
@@ -372,14 +376,17 @@
       </dl>
     </section>
 
-    <section>
+    <section data-dfn-for="DocumentOrShadowRoot">
       <h2>Extensions to the <a>DocumentOrShadowRoot</a> Mixin</h2>
 
-      <dl title='partial interface DocumentOrShadowRoot' class='idl'>
-        <dt>readonly attribute Element? pointerLockElement</dt>
+      <pre class="idl">
+        partial interface DocumentOrShadowRoot {
+          readonly attribute Element ? pointerLockElement;
+        };
+      </pre>
+      <dl>
+        <dt><dfn>pointerLockElement</dfn></dt>
         <dd>
-          <dfn title="pointerLockElement"></dfn>
-
           <p>While the pointer is locked, returns the result of
           <a href="https://dom.spec.whatwg.org/#retarget">retargeting</a>
           the element, which is the target for mouse events, against
@@ -388,7 +395,7 @@
           <a href="https://dom.spec.whatwg.org/#context-object">context object</a> are in the
           same tree, otherwise returns null.</p>
           <p>Returns null if lock is pending or if pointer is unlocked.</p>
-          <pre class='example highlight' id="example-retarget-pointerlock">
+          <pre class='example' id="example-retarget-pointerlock">
               &lt;body&gt;
                 &lt;div id=&quot;host1&quot;&gt;
                   &lt;shadow-root id=&quot;root1&quot;&gt;
@@ -416,18 +423,22 @@
       </dl>
     </section>
 
-    <section>
+    <section data-dfn-for="MouseEvent">
       <h2>Extensions to the <a>MouseEvent</a> Interface</h2>
 
       <p><a>User agent</a>s must extend the MouseEvent interface
       [[!UIEVENTS]]
       with two members:</p>
 
-      <dl title='partial interface MouseEvent' class='idl'>
-        <dt>readonly attribute long movementX</dt>
-        <dd><dfn title="movementX"></dfn></dd>
-        <dt>readonly attribute long movementY</dt>
-        <dd><dfn title="movementY"></dfn></dd>
+      <pre class="idl">
+        partial interface MouseEvent {
+          readonly attribute long movementX;
+          readonly attribute long movementY;
+        };
+      </pre>
+      <dl>
+        <dt><dfn>movementX</dfn></dt>
+        <dt><dfn>movementY</dfn></dt>
       </dl>
 
       <p>The members <code>movementX</code> and <code>movementY</code> must
@@ -483,7 +494,7 @@
       events when the cursor moves outside the window.</p>
     </section>
 
-    <section>
+    <section data-dfn-for="MouseEventInit">
       <h2>Extensions to the <a>MouseEventInit</a> Dictionary</h2>
 
       <p><a>User agent</a>s must extend the MouseEventInit dictionary
@@ -491,11 +502,15 @@
       <code>movementY</code> used to initialize respective members
       of <code>MouseEvent</code>.</p>
 
-      <dl title='partial dictionary MouseEventInit' class='idl'>
-        <dt>long movementX = 0</dt>
-        <dd></dd>
-        <dt>long movementY = 0</dt>
-        <dd></dd>
+      <pre class="idl">
+        partial dictionary MouseEventInit {
+          long movementX = 0;
+          long movementY = 0;
+        };
+      </pre>
+      <dl>
+        <dt><dfn>movementX</dfn></dt>
+        <dt><dfn>movementY</dfn></dt>
       </dl>
     </section>
 
@@ -592,7 +607,7 @@
         following code should permit a custom cursor to send click events while
         the pointer is locked:</p>
 
-        <pre class='example highlight' id="example-synthetic-cursor">
+        <pre class='example' id="example-synthetic-cursor">
             document.addEventListener("click", function (e) {
               if (e._isSynthetic)
                 return;
