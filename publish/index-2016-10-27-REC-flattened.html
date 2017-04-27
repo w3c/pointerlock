@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en" typeof="bibo:Document w3p:REC" prefix="bibo: http://purl.org/ontology/bibo/ w3p: http://www.w3.org/2001/02pd/rec54#">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta lang="" property="dc:language" content="en">
+  <style>
+    /*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+    
+    .hljs {
+      display: block;
+      overflow-x: auto;
+      padding: 0.5em;
+      color: #333;
+      background: #f8f8f8;
+      -webkit-text-size-adjust: none;
+    }
+    
+    .hljs-comment,
+    .diff .hljs-header {
+      color: #998;
+      font-style: italic;
+    }
+    
+    .hljs-keyword,
+    .css .rule .hljs-keyword,
+    .hljs-winutils,
+    .nginx .hljs-title,
+    .hljs-subst,
+    .hljs-request,
+    .hljs-status {
+      color: #333;
+      font-weight: bold;
+    }
+    
+    .hljs-number,
+    .hljs-hexcolor,
+    .ruby .hljs-constant {
+      color: #008080;
+    }
+    
+    .hljs-string,
+    .hljs-tag .hljs-value,
+    .hljs-doctag,
+    .tex .hljs-formula {
+      color: #d14;
+    }
+    
+    .hljs-title,
+    .hljs-id,
+    .scss .hljs-preprocessor {
+      color: #900;
+      font-weight: bold;
+    }
+    
+    .hljs-list .hljs-keyword,
+    .hljs-subst {
+      font-weight: normal;
+    }
+    
+    .hljs-class .hljs-title,
+    .hljs-type,
+    .vhdl .hljs-literal,
+    .tex .hljs-command {
+      color: #458;
+      font-weight: bold;
+    }
+    
+    .hljs-tag,
+    .hljs-tag .hljs-title,
+    .hljs-rule .hljs-property,
+    .django .hljs-tag .hljs-keyword {
+      color: #000080;
+      font-weight: normal;
+    }
+    
+    .hljs-attribute,
+    .hljs-variable,
+    .lisp .hljs-body,
+    .hljs-name {
+      color: #008080;
+    }
+    
+    .hljs-regexp {
+      color: #009926;
+    }
+    
+    .hljs-symbol,
+    .ruby .hljs-symbol .hljs-string,
+    .lisp .hljs-keyword,
+    .clojure .hljs-keyword,
+    .scheme .hljs-keyword,
+    .tex .hljs-special,
+    .hljs-prompt {
+      color: #990073;
+    }
+    
+    .hljs-built_in {
+      color: #0086b3;
+    }
+    
+    .hljs-preprocessor,
+    .hljs-pragma,
+    .hljs-pi,
+    .hljs-doctype,
+    .hljs-shebang,
+    .hljs-cdata {
+      color: #999;
+      font-weight: bold;
+    }
+    
+    .hljs-deletion {
+      background: #fdd;
+    }
+    
+    .hljs-addition {
+      background: #dfd;
+    }
+    
+    .diff .hljs-change {
+      background: #0086b3;
+    }
+    
+    .hljs-chunk {
+      color: #aaa;
+    }
+  </style>
+  <style id="respec-mainstyle">
+    /*****************************************************************
+ * ReSpec 3 CSS
+ * Robin Berjon - http://berjon.com/
+ *****************************************************************/
+    /* Override code highlighter background */
+    
+    .hljs {
+      background: transparent !important;
+    }
+    /* --- INLINES --- */
+    
+    em.rfc2119 {
+      text-transform: lowercase;
+      font-variant: small-caps;
+      font-style: normal;
+      color: #900;
+    }
+    
+    h1 acronym,
+    h2 acronym,
+    h3 acronym,
+    h4 acronym,
+    h5 acronym,
+    h6 acronym,
+    a acronym,
+    h1 abbr,
+    h2 abbr,
+    h3 abbr,
+    h4 abbr,
+    h5 abbr,
+    h6 abbr,
+    a abbr {
+      border: none;
+    }
+    
+    dfn {
+      font-weight: bold;
+    }
+    
+    a.internalDFN {
+      color: inherit;
+      border-bottom: 1px solid #99c;
+      text-decoration: none;
+    }
+    
+    a.externalDFN {
+      color: inherit;
+      border-bottom: 1px dotted #ccc;
+      text-decoration: none;
+    }
+    
+    a.bibref {
+      text-decoration: none;
+    }
+    
+    cite .bibref {
+      font-style: normal;
+    }
+    
+    code {
+      color: #C83500;
+    }
+    /* --- TOC --- */
+    
+    .toc a,
+    .tof a {
+      text-decoration: none;
+    }
+    
+    a .secno,
+    a .figno {
+      color: #000;
+    }
+    
+    ul.tof,
+    ol.tof {
+      list-style: none outside none;
+    }
+    
+    .caption {
+      margin-top: 0.5em;
+      font-style: italic;
+    }
+    /* --- TABLE --- */
+    
+    table.simple {
+      border-spacing: 0;
+      border-collapse: collapse;
+      border-bottom: 3px solid #005a9c;
+    }
+    
+    .simple th {
+      background: #005a9c;
+      color: #fff;
+      padding: 3px 5px;
+      text-align: left;
+    }
+    
+    .simple th[scope="row"] {
+      background: inherit;
+      color: inherit;
+      border-top: 1px solid #ddd;
+    }
+    
+    .simple td {
+      padding: 3px 10px;
+      border-top: 1px solid #ddd;
+    }
+    
+    .simple tr:nth-child(even) {
+      background: #f0f6ff;
+    }
+    /* --- DL --- */
+    
+    .section dd> p:first-child {
+      margin-top: 0;
+    }
+    
+    .section dd> p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .section dd {
+      margin-bottom: 1em;
+    }
+    
+    .section dl.attrs dd,
+    .section dl.eldef dd {
+      margin-bottom: 0;
+    }
+    
+    .respec-hidden {
+      display: none;
+    }
+    
+    @media print {
+      .removeOnSave {
+        display: none;
+      }
+    }
+  </style>
+  <title>Pointer Lock</title>
+
+
+  <!--
+      === NOTA BENE ===
+      For the three scripts below, if your spec resides on dev.w3 you can check them
+      out in the same tree and use relative links so that they'll work offline,
+     -->
+
+
+
+  <style type="text/css">
+    .event {
+      font-family: monospace;
+      color: #459900;
+    }
+    
+    pre.idl {
+      white-space: pre-wrap;
+    }
+  </style>
+  <style>
+    /* --- EXAMPLES --- */
+    
+    div.example-title {
+      min-width: 7.5em;
+      color: #b9ab2d;
+    }
+    
+    div.example-title span {
+      text-transform: uppercase;
+    }
+    
+    aside.example,
+    div.example,
+    div.illegal-example {
+      padding: 0.5em;
+      margin: 1em 0;
+      position: relative;
+      clear: both;
+    }
+    
+    div.illegal-example {
+      color: red
+    }
+    
+    div.illegal-example p {
+      color: black
+    }
+    
+    aside.example,
+    div.example {
+      padding: .5em;
+      border-left-width: .5em;
+      border-left-style: solid;
+      border-color: #e0cb52;
+      background: #fcfaee;
+    }
+    
+    aside.example div.example {
+      border-left-width: .1em;
+      border-color: #999;
+      background: #fff;
+    }
+    
+    aside.example div.example div.example-title {
+      color: #999;
+    }
+  </style>
+  <style>
+    /* --- ISSUES/NOTES --- */
+    
+    div.issue-title,
+    div.note-title,
+    div.ednote-title,
+    div.warning-title {
+      padding-right: 1em;
+      min-width: 7.5em;
+      color: #b9ab2d;
+    }
+    
+    div.issue-title {
+      color: #e05252;
+    }
+    
+    div.note-title,
+    div.ednote-title {
+      color: #2b2;
+    }
+    
+    div.warning-title {
+      color: #f22;
+    }
+    
+    div.issue-title span,
+    div.note-title span,
+    div.ednote-title span,
+    div.warning-title span {
+      text-transform: uppercase;
+    }
+    
+    div.note,
+    div.issue,
+    div.ednote,
+    div.warning {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+    
+    .note> p:first-child,
+    .ednote> p:first-child,
+    .issue> p:first-child,
+    .warning> p:first-child {
+      margin-top: 0
+    }
+    
+    .issue,
+    .note,
+    .ednote,
+    .warning {
+      padding: .5em;
+      border-left-width: .5em;
+      border-left-style: solid;
+    }
+    
+    div.issue,
+    div.note,
+    div.ednote,
+    div.warning {
+      padding: 1em 1.2em 0.5em;
+      margin: 1em 0;
+      position: relative;
+      clear: both;
+    }
+    
+    span.note,
+    span.ednote,
+    span.issue,
+    span.warning {
+      padding: .1em .5em .15em;
+    }
+    
+    .issue {
+      border-color: #e05252;
+      background: #fbe9e9;
+    }
+    
+    .note,
+    .ednote {
+      border-color: #52e052;
+      background: #e9fbe9;
+    }
+    
+    .warning {
+      border-color: #f11;
+      border-width: .2em;
+      border-style: solid;
+      background: #fbe9e9;
+    }
+    
+    .warning-title:before {
+      content: "⚠";
+      /*U+26A0 WARNING SIGN*/
+      font-size: 3em;
+      float: left;
+      height: 100%;
+      padding-right: .3em;
+      vertical-align: top;
+      margin-top: -0.5em;
+    }
+    
+    li.task-list-item {
+      list-style: none;
+    }
+    
+    input.task-list-item-checkbox {
+      margin: 0 0.35em 0.25em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style>
+    /* --- WEB IDL --- */
+    
+    pre.idl {
+      border-top: 1px solid #90b8de;
+      border-bottom: 1px solid #90b8de;
+      padding: 1em;
+      line-height: 120%;
+    }
+    
+    @media print {
+      pre.idl {
+        white-space: pre-wrap;
+      }
+    }
+    
+    pre.idl::before {
+      content: "WebIDL";
+      display: block;
+      width: 150px;
+      background: #90b8de;
+      color: #fff;
+      font-family: sans-serif;
+      padding: 3px;
+      font-weight: bold;
+      margin: -1em 0 1em -1em;
+    }
+    
+    .idlType {
+      color: #ff4500;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    /*.idlModule*/
+    /*.idlModuleID*/
+    /*.idlInterface*/
+    
+    .idlInterfaceID,
+    .idlDictionaryID,
+    .idlCallbackID,
+    .idlEnumID {
+      font-weight: bold;
+      color: #005a9c;
+    }
+    
+    a.idlEnumItem {
+      color: #000;
+      border-bottom: 1px dotted #ccc;
+      text-decoration: none;
+    }
+    
+    .idlSuperclass {
+      font-style: italic;
+      color: #005a9c;
+    }
+    /*.idlAttribute*/
+    
+    .idlAttrType,
+    .idlFieldType,
+    .idlMemberType {
+      color: #005a9c;
+    }
+    
+    .idlAttrName,
+    .idlFieldName,
+    .idlMemberName {
+      color: #ff4500;
+    }
+    
+    .idlAttrName a,
+    .idlFieldName a,
+    .idlMemberName a {
+      color: #ff4500;
+      border-bottom: 1px dotted #ff4500;
+      text-decoration: none;
+    }
+    /*.idlMethod*/
+    
+    .idlMethType,
+    .idlCallbackType {
+      color: #005a9c;
+    }
+    
+    .idlMethName {
+      color: #ff4500;
+    }
+    
+    .idlMethName a {
+      color: #ff4500;
+      border-bottom: 1px dotted #ff4500;
+      text-decoration: none;
+    }
+    /*.idlCtor*/
+    
+    .idlCtorName {
+      color: #ff4500;
+    }
+    
+    .idlCtorName a {
+      color: #ff4500;
+      border-bottom: 1px dotted #ff4500;
+      text-decoration: none;
+    }
+    /*.idlParam*/
+    
+    .idlParamType {
+      color: #005a9c;
+    }
+    
+    .idlParamName,
+    .idlDefaultValue {
+      font-style: italic;
+    }
+    
+    .extAttr {
+      color: #666;
+    }
+    /*.idlSectionComment*/
+    
+    .idlSectionComment {
+      color: gray;
+    }
+    /*.idlIterable*/
+    
+    .idlIterableKeyType,
+    .idlIterableValueType {
+      color: #005a9c;
+    }
+    /*.idlMaplike*/
+    
+    .idlMaplikeKeyType,
+    .idlMaplikeValueType {
+      color: #005a9c;
+    }
+    /*.idlConst*/
+    
+    .idlConstType {
+      color: #005a9c;
+    }
+    
+    .idlConstName {
+      color: #ff4500;
+    }
+    
+    .idlConstName a {
+      color: #ff4500;
+      border-bottom: 1px dotted #ff4500;
+      text-decoration: none;
+    }
+    /*.idlException*/
+    
+    .idlExceptionID {
+      font-weight: bold;
+      color: #c00;
+    }
+    
+    .idlTypedefID,
+    .idlTypedefType {
+      color: #005a9c;
+    }
+    
+    .idlRaises,
+    .idlRaises a.idlType,
+    .idlRaises a.idlType code,
+    .excName a,
+    .excName a code {
+      color: #c00;
+      font-weight: normal;
+    }
+    
+    .excName a {
+      font-family: monospace;
+    }
+    
+    .idlRaises a.idlType,
+    .excName a.idlType {
+      border-bottom: 1px dotted #c00;
+    }
+    
+    .excGetSetTrue,
+    .excGetSetFalse,
+    .prmNullTrue,
+    .prmNullFalse,
+    .prmOptTrue,
+    .prmOptFalse {
+      width: 45px;
+      text-align: center;
+    }
+    
+    .excGetSetTrue,
+    .prmNullTrue,
+    .prmOptTrue {
+      color: #0c0;
+    }
+    
+    .excGetSetFalse,
+    .prmNullFalse,
+    .prmOptFalse {
+      color: #c00;
+    }
+    
+    .idlImplements a {
+      font-weight: bold;
+    }
+    
+    dl.attributes,
+    dl.methods,
+    dl.constants,
+    dl.constructors,
+    dl.fields,
+    dl.dictionary-members {
+      margin-left: 2em;
+    }
+    
+    .attributes dt,
+    .methods dt,
+    .constants dt,
+    .constructors dt,
+    .fields dt,
+    .dictionary-members dt {
+      font-weight: normal;
+    }
+    
+    .attributes dt code,
+    .methods dt code,
+    .constants dt code,
+    .constructors dt code,
+    .fields dt code,
+    .dictionary-members dt code {
+      font-weight: bold;
+      color: #000;
+      font-family: monospace;
+    }
+    
+    .attributes dt code,
+    .fields dt code,
+    .dictionary-members dt code {
+      background: #ffffd2;
+    }
+    
+    .attributes dt .idlAttrType code,
+    .fields dt .idlFieldType code,
+    .dictionary-members dt .idlMemberType code {
+      color: #005a9c;
+      background: transparent;
+      font-family: inherit;
+      font-weight: normal;
+      font-style: italic;
+    }
+    
+    .methods dt code {
+      background: #d9e6f8;
+    }
+    
+    .constants dt code {
+      background: #ddffd2;
+    }
+    
+    .constructors dt code {
+      background: #cfc;
+    }
+    
+    .attributes dd,
+    .methods dd,
+    .constants dd,
+    .constructors dd,
+    .fields dd,
+    .dictionary-members dd {
+      margin-bottom: 1em;
+    }
+    
+    table.parameters,
+    table.exceptions {
+      border-spacing: 0;
+      border-collapse: collapse;
+      margin: 0.5em 0;
+      width: 100%;
+    }
+    
+    table.parameters {
+      border-bottom: 1px solid #90b8de;
+    }
+    
+    table.exceptions {
+      border-bottom: 1px solid #deb890;
+    }
+    
+    .parameters th,
+    .exceptions th {
+      color: #fff;
+      padding: 3px 5px;
+      text-align: left;
+      font-weight: normal;
+      text-shadow: #666 1px 1px 0;
+    }
+    
+    .parameters th {
+      background: #90b8de;
+    }
+    
+    .exceptions th {
+      background: #deb890;
+    }
+    
+    .parameters td,
+    .exceptions td {
+      padding: 3px 10px;
+      border-top: 1px solid #ddd;
+      vertical-align: top;
+    }
+    
+    .parameters tr:first-child td,
+    .exceptions tr:first-child td {
+      border-top: none;
+    }
+    
+    .parameters td.prmName,
+    .exceptions td.excName,
+    .exceptions td.excCodeName {
+      width: 100px;
+    }
+    
+    .parameters td.prmType {
+      width: 120px;
+    }
+    
+    table.exceptions table {
+      border-spacing: 0;
+      border-collapse: collapse;
+      width: 100%;
+    }
+  </style>
+  <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-REC">
+  <!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]-->
+  <script id="initialUserConfig" type="application/json">
+    {
+      "specStatus": "REC",
+      "shortName": "pointerlock",
+      "previousPublishDate": "2016-08-30",
+      "previousMaturity": "PR",
+      "edDraftURI": "https://w3c.github.io/pointerlock/",
+      "implementationReportURI": "https://github.com/w3c/web-platform-tests/tree/master/pointerlock",
+      "editors": [
+      {
+        "name": "Vincent Scheib",
+        "url": "http://www.scheib.net",
+        "company": "Google",
+        "companyURL": "http://www.google.com/"
+      }],
+      "otherLinks": [
+      {
+        "key": "Participate",
+        "data": [
+        {
+          "value": "We are on Github.",
+          "href": "https://github.com/w3c/pointerlock"
+        },
+        {
+          "value": "Bugzilla Bug list.",
+          "href": "https://www.w3.org/Bugs/Public/buglist.cgi?component=Pointer%20Lock&list_id=58701&product=WebAppsWG&resolution=---"
+        },
+        {
+          "value": "Github Issues.",
+          "href": "https://github.com/w3c/pointerlock/issues"
+        },
+        {
+          "value": "Commit history.",
+          "href": "https://github.com/w3c/pointerlock/commits"
+        },
+        {
+          "value": "Mailing list.",
+          "href": "http://lists.w3.org/Archives/Public/public-webapps/"
+        }]
+      }],
+      "wg": "Web Platform Working Group",
+      "wgURI": "https://www.w3.org/WebPlatform/WG/",
+      "license": "w3c-software-doc",
+      "wgPublicList": "public-webapps",
+      "wgPatentURI": "http://www.w3.org/2004/01/pp-impl/83482/status"
+    }
+  </script>
+</head>
+<body class="h-entry" role="document" id="respecDocument">
+  <div class="head" role="contentinfo" id="respecHeader">
+    <p>
+      <a href="https://www.w3.org/"><img height="48" width="72" alt="W3C" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C"/></a>
+    </p>
+    <h1 class="title p-name" id="title" property="dcterms:title">Pointer Lock</h1>
+    <h2 id="w3c-recommendation-27-october-2016"><abbr title="World Wide Web Consortium">W3C</abbr> Recommendation <time property="dcterms:issued" class="dt-published" datetime="2016-10-27">27 October 2016</time></h2>
+    <dl>
+      <dt>This version:</dt>
+      <dd><a class="u-url" href="https://www.w3.org/TR/2016/REC-pointerlock-20161027/">https://www.w3.org/TR/2016/REC-pointerlock-20161027/</a></dd>
+      <dt>Latest published version:</dt>
+      <dd><a href="https://www.w3.org/TR/pointerlock/">https://www.w3.org/TR/pointerlock/</a></dd>
+      <dt>Latest editor's draft:</dt>
+      <dd><a href="https://w3c.github.io/pointerlock/">https://w3c.github.io/pointerlock/</a></dd>
+      <dt>Test Suite:</dt>
+      <dd><a href="https://github.com/w3c/web-platform-tests/tree/master/pointerlock">https://github.com/w3c/web-platform-tests/tree/master/pointerlock</a></dd>
+      <dt>Implementation report:</dt>
+      <dd><a href="https://w3c.github.io/test-results/pointerlock/all.html">https://w3c.github.io/test-results/pointerlock/all.html</a></dd>
+      <dt>Previous version:</dt>
+      <dd><a rel="dcterms:replaces" href="https://www.w3.org/TR/2016/PR-pointerlock-20160830/">https://www.w3.org/TR/2016/PR-pointerlock-20160830/</a></dd>
+      <dd><a rel="dcterms:replaces" href="https://www.w3.org/TR/2016/CR-pointerlock-20160705/">https://www.w3.org/TR/2016/CR-pointerlock-20160705/</a></dd>
+      <dd><a rel="dcterms:replaces" href="https://www.w3.org/TR/2013/CR-pointerlock-20131217/">https://www.w3.org/TR/2013/CR-pointerlock-20131217/</a></dd>
+      <dt>Editor:</dt>
+      <dd class="p-author h-card vcard" property="bibo:editor" resource="_:editor0"><span property="rdf:first" typeof="foaf:Person"><meta property="foaf:name" content="Vincent Scheib"><a class="u-url url p-name fn" property="foaf:homepage" href="http://www.scheib.net">Vincent Scheib</a>, <a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://www.google.com/">Google</a></span>
+        <span property="rdf:rest" resource="rdf:nil"></span>
+      </dd>
+
+      <dt>Participate:</dt>
+      <dd>
+        <a href="https://github.com/w3c/pointerlock">
+                      We are on Github.
+                    </a>
+      </dd>
+      <dd>
+        <a href="https://www.w3.org/Bugs/Public/buglist.cgi?component=Pointer%20Lock&amp;list_id=58701&amp;product=WebAppsWG&amp;resolution=---">
+                      Bugzilla Bug list.
+                    </a>
+      </dd>
+      <dd>
+        <a href="https://github.com/w3c/pointerlock/issues">
+                      Github Issues.
+                    </a>
+      </dd>
+      <dd>
+        <a href="https://github.com/w3c/pointerlock/commits">
+                      Commit history.
+                    </a>
+      </dd>
+      <dd>
+        <a href="http://lists.w3.org/Archives/Public/public-webapps/">
+                      Mailing list.
+                    </a>
+      </dd>
+    </dl>
+    <p>
+      Please check the <a href="https://github.com/w3c/pointerlock/blob/gh-pages/publish/Errata.md"><strong>errata</strong></a> for any errors or issues reported since publication.
+    </p>
+    <p>
+      The English version of this specification is the only normative version. Non-normative
+      <a href="https://www.w3.org/Consortium/Translation/">translations</a> may also be available.
+    </p>
+    <p class="copyright">
+      <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2016
+
+      <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>,
+      <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>,
+      <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>).
+      <abbr title="World Wide Web Consortium">W3C</abbr> <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+      <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and
+      <a rel="license" href="http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">permissive document license</a> rules apply.
+    </p>
+    <hr title="Separator for header">
+  </div>
+
+  <section id="abstract" class="introductory" property="dc:abstract">
+    <h2 id="h-abstract" resource="#h-abstract"><span property="xhv:role" resource="xhv:heading">Abstract</span></h2>
+    <p>
+      This specification defines an API that provides scripted access to raw mouse movement data while locking the target of mouse events to a single element and removing the cursor from view. This is an essential input mode for certain classes of applications, especially first person perspective 3D applications and 3D modeling software.
+    </p>
+  </section>
+
+  <section id="sotd" class="introductory">
+    <h2 id="h-sotd" resource="#h-sotd"><span property="xhv:role" resource="xhv:heading">Status of This Document</span></h2>
+    <p>
+      <em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the latest revision of this technical report can be found in the <a href="https://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at https://www.w3.org/TR/.</em>
+    </p>
+    <!-- Status of This Document -->
+
+    <p>
+      This document was published by the <a href="http://www.w3.org/WebPlatform/WG/">Web Platform Working Group</a> as a Recommendation. If you wish to make comments regarding this document, please send them to <a href="https://github.com/w3c/pointerlock/issues">GitHub</a> or <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> (<a href="https://lists.w3.org/Archives/Public/public-webapps/">archives</a>). All comments are welcome.
+    </p>
+
+    <p>The following implementation report was used to move this document forward: <a href="https://w3c.github.io/test-results/pointerlock/all.html">https://w3c.github.io/test-results/pointerlock/all.html</a>.</p>
+
+    <p>
+      This document has been reviewed by <abbr title="World Wide Web Consortium">W3C</abbr> Members, by software developers, and by other <abbr title="World Wide Web Consortium">W3C</abbr> groups and interested parties, and is endorsed by the Director as a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation. It is a stable document and may be used as reference material or cited from another document. <abbr title="World Wide Web Consortium">W3C</abbr>'s role in making the Recommendation is to draw attention to the specification and to promote its widespread deployment. This enhances the functionality and interoperability of the Web.
+    </p>
+
+  <p>By publishing this Recommendation, W3C expects the functionality specified in this document will not be affected by changes to <a href="#bib-UIEVENTS">UI Events</a> as this specification proceeds to Recommendation. The Working Group will continue to track this specification.</p>
+
+  <p>
+      This document was produced by a group operating under the
+      <a id="sotd_patent" property="w3p:patentRules" href="https://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 <abbr title="World Wide Web Consortium">W3C</abbr> Patent
+              Policy</a>.
+      <abbr title="World Wide Web Consortium">W3C</abbr> maintains a <a href="https://www.w3.org/2004/01/pp-impl/83482/status" rel="disclosure">public list of any patent
+                disclosures</a> made in connection with the deliverables of the group; that page also includes instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains
+      <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+              Claim(s)</a> must disclose the information in accordance with
+      <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
+              6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+    </p>
+    <p>This document is governed by the <a id="w3c_process_revision" href="https://www.w3.org/2015/Process-20150901/">1 September 2015 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
+    </p>
+
+  </section>
+  <nav id="toc">
+    <h2 class="introductory" id="table-of-contents" resource="#table-of-contents"><span property="xhv:role" resource="xhv:heading">Table of Contents</span></h2>
+    <ul class="toc" role="directory">
+      <li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a></li>
+      <li class="tocline"><a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a></li>
+      <li class="tocline"><a href="#glossary" class="tocxref"><span class="secno">3. </span>Glossary</a></li>
+      <li class="tocline"><a href="#pointerlockchange-and-pointerlockerror-events" class="tocxref"><span class="secno">4. </span><code>pointerlockchange</code> and <code>pointerlockerror</code> Events</a></li>
+      <li class="tocline"><a href="#extensions-to-the-element-interface" class="tocxref"><span class="secno">5. </span>Extensions to the <span class="formerLink"><code>Element</code></span> Interface</a>
+        <ul class="toc">
+          <li class="tocline"><a href="#methods" class="tocxref"><span class="secno">5.1 </span>Methods</a></li>
+        </ul>
+      </li>
+      <li class="tocline"><a href="#extensions-to-the-document-interface" class="tocxref"><span class="secno">6. </span>Extensions to the <span class="formerLink"><code>Document</code></span> Interface</a>
+        <ul class="toc">
+          <li class="tocline"><a href="#attributes" class="tocxref"><span class="secno">6.1 </span>Attributes</a></li>
+          <li class="tocline"><a href="#methods-1" class="tocxref"><span class="secno">6.2 </span>Methods</a></li>
+        </ul>
+      </li>
+      <li class="tocline"><a href="#extensions-to-the-mouseevent-interface" class="tocxref"><span class="secno">7. </span>Extensions to the <span class="formerLink"><code>MouseEvent</code></span> Interface</a>
+        <ul class="toc">
+          <li class="tocline"><a href="#attributes-1" class="tocxref"><span class="secno">7.1 </span>Attributes</a></li>
+        </ul>
+      </li>
+      <li class="tocline"><a href="#extensions-to-the-mouseeventinit-dictionary" class="tocxref"><span class="secno">8. </span>Extensions to the <span class="formerLink"><code>MouseEventInit</code></span> Dictionary</a>
+        <ul class="toc">
+          <li class="tocline"><a href="#dictionary-mouseeventinit-members" class="tocxref"><span class="secno">8.1 </span>Dictionary <span class="formerLink"><code>MouseEventInit</code></span> Members</a></li>
+        </ul>
+      </li>
+      <li class="tocline"><a href="#requirements" class="tocxref"><span class="secno">9. </span>Requirements</a></li>
+      <li class="tocline"><a href="#use-cases" class="tocxref"><span class="secno">10. </span>Use Cases</a>
+        <ul class="toc">
+          <li class="tocline"><a href="#relative-view-port-rotation-of-free-moving-virtual-actors" class="tocxref"><span class="secno">10.1 </span>Relative view-port rotation of free moving virtual actors</a></li>
+          <li class="tocline"><a href="#free-rotation-of-3d-models-or-panning-of-2d-layers" class="tocxref"><span class="secno">10.2 </span>Free rotation of 3D models or panning of 2D layers</a></li>
+          <li class="tocline"><a href="#relative-movement-of-actors" class="tocxref"><span class="secno">10.3 </span>Relative movement of actors</a></li>
+          <li class="tocline"><a href="#jog-movement-over-spinner-controls" class="tocxref"><span class="secno">10.4 </span>Jog movement over spinner controls</a></li>
+          <li class="tocline"><a href="#synthetic-cursor-interaction-with-html-dom-ui" class="tocxref"><span class="secno">10.5 </span>Synthetic cursor interaction with HTML DOM UI</a></li>
+          <li class="tocline"><a href="#view-port-panning-by-moving-a-mouse-cursor-against-the-bounds-of-a-view-port.x" class="tocxref"><span class="secno">10.6 </span>View-port panning by moving a mouse cursor against the bounds of a
+        view-port.</a></li>
+          <li class="tocline"><a href="#game-lobby-timer-based-pointer-lock" class="tocxref"><span class="secno">10.7 </span>Game Lobby, timer based pointer lock</a></li>
+          <li class="tocline"><a href="#game-portal" class="tocxref"><span class="secno">10.8 </span>Game Portal</a></li>
+        </ul>
+      </li>
+      <li class="tocline"><a href="#security" class="tocxref"><span class="secno">11. </span>Security</a></li>
+      <li class="tocline"><a href="#frequently-asked-questions" class="tocxref"><span class="secno">12. </span>Frequently Asked Questions</a>
+        <ul class="toc">
+          <li class="tocline"><a href="#why-not-merge-with-mouse-capture-setcapture" class="tocxref"><span class="secno">12.1 </span>Why not merge with Mouse Capture: setCapture()?</a></li>
+          <li class="tocline"><a href="#why-not-repurpose-mouseevent-s-.clientx-y-.screenx-y" class="tocxref"><span class="secno">12.2 </span>Why not repurpose MouseEvent's .clientX/Y .screenX/Y?</a></li>
+          <li class="tocline"><a href="#why-use-.movementx-y-instead-of-.deltax-y" class="tocxref"><span class="secno">12.3 </span>Why use .movementX/Y instead of .deltaX/Y?</a></li>
+          <li class="tocline"><a href="#why-bundle" class="tocxref"><span class="secno">12.4 </span>Why bundle all functionality (hiding cursor, providing mouse deltas)
+        instead of using CSS to hide the cursor, always providing delta values,
+        and offering an API to restrict the cursor movement to a portion of the
+        web page?</a></li>
+          <li class="tocline"><a href="#high-resolution-deltas-high-frequency-updates" class="tocxref"><span class="secno">12.5 </span>High resolution deltas / High frequency updates?</a></li>
+          <li class="tocline"><a href="#why-modify-mouseevent-and-reuse-existing-mouse-events-instead-of-creating-a-mouse-delta-event" class="tocxref"><span class="secno">12.6 </span>Why modify MouseEvent and reuse existing mouse events instead of
+        creating a mouse delta event?</a></li>
+          <li class="tocline"><a href="#why-separate-targets-for-mouse-events-under-pointer-lock-and-keyboard-input-focus" class="tocxref"><span class="secno">12.7 </span>Why separate targets for mouse events under pointer lock and keyboard
+        input focus?</a></li>
+        </ul>
+      </li>
+      <li class="tocline"><a href="#acknowledgments" class="tocxref"><span class="secno">A. </span>Acknowledgments</a></li>
+      <li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a>
+        <ul class="toc">
+          <li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li>
+          <li class="tocline"><a href="#informative-references" class="tocxref"><span class="secno">B.2 </span>Informative references</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+
+
+  <section id="introduction" class="informative" typeof="bibo:Chapter" resource="#introduction" property="bibo:hasPart">
+
+    <!--OddPage-->
+    <h2 id="h-introduction" resource="#h-introduction"><span property="xhv:role" resource="xhv:heading"><span class="secno">1. </span>Introduction</span></h2>
+    <p><em>This section is non-normative.</em></p>
+
+    <p>The Pointer Lock API provides applications the ability to directly interpret mouse movements as an input method, rather than being limited to only read the position of the mouse cursor. A popular example is that of first person movement controls in three dimensional graphics applications such as games: movement of the mouse is interpreted to control the rotation/direction of the player's camera; no mouse cursor is displayed, and the movement is not limited to the traditional boundaries (such as the user agent's window, or the overall screen) that the mouse cursor is usually subject to, meaning that any mouse movements can be tracked indefinitely in any direction.</p>
+
+    <p>Pointer Lock is related to Mouse Capture [<cite><a class="bibref" href="#bib-MSDN-SETCAPTURE">MSDN-SETCAPTURE</a></cite>] [<cite><a class="bibref" href="#bib-MDN-SETCAPTURE">MDN-SETCAPTURE</a></cite>] (Mouse Capture is unspecified: bug
+      <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=14600">14600</a>). Capture provides continued event delivery to a target element while a mouse is being dragged, but ceases when the mouse button is released. Pointer Lock differs by being persistent, not limited by screen boundaries, sending events regardless of mouse button state, hiding the cursor, and not releasing until an API call or specific <a href="#dfn-default-unlock-gesture" class="internalDFN" data-link-type="dfn">default unlock gesture</a> by the user.</p>
+
+    <p>Pointer Lock deals with capturing a single resource and relating it to a single element. This is similar to the Fullscreen API [<cite><a class="bibref" href="#bib-FULLSCREEN">FULLSCREEN</a></cite>], which promotes a single element to be full screen. The Pointer Lock API chooses to pattern the resource capture, state change, and release API as closely as possible after the Fullscreen API.</p>
+
+    <p>The Pointer Lock interaction mode was previously referred to as mouse lock. The name was changed as many different controller types besides mice can manipulate the on screen pointing cursor, and they are all impacted.</p>
+
+  </section>
+
+  <section id="conformance" typeof="bibo:Chapter" resource="#conformance" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-conformance" resource="#h-conformance"><span property="xhv:role" resource="xhv:heading"><span class="secno">2. </span>Conformance</span></h2>
+    <p>
+      As well as sections marked as non-normative, all authoring guidelines, diagrams, examples, and notes in this specification are non-normative. Everything else in this specification is normative.
+    </p>
+    <p id="respecRFC2119">The key word <em class="rfc2119" title="MUST">MUST</em> is to be interpreted as described in [<cite><a class="bibref" href="#bib-RFC2119">RFC2119</a></cite>].
+    </p>
+
+    <p>
+      This specification defines conformance criteria that apply to a single product: the <dfn id="dfn-user-agent" data-dfn-type="dfn">user agent</dfn> that implements the interfaces that it contains.
+    </p>
+
+    <p>
+      Implementations that use ECMAScript to implement the APIs defined in this specification <em class="rfc2119" title="MUST">MUST</em> implement them in a manner consistent with the ECMAScript Bindings defined in the Web IDL specification [<cite><a class="bibref" href="#bib-WEBIDL">WEBIDL</a></cite>] as this specification uses that specification and terminology.
+    </p>
+
+    <p>
+      A conforming implementation is required to implement all fields defined in this specification.
+    </p>
+  </section>
+
+  <section id="glossary" typeof="bibo:Chapter" resource="#glossary" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-glossary" resource="#h-glossary"><span property="xhv:role" resource="xhv:heading"><span class="secno">3. </span>Glossary</span></h2>
+    <dl>
+    <dt><dfn data-dfn-type="dfn" id="dfn-engagement-gesture">Engagement gesture</dfn></dt>
+    <dd>
+      An event generated by the user agent as a result of user interaction processed by the user agent to interact with the page. e.g. <code>click</code>, but not
+      <code>mousemove</code>. Engagement gestures are any events included in the definition of being allowed to show a popup with the addition of <code>keypress</code> and <code>keyup</code>. Note that operating system level accessibility and internationalization features may intercept gestures before the user agent processes them for interaction with a page. E.g. multiple key press codes used to enter an extended international character.
+    </dd>
+    </dl>
+
+  </section>
+
+  <section id="pointerlockchange-and-pointerlockerror-events" typeof="bibo:Chapter" resource="#pointerlockchange-and-pointerlockerror-events" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-pointerlockchange-and-pointerlockerror-events" resource="#h-pointerlockchange-and-pointerlockerror-events"><span property="xhv:role" resource="xhv:heading"><span class="secno">4. </span><code>pointerlockchange</code> and <code>pointerlockerror</code> Events</span></h2>
+
+    <p>Two events are used to communicate pointer lock state change or an error in changing state. They are named <dfn data-dfn-type="dfn" id="dfn-pointerlockchange">pointerlockchange</dfn> and <dfn data-dfn-type="dfn" id="dfn-pointerlockerror">pointerlockerror</dfn>. If pointer lock is entered or exited for any reason a <a href="#dfn-pointerlockchange" class="internalDFN" data-link-type="dfn">pointerlockchange</a> event must be sent.</p>
+
+    <p><a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">User agent</a>s must deliver these events by queuing a task [<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>] to <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire">
+      fire an event</a> of the appropriate name with its
+      <code>bubbles</code> attribute [<cite><a class="bibref" href="#bib-DOM4">DOM4</a></cite>] set to false to the pointer lock
+      <a href="#dfn-target" class="internalDFN" data-link-type="dfn">target</a> element's <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document">
+      node document</a>.</p>
+
+    <div class="note">
+      <div class="note-title marker" aria-level="3" role="heading" id="h-note1"><span>Note</span></div>
+      <p class="">Magnification software increases the size of content on the screen. It uses the mouse to move the magnified point of focus around. When a pointer lock is initiated, the magnification software needs to switch to using the keyboard to move the magnified point of focus around instead. When a pointerlockchange event is fired, web browsers therefore need to make sure the event is communicated to assistive technologies like screen magnifiers.</p>
+    </div>
+  </section>
+
+  <section id="extensions-to-the-element-interface" typeof="bibo:Chapter" resource="#extensions-to-the-element-interface" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-extensions-to-the-element-interface" resource="#h-extensions-to-the-element-interface"><span property="xhv:role" resource="xhv:heading"><span class="secno">5. </span>Extensions to the <a href="#idl-def-Element" class="idlType"><code>Element</code></a> Interface</span></h2>
+    <p>
+      The <a href="#idl-def-Element" class="idlType"><code>Element</code></a> interface is extended to provide the ability to request the the pointer be locked.
+    </p>
+
+    <pre class="idl"><span class="idlInterface" id="idl-def-Element">partial interface <span class="idlInterfaceID">Element</span> {
+<span class="idlMethod">    <span class="idlMethType">void</span> <span class="idlMethName"><a href="#widl-Element-requestPointerLock-void">requestPointerLock</a></span> ();</span>
+};</span></pre>
+
+    <section id="methods" typeof="bibo:Chapter" resource="#methods" property="bibo:hasPart">
+      <h3 id="h-methods" resource="#h-methods"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.1 </span>Methods</span></h3>
+      <dl class="methods"><dt id="widl-Element-requestPointerLock-void"><code>requestPointerLock</code></dt>
+        <dd><dfn data-lt="requestpointerlock" data-dfn-type="dfn" id="dfn-requestpointerlock"></dfn>
+          <p>Requests that the pointer be locked to a DOM element
+            <dfn data-dfn-type="dfn" id="dfn-target">target</dfn>. The <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user agent</a> determines if pointer lock state will be entered and upon lock state change or error must send either a <a href="#dfn-pointerlockchange" class="internalDFN" data-link-type="dfn">pointerlockchange</a> or <a href="#dfn-pointerlockerror" class="internalDFN" data-link-type="dfn">pointerlockerror</a> event respectively.
+
+          </p>
+          <p>Pointer lock must not succeed if the document object's
+            active sandboxing flag set [<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>] has the sandboxed pointer lock browsing context flag [<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>] set.
+
+          </p>
+          <p>Pointer lock must not succeed unless the <a href="#dfn-target" class="internalDFN" data-link-type="dfn">target</a> is in the
+            active document [<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>] of a browsing context [<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>] which is (or has an ancestor browsing context [<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>] which is) in focus by a window which is in focus by the operating system's window manager. The <a href="#dfn-target" class="internalDFN" data-link-type="dfn">target</a> element and its browsing context [<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>] need not be in focus.</p>
+          <p>If a user has exited pointer lock via the default unlock user gesture, or pointer lock has not previously been entered for this document, an event generated as a result of an
+            <a href="#dfn-engagement-gesture" class="internalDFN" data-link-type="dfn">engagement gesture</a> must be received by the document before
+            <a href="#dfn-requestpointerlock" class="internalDFN" data-link-type="dfn">requestPointerLock</a> will succeed.[<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>]</p>
+          <div class="note">
+            <div class="note-title marker" aria-level="4" role="heading" id="h-note2"><span>Note</span></div>
+            <p class="">
+              This ensures a user can leave a document that constantly attempts to lock the pointer. The document will be blocked from locking upon initial navigation or re-acquiring lock unless the user re-engages directly with the document.<br><br> Conversely, if pointer lock is exited via <a href="#dfn-exitpointerlock" class="internalDFN" data-link-type="dfn">exitPointerLock</a> no <a href="#dfn-engagement-gesture" class="internalDFN" data-link-type="dfn">engagement gesture</a> is required to reenter pointer lock. This enables applications that frequently move between interaction modes, and ones that may do so based on a timer or remote network activity.
+              <br><br> Pointer lock is commonly combined with fullscreen [<cite><a class="bibref" href="#bib-FULLSCREEN">FULLSCREEN</a></cite>], and if an <a href="#dfn-engagement-gesture" class="internalDFN" data-link-type="dfn">engagement gesture</a> is used to enter fullscreen it is sufficient for a subsequent requestPointerLock.
+            </p>
+          </div>
+          <p>If any element (including this one) in the same document is already locked (or pending lock) the pointer lock <a href="#dfn-target" class="internalDFN" data-link-type="dfn">target</a> must be updated to this element and a
+            <a href="#dfn-pointerlockchange" class="internalDFN" data-link-type="dfn">pointerlockchange</a> event sent.</p>
+          <p>If any element in another document is already locked the request must fail and a <a href="#dfn-pointerlockerror" class="internalDFN" data-link-type="dfn">pointerlockerror</a> event be sent.</p>
+          <p>Once in the locked state the <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user agent</a> must fire all relevant user generated <code>MouseEvent</code> events (for example:
+            <code>mousemove</code>, <code>mousedown</code>, <code>mouseup</code>,
+            <code>click</code>, and <code>wheel</code>)[<cite><a class="bibref" href="#bib-UIEVENTS">UIEVENTS</a></cite>] to the <a href="#dfn-target" class="internalDFN" data-link-type="dfn">target</a> of pointer lock, and not fire mouse events to other elements. Events that require the concept of a mouse cursor must not be dispatched (for example: <code>mouseover</code>,
+            <code>mouseout</code>, <code>drag</code>, and <code>drop</code>).</p>
+          <p>In the locked state the system mouse cursor must be hidden. Movement and button presses of the mouse must not cause the window to lose focus.</p>
+          <p>Synthetic mouse events created by application script act the same regardless of lock state.</p>
+          <p>
+          </p>
+          <div><em>No parameters.</em></div>
+          <div><em>Return type: </em><code>void</code></div>
+        </dd>
+      </dl>
+    </section>
+  </section>
+
+  <section id="extensions-to-the-document-interface" typeof="bibo:Chapter" resource="#extensions-to-the-document-interface" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-extensions-to-the-document-interface" resource="#h-extensions-to-the-document-interface"><span property="xhv:role" resource="xhv:heading"><span class="secno">6. </span>Extensions to the <a href="#idl-def-Document" class="idlType"><code>Document</code></a> Interface</span></h2>
+
+    <pre class="idl"><span class="idlInterface" id="idl-def-Document">partial interface <span class="idlInterfaceID">Document</span> {
+<span class="idlAttribute">                    attribute <span class="idlAttrType">EventHandler</span> <span class="idlAttrName"><a href="#widl-Document-onpointerlockchange">onpointerlockchange</a></span>;</span>
+<span class="idlAttribute">                    attribute <span class="idlAttrType">EventHandler</span> <span class="idlAttrName"><a href="#widl-Document-onpointerlockerror">onpointerlockerror</a></span>;</span>
+<span class="idlAttribute">    readonly        attribute <span class="idlAttrType"><a href="#idl-def-Element" class="idlType"><code>Element</code></a>?</span>     <span class="idlAttrName"><a href="#widl-Document-pointerLockElement">pointerLockElement</a></span>;</span>
+<span class="idlMethod">    <span class="idlMethType">void</span> <span class="idlMethName"><a href="#widl-Document-exitPointerLock-void">exitPointerLock</a></span> ();</span>
+};</span></pre>
+
+    <section id="attributes" typeof="bibo:Chapter" resource="#attributes" property="bibo:hasPart">
+      <h3 id="h-attributes" resource="#h-attributes"><span property="xhv:role" resource="xhv:heading"><span class="secno">6.1 </span>Attributes</span></h3>
+      <dl class="attributes"><dt id="widl-Document-onpointerlockchange"><code>onpointerlockchange</code> of type <span class="idlAttrType">EventHandler</span></dt>
+        <dd><dfn data-lt="onpointerlockchange" data-dfn-type="dfn" id="dfn-onpointerlockchange"></dfn>
+          <p>An event handler [<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>] for <a href="#dfn-pointerlockchange" class="internalDFN" data-link-type="dfn">pointerlockchange</a> events.[<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>]</p>
+        </dd><dt id="widl-Document-onpointerlockerror"><code>onpointerlockerror</code> of type <span class="idlAttrType">EventHandler</span></dt>
+        <dd><dfn data-lt="onpointerlockerror" data-dfn-type="dfn" id="dfn-onpointerlockerror"></dfn>
+          <p>An event handler [<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>] for <a href="#dfn-pointerlockerror" class="internalDFN" data-link-type="dfn">pointerlockerror</a> events.[<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>]</p>
+        </dd><dt id="widl-Document-pointerLockElement"><code>pointerLockElement</code> of type <span class="idlAttrType"><a href="#idl-def-Element" class="idlType"><code>Element</code></a></span>, readonly       , nullable</dt>
+        <dd><dfn data-lt="pointerlockelement" data-dfn-type="dfn" id="dfn-pointerlockelement"></dfn>
+          <p>Returns the element set as the <a href="#dfn-target" class="internalDFN" data-link-type="dfn">target</a> for mouse events while the pointer is locked. Null if lock is pending, pointer is unlocked, or if the target is in another document.</p>
+        </dd>
+      </dl>
+    </section>
+
+    <section id="methods-1" typeof="bibo:Chapter" resource="#methods-1" property="bibo:hasPart">
+      <h3 id="h-methods-1" resource="#h-methods-1"><span property="xhv:role" resource="xhv:heading"><span class="secno">6.2 </span>Methods</span></h3>
+      <dl class="methods"><dt id="widl-Document-exitPointerLock-void"><code>exitPointerLock</code></dt>
+        <dd><dfn data-lt="exitpointerlock" data-dfn-type="dfn" id="dfn-exitpointerlock"></dfn>
+          <p>Initiates an exit from pointer lock state if currently locked to a target in this document, and sends a <a href="#dfn-pointerlockchange" class="internalDFN" data-link-type="dfn">pointerlockchange</a> event when the lock state has been exited.</p>
+          <p>The system mouse cursor must be displayed again and positioned at the same location that it was when pointer lock was entered (the same location that is reported in <code>screenX</code>, <code>screenY</code>, when the pointer is locked).</p>
+          <div><em>No parameters.</em></div>
+          <div><em>Return type: </em><code>void</code></div>
+        </dd>
+      </dl>
+    </section>
+  </section>
+
+  <section id="extensions-to-the-mouseevent-interface" typeof="bibo:Chapter" resource="#extensions-to-the-mouseevent-interface" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-extensions-to-the-mouseevent-interface" resource="#h-extensions-to-the-mouseevent-interface"><span property="xhv:role" resource="xhv:heading"><span class="secno">7. </span>Extensions to the <a href="#idl-def-MouseEvent" class="idlType"><code>MouseEvent</code></a> Interface</span></h2>
+
+    <p><a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">User agent</a>s must extend the MouseEvent interface [
+      <cite><a class="bibref" href="#bib-UIEVENTS">UIEVENTS</a></cite>] with two members:</p>
+
+    <pre class="idl"><span class="idlInterface" id="idl-def-MouseEvent">partial interface <span class="idlInterfaceID">MouseEvent</span> {
+<span class="idlAttribute">    readonly        attribute <span class="idlAttrType">long</span> <span class="idlAttrName"><a href="#widl-MouseEvent-movementX">movementX</a></span>;</span>
+<span class="idlAttribute">    readonly        attribute <span class="idlAttrType">long</span> <span class="idlAttrName"><a href="#widl-MouseEvent-movementY">movementY</a></span>;</span>
+};</span></pre>
+
+    <section id="attributes-1" typeof="bibo:Chapter" resource="#attributes-1" property="bibo:hasPart">
+      <h3 id="h-attributes-1" resource="#h-attributes-1"><span property="xhv:role" resource="xhv:heading"><span class="secno">7.1 </span>Attributes</span></h3>
+      <dl class="attributes"><dt id="widl-MouseEvent-movementX"><code>movementX</code> of type <span class="idlAttrType">long</span>, readonly       </dt>
+        <dd><dfn data-lt="movementx" data-dfn-type="dfn" id="dfn-movementx"></dfn></dd><dt id="widl-MouseEvent-movementY"><code>movementY</code> of type <span class="idlAttrType">long</span>, readonly       </dt>
+        <dd><dfn data-lt="movementy" data-dfn-type="dfn" id="dfn-movementy"></dfn></dd>
+      </dl>
+    </section>
+
+    <p>The members <code>movementX</code> and <code>movementY</code> must provide the change in position of the pointer, as if the values of
+      <code>screenX</code>, <code>screenY</code>, were stored between two subsequent
+      <code>mousemove</code> events <code>eNow</code> and
+      <code>ePrevious</code> and the difference taken
+      <code>movementX = eNow.screenX-ePrevious.screenX</code>.</p>
+
+    <p><code>movementX</code>/<code>Y</code> must be zero for all mouse events except <code>mousemove</code>. All motion data must be delivered via
+      <code>mousemove</code> events such that between any two mouse events
+      <code>earlierEvent</code> and <code>currentEvent</code> the value of
+      <code>currentEvent.screenX-earlierEvent.screenX</code> is equivalent to the sum of all <code>movementX</code> values received on
+      <code>mousemove</code> events after <code>earlierEvent</code>, with the exception of when screenX can not be updated because the pointer is clipped by the user agent screen boundaries.</p>
+
+    <p><code>movementX</code>/<code>Y</code> must be updated regardless of pointer lock state.</p>
+
+    <p>When unlocked, the system cursor can exit and re-enter the <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user
+      agent</a> window. If it does so and the <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user agent</a> was not the target of operating system mouse move events then the most recent pointer position will be unknown to the <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user agent</a> and
+      <code>movementX</code>/<code>Y</code> can not be computed and must be set to zero.</p>
+
+    <p>When pointer lock is enabled <code>clientX</code>, <code>clientY</code>,
+      <code>screenX</code>, and <code>screenY</code> must hold constant values as if the pointer did not move at all once pointer lock was entered. But
+      <code>movementX</code>/<code>Y</code> must continue to provide the change in position of the pointer as when the pointer is unlocked. There will be no limit to <code>movementX</code>/<code>Y</code> values if the mouse is continuously moved in a single direction. The concept of the mouse cursor will have been removed, and it will not move off the window or be clamped by a screen edge.</p>
+
+    <p>The un-initialized value of <code>movementX</code>/<code>Y</code> must be <code>0</code>.</p>
+
+    <p>Large movement values must not appear in situations when mouse input
+      is interupted, such as the mouse cursor leaving the window and then
+      re-entering at another location. 
+      If a <a>User agent</a> experiences a gap in receiving mouse input data from
+      the operating system then the next generated <code>mousemove</code>
+      event must have <code>movementX</code>/<code>Y</code> set to
+      <code>0</code>.
+      These gaps may appear for example when the <a>User agent</a>
+      receives a mouse leaving event at the window system API. As an exception
+      mouse capture may allow the <a>User agent</a> to continue receiving mouse
+      events when the cursor moves outside the window.</p>
+  </section>
+
+  <section id="extensions-to-the-mouseeventinit-dictionary" typeof="bibo:Chapter" resource="#extensions-to-the-mouseeventinit-dictionary" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-extensions-to-the-mouseeventinit-dictionary" resource="#h-extensions-to-the-mouseeventinit-dictionary"><span property="xhv:role" resource="xhv:heading"><span class="secno">8. </span>Extensions to the <a href="#idl-def-MouseEventInit" class="idlType"><code>MouseEventInit</code></a> Dictionary</span></h2>
+
+    <p><a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">User agent</a>s must extend the MouseEventInit dictionary [
+      <cite><a class="bibref" href="#bib-UIEVENTS">UIEVENTS</a></cite>] with two members <code>movementX</code> and
+      <code>movementY</code> used to initialize respective members of <code>MouseEvent</code>.</p>
+
+    <pre class="idl"><span class="idlDictionary" id="idl-def-MouseEventInit">partial dictionary <span class="idlDictionaryID">MouseEventInit</span> {
+<span class="idlMember">             <span class="idlMemberType">long</span> <span class="idlMemberName"><a href="#widl-MouseEventInit-movementX">movementX</a></span> = <span class="idlMemberValue">0</span>;</span>
+<span class="idlMember">             <span class="idlMemberType">long</span> <span class="idlMemberName"><a href="#widl-MouseEventInit-movementY">movementY</a></span> = <span class="idlMemberValue">0</span>;</span>
+};</span></pre>
+
+    <section id="dictionary-mouseeventinit-members" typeof="bibo:Chapter" resource="#dictionary-mouseeventinit-members" property="bibo:hasPart">
+      <h3 id="h-dictionary-mouseeventinit-members" resource="#h-dictionary-mouseeventinit-members"><span property="xhv:role" resource="xhv:heading"><span class="secno">8.1 </span>Dictionary <a class="idlType" href="#idl-def-MouseEventInit"><code>MouseEventInit</code></a> Members</span></h3>
+      <dl class="dictionary-members"><dt id="widl-MouseEventInit-movementX"><code>movementX</code> of type <span class="idlMemberType">long</span>, defaulting to <code>0</code></dt>
+        <dd></dd><dt id="widl-MouseEventInit-movementY"><code>movementY</code> of type <span class="idlMemberType">long</span>, defaulting to <code>0</code></dt>
+        <dd></dd>
+      </dl>
+    </section>
+  </section>
+
+  <section id="requirements" typeof="bibo:Chapter" resource="#requirements" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-requirements" resource="#h-requirements"><span property="xhv:role" resource="xhv:heading"><span class="secno">9. </span>Requirements</span></h2>
+
+    <p>A <dfn data-dfn-type="dfn" id="dfn-default-unlock-gesture">default unlock gesture</dfn> must always be available that will exit pointer lock.</p>
+    <div class="note">
+      <div class="note-title marker" aria-level="3" role="heading" id="h-note3"><span>Note</span></div>
+      <p class="">The ESC key is the recommended <a href="#dfn-default-unlock-gesture" class="internalDFN" data-link-type="dfn">default unlock
+      gesture</a> for <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user agent</a>s with keyboard input. It is recommended that the unlock gesture also match any used to exit fullscreen [
+        <cite><a class="bibref" href="#bib-FULLSCREEN">FULLSCREEN</a></cite>].</p>
+    </div>
+
+    <p>Pointer lock must be exited if the
+      <a>target</a> is disconnected [<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>], or the <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user agent</a>, window, or tab loses focus. Moving focus between elements of active documents [<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>], including between browsing contexts [<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>], does not exit pointer lock. E.g. using the keyboard to move focus between contents of frames or iframes will not exit.[<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>]</p>
+
+    <p>Pointer lock must not be exited when fullscreen [<cite><a class="bibref" href="#bib-FULLSCREEN">FULLSCREEN</a></cite>] is entered or exited unless the pointer is required to enable interaction with the <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user agent</a> graphical user interface, the <a href="#dfn-default-unlock-gesture" class="internalDFN" data-link-type="dfn">default
+      unlock gesture</a> was used to exit both fullscreen and pointer lock, or window or tab focus was lost.</p>
+  </section>
+
+  <section class="informative" id="use-cases" typeof="bibo:Chapter" resource="#use-cases" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-use-cases" resource="#h-use-cases"><span property="xhv:role" resource="xhv:heading"><span class="secno">10. </span>Use Cases</span></h2>
+    <p><em>This section is non-normative.</em></p>
+
+    <section id="relative-view-port-rotation-of-free-moving-virtual-actors" typeof="bibo:Chapter" resource="#relative-view-port-rotation-of-free-moving-virtual-actors" property="bibo:hasPart">
+      <h3 id="h-relative-view-port-rotation-of-free-moving-virtual-actors" resource="#h-relative-view-port-rotation-of-free-moving-virtual-actors"><span property="xhv:role" resource="xhv:heading"><span class="secno">10.1 </span>Relative view-port rotation of free moving virtual actors</span></h3>
+
+      <p>A player on a first/third person game will need to control the view-port orientation. A widely used method is the use of mouse movements to control the viewing angle. This kind of application can use the Pointer Lock API to allow a complete freedom of control over the viewport's yaw and pitch even when the user is not pressing mouse buttons. Those buttons can be used for other actions while constantly providing navigation via mouse movement.</p>
+    </section>
+
+    <section id="free-rotation-of-3d-models-or-panning-of-2d-layers" typeof="bibo:Chapter" resource="#free-rotation-of-3d-models-or-panning-of-2d-layers" property="bibo:hasPart">
+      <h3 id="h-free-rotation-of-3d-models-or-panning-of-2d-layers" resource="#h-free-rotation-of-3d-models-or-panning-of-2d-layers"><span property="xhv:role" resource="xhv:heading"><span class="secno">10.2 </span>Free rotation of 3D models or panning of 2D layers</span></h3>
+
+      <p>Users of a three dimensional modeling application will need to rotate models. A application can use the Pointer Lock API to enable the author to rotate the model freely in a drag operation without limiting motion. Without pointer lock a drag would stop providing motion data when the mouse cursor is limited by the edge of the screen.</p>
+
+      <p>Similarly, absolute motion panning of a large two dimensional image could be permitted in a single drag operation without cursor / screen limits.
+      </p>
+    </section>
+
+    <section id="relative-movement-of-actors" typeof="bibo:Chapter" resource="#relative-movement-of-actors" property="bibo:hasPart">
+      <h3 id="h-relative-movement-of-actors" resource="#h-relative-movement-of-actors"><span property="xhv:role" resource="xhv:heading"><span class="secno">10.3 </span>Relative movement of actors</span></h3>
+
+      <p>A player on a fast reflexes game controls a paddle to bounce back a ball to the opponent, while allowing the same paddle to execute actions based on different mouse buttons being pressed. The application can use the Pointer Lock API to allow the player to react quickly without being concerned about the mouse cursor leaving the game play area and clicking another system application, thus breaking the game flow.</p>
+    </section>
+
+    <section id="jog-movement-over-spinner-controls" typeof="bibo:Chapter" resource="#jog-movement-over-spinner-controls" property="bibo:hasPart">
+      <h3 id="h-jog-movement-over-spinner-controls" resource="#h-jog-movement-over-spinner-controls"><span property="xhv:role" resource="xhv:heading"><span class="secno">10.4 </span>Jog movement over spinner controls</span></h3>
+
+      <p>When modifying numerically magnitudes in applications sometimes the user will prefer to "drag" a numeric control by its button handles to increment or decrement the numeric value. E.g. a spinner with a number entry text box and arrows pointing up and down that can be clicked or dragged on to change the value. An application could use the Pointer Lock API to allow modifying the numeric values beyond what the logical screen bounds allow. The same could apply for a control that fast forwards or rewinds a video or audio stream like a "jog".
+      </p>
+    </section>
+
+    <section id="synthetic-cursor-interaction-with-html-dom-ui" typeof="bibo:Chapter" resource="#synthetic-cursor-interaction-with-html-dom-ui" property="bibo:hasPart">
+      <h3 id="h-synthetic-cursor-interaction-with-html-dom-ui" resource="#h-synthetic-cursor-interaction-with-html-dom-ui"><span property="xhv:role" resource="xhv:heading"><span class="secno">10.5 </span>Synthetic cursor interaction with HTML DOM UI</span></h3>
+
+      <p>Some games use a classical cursor, however they want it to be limited or controlled in some manner. E.g. limited to the bounds of the game, or movable by the game. Locking the pointer enables this if the application creates their own cursor. However HTML and DOM should still be available to use for user interface. Synthetic mouse events should be permitted to allow an application defined cursor to interact with DOM. E.g. the following code should permit a custom cursor to send click events while the pointer is locked:</p>
+
+      <div class="example">
+        <div class="example-title marker"><span>Example 1</span></div><pre class="highlight hljs javascript" id="example-synthetic-cursor"><span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>{
+  <span class="hljs-keyword">if</span> (e._isSynthetic)
+    <span class="hljs-keyword">return</span>;
+  <span class="hljs-comment">// send a synthetic click</span>
+  <span class="hljs-keyword">var</span> ee = <span class="hljs-built_in">document</span>.createEvent(<span class="hljs-string">"MouseEvents"</span>);
+  ee._isSynthetic = <span class="hljs-literal">true</span>;
+  x = myCursor.x;
+  y = myCursor.y;
+  ee.initMouseEvent(<span class="hljs-string">"click"</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">null</span>, <span class="hljs-number">1</span>,
+                    x + e.screenX - e.clientX,
+                    y + e.screenY - e.clientY,
+                    x,
+                    y);
+  <span class="hljs-keyword">var</span> target = <span class="hljs-built_in">document</span>.elementFromPoint(x, y);
+  <span class="hljs-keyword">if</span> (target)
+    target.dispatchEvent(ee);
+});</pre></div>
+
+      <p>Note that synthetic clicks may not be permitted by a <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user agent</a> to produce the same default action as a non-synthetic click. However, application handlers can still take action and provide user interface with existing HTML &amp; DOM mechanisms.</p>
+    </section>
+
+    <section id="view-port-panning-by-moving-a-mouse-cursor-against-the-bounds-of-a-view-port.x" typeof="bibo:Chapter" resource="#view-port-panning-by-moving-a-mouse-cursor-against-the-bounds-of-a-view-port.x" property="bibo:hasPart">
+      <h3 id="h-view-port-panning-by-moving-a-mouse-cursor-against-the-bounds-of-a-view-port.x" resource="#h-view-port-panning-by-moving-a-mouse-cursor-against-the-bounds-of-a-view-port.x"><span property="xhv:role" resource="xhv:heading"><span class="secno">10.6 </span>View-port panning by moving a mouse cursor against the bounds of a
+        view-port.</span></h3>
+
+      <p>Real Time Strategy games often use this technique. When the player moves the pointer to the view-port borders, if they "push" the border with a mouse movement, the view-port is panned over the game area according to how much they move the mouse. When moving the mouse cursor within the bounds of the view port it acts at is typically would on a system. Applications may choose to implement this using pointer lock and the previous use case of "Synthetic cursor interaction with HTML DOM UI" to bring cursor behavior completely under their control.</p>
+    </section>
+
+    <section id="game-lobby-timer-based-pointer-lock" typeof="bibo:Chapter" resource="#game-lobby-timer-based-pointer-lock" property="bibo:hasPart">
+      <h3 id="h-game-lobby-timer-based-pointer-lock" resource="#h-game-lobby-timer-based-pointer-lock"><span property="xhv:role" resource="xhv:heading"><span class="secno">10.7 </span>Game Lobby, timer based pointer lock</span></h3>
+
+      <p>Games that use pointer lock may desire a traditional UI and system cursor while players prepare in a game lobby. Games usually start after a short timer when all players are ready. Ideally the game could then switch to pointer lock mode without requiring an <a href="#dfn-engagement-gesture" class="internalDFN" data-link-type="dfn">engagement gesture</a>. Players should be able to seamlessly move from the game lobby into game navigation.</p>
+    </section>
+
+    <section id="game-portal" typeof="bibo:Chapter" resource="#game-portal" property="bibo:hasPart">
+      <h3 id="h-game-portal" resource="#h-game-portal"><span property="xhv:role" resource="xhv:heading"><span class="secno">10.8 </span>Game Portal</span></h3>
+
+      <p>Game portals, and other sites such as Facebook and Google Plus, host games for users to play. These games may be hosted and served from a different origin from that of the portal site. Embedded games should be able to lock the pointer, even in non-full screen mode.</p>
+    </section>
+
+  </section>
+
+  <section class="informative" id="security" typeof="bibo:Chapter" resource="#security" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-security" resource="#h-security"><span property="xhv:role" resource="xhv:heading"><span class="secno">11. </span>Security</span></h2>
+    <p><em>This section is non-normative.</em></p>
+
+    <p>Security Concerns:</p>
+    <ul>
+      <li>User actions may be misdirected to elements the user did not intend to interact with.</li>
+
+      <li>Pointer Lock will remove the ability of a user to interact with user agent and operating system controls</li>
+
+      <li>Pointer Lock can be called repeated by script after user exits pointer lock, blocking user from meaningful progress.</li>
+
+      <li>Full screen exit instructions are displayed in some <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user agent</a>s when the pointer is moved to the top of the screen. During pointer lock that gesture is not possible.</li>
+    </ul>
+
+    <p>Responses:</p>
+    <ul>
+      <li><a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">User agent</a>s may limit what security origins may lock the pointer.</li>
+
+      <li><a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">User agent</a>s may prompt for confirmation before locking, this preference may be saved as a content setting.</li>
+
+      <li>Escape will always be provided by a <a href="#dfn-default-unlock-gesture" class="internalDFN" data-link-type="dfn">default unlock
+          gesture</a>, e.g. Esc key.</li>
+
+      <li>Persistent display of escape instructions can be provided.</li>
+
+      <li>Repeated escapes of pointer lock can signal <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user agent</a> to not re-lock the pointer without more specific <a href="#dfn-engagement-gesture" class="internalDFN" data-link-type="dfn">engagement gesture</a>, e.g. similar to how Chrome suppresses repeated alert() calls.</li>
+
+      <li>Changing to new tabs, windows, or any other action that causes a page to lose focus will exit pointer lock.</li>
+
+      <li>Pointer lock can only be engaged when the window is in focus in the user agent and operating system.</li>
+    </ul>
+
+    <p>Recommendations:</p>
+    <ul>
+      <li>Esc key should exit pointer lock.</li>
+
+      <li>Preferences per sub-domain can be used to allow or block pointer lock, similar to pop-up, geolocation, and fullscreen.</li>
+    </ul>
+
+    <p>Pointer lock is a required user interaction mode for certain application types, but carries a usability concern if maliciously used. An attacker could remove the ability for a user to control their mouse cursor on their system. <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">User agent</a>s will prevent this by always providing a mechanism to exit pointer lock, by informing the user of how, and by limiting how pointer lock can be entered.</p>
+
+    <p><a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">User agent</a>s will determine their own appropriate policies, which may be specialized per device or differ based on user options.
+    </p>
+  </section>
+
+  <section class="informative" id="frequently-asked-questions" typeof="bibo:Chapter" resource="#frequently-asked-questions" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-frequently-asked-questions" resource="#h-frequently-asked-questions"><span property="xhv:role" resource="xhv:heading"><span class="secno">12. </span>Frequently Asked Questions</span></h2>
+    <p><em>This section is non-normative.</em></p>
+
+    <section id="why-not-merge-with-mouse-capture-setcapture" typeof="bibo:Chapter" resource="#why-not-merge-with-mouse-capture-setcapture" property="bibo:hasPart">
+      <h3 id="h-why-not-merge-with-mouse-capture-setcapture" resource="#h-why-not-merge-with-mouse-capture-setcapture"><span property="xhv:role" resource="xhv:heading"><span class="secno">12.1 </span>Why not merge with Mouse Capture: setCapture()?</span></h3>
+
+      <p>Mouse Capture [<cite><a class="bibref" href="#bib-MDN-SETCAPTURE">MDN-SETCAPTURE</a></cite>] handles low security risk mouse event target lock for the duration of a mouse drag gesture. Pointer lock removes the concept of the cursor and directs all events to a given target. They are related, but different.
+      </p>
+
+      <p>If a browser implemented both, it would be reasonable to support a combination of traits: The security simplicity of "automatically release lock when mouse up" and the increased functionality of total control over mouse input and removal of the system cursor. The security trait would allow more permissive use of the feature for applications that only required a short burst of pointer lock during a drag event.</p>
+
+      <p>This functionality is omitted from the initial version of this spec because it helps the minor use cases in windowed mode but we still do not have an implementation solving the major ones. And, to implement this a browser must implement both, which none does yet. It is not clear if this feature should live on .lock or on .setCapture. If both were implemented, either API could be augmented fairly easily to offer the hybrid functionality.</p>
+    </section>
+
+    <section id="why-not-repurpose-mouseevent-s-.clientx-y-.screenx-y" typeof="bibo:Chapter" resource="#why-not-repurpose-mouseevent-s-.clientx-y-.screenx-y" property="bibo:hasPart">
+      <h3 id="h-why-not-repurpose-mouseevent-s-.clientx-y-.screenx-y" resource="#h-why-not-repurpose-mouseevent-s-.clientx-y-.screenx-y"><span property="xhv:role" resource="xhv:heading"><span class="secno">12.2 </span>Why not repurpose MouseEvent's .clientX/Y .screenX/Y?</span></h3>
+
+      <p>Even in non locked state, the delta values of mouse movement are useful. Changing the meaning of .client or .screen based on lock state would also cause easy errors in code not carefully monitoring the lock state.
+      </p>
+    </section>
+
+    <section id="why-use-.movementx-y-instead-of-.deltax-y" typeof="bibo:Chapter" resource="#why-use-.movementx-y-instead-of-.deltax-y" property="bibo:hasPart">
+      <h3 id="h-why-use-.movementx-y-instead-of-.deltax-y" resource="#h-why-use-.movementx-y-instead-of-.deltax-y"><span property="xhv:role" resource="xhv:heading"><span class="secno">12.3 </span>Why use .movementX/Y instead of .deltaX/Y?</span></h3>
+
+      <p>When the pointer is locked 'wheel' events should be sent to the pointer lock <a href="#dfn-target" class="internalDFN" data-link-type="dfn">target</a> element just as 'mousemove' events are. There is a naming conflict with .deltaX/Y/Z as defined in <a href="http://dev.w3.org/2006/webapi/DOM-Level-3-Events/html/DOM3-Events.html#events-wheelevents">DOM
+        3 'wheel' event</a>.</p>
+    </section>
+
+    <section id="why-bundle" typeof="bibo:Chapter" resource="#why-bundle" property="bibo:hasPart">
+      <h3 id="h-why-bundle" resource="#h-why-bundle"><span property="xhv:role" resource="xhv:heading"><span class="secno">12.4 </span>Why bundle all functionality (hiding cursor, providing mouse deltas)
+        instead of using CSS to hide the cursor, always providing delta values,
+        and offering an API to restrict the cursor movement to a portion of the
+        web page?</span></h3>
+
+      <p>There are good motivations to provide a more fine grained approach. E.g. the use case "View-port panning by moving a mouse cursor against the bounds of a view-port" doesn't require hiding the mouse cursor, only bounding it and always having delta values available. Also, this specification defines the movement deltas to be taken from how the system mouse cursor moves, which incorporates operating system filtering and acceleration of the mouse movement data. Applications may desire access to a more raw form of movement data prior to adjustments appropriate for a mouse cursor. Also, raw data may provide better than pixel level accuracy for movement, as well as higher frequency updates. Providing the raw delta movement would also not require special permission or mode from a user, and for some set of applications that do not require bounding the cursor may reduce the security barriers and prompts needed.</p>
+
+      <p>There are two justifications for postponing this finer grained approach. The first is a concern of specifying what units mouse movement data are provided in. This specification defines .movementX/Y precisely as the same values that could be recorded when the mouse is not under lock by changes in .screenX/Y. Implementations across multiple <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user agent</a>s and operating systems will easily be able to meet that requirement and provide application developers and users with a consistent experience. Further, users are expected to have already configured the full system of hardware input and operating system options resulting in a comfortable control the system mouse cursor. By specifying .movementX/Y in the same units mouse lock API applications will be instantly usable to all users because they have already settled their preferences.</p>
+
+      <p>Secondly, the implementation of providing movement data and bounding the mouse cursor is more difficult in the fine grained approach. Bundling the features together gives implementations freedom to use a variety of techniques as appropriate on each operating system and is more practical to implement. Direct APIs do not exist on major desktop platforms (Windows, Mac OS X, Linux) to bound the cursor to a specific rectangle, and prototypes have not yet been developed to demonstrate building that behavior by e.g.
+        <a href="http://tronche.com/gui/x/xlib/window/attributes/">
+        invisible windows</a> with <a href="http://en.wikipedia.org/wiki/Xlib">Xlib</a> or manual cursor movement on Mac. Unaccelerated Delta values have been proposed to be accessed by reading raw Human Interface Device (HID) data. E.g. WM_INPUT messages on Windows, and USB device APIs on Mac OS X / Linux. The challenge here is interpreting and normalizing the units to some consistent and specifiable scale. Also, most APIs considered to date are limited to USB devices.</p>
+
+      <p>It would be reasonable to consider adding these capabilities in the future, as the currently specified pointer lock API would be easy to continue to support if the finer grained delta and confinement features were implemented.</p>
+
+      <p>The bundled API is selected for implementation practicality, because the desired use cases are supported, and because it will not conflict with future improvements as discussed here.</p>
+    </section>
+
+    <section id="high-resolution-deltas-high-frequency-updates" typeof="bibo:Chapter" resource="#high-resolution-deltas-high-frequency-updates" property="bibo:hasPart">
+      <h3 id="h-high-resolution-deltas-high-frequency-updates" resource="#h-high-resolution-deltas-high-frequency-updates"><span property="xhv:role" resource="xhv:heading"><span class="secno">12.5 </span>High resolution deltas / High frequency updates?</span></h3>
+
+      <p>Not yet, for the same reasons in the previous question:
+        <a href="#why-bundle">"Why bundle all
+        functionality (hiding cursor, providing mouse deltas) instead of using CSS
+        to hide the cursor, always providing delta values, and offering an API to
+        restrict the cursor movement to a portion of the web page?"</a>.</p>
+    </section>
+
+    <section id="why-modify-mouseevent-and-reuse-existing-mouse-events-instead-of-creating-a-mouse-delta-event" typeof="bibo:Chapter" resource="#why-modify-mouseevent-and-reuse-existing-mouse-events-instead-of-creating-a-mouse-delta-event" property="bibo:hasPart">
+      <h3 id="h-why-modify-mouseevent-and-reuse-existing-mouse-events-instead-of-creating-a-mouse-delta-event" resource="#h-why-modify-mouseevent-and-reuse-existing-mouse-events-instead-of-creating-a-mouse-delta-event"><span property="xhv:role" resource="xhv:heading"><span class="secno">12.6 </span>Why modify MouseEvent and reuse existing mouse events instead of
+        creating a mouse delta event?</span></h3>
+
+      <p>When under pointer lock many mouse events remain relevant, e.g. click, mousedown, etc. These all share the same event data structure MouseEvent. If movement data were reported via a new data structure then a new event would be needed for reporting delta movement. The new data structure would have many parallels to MouseEvent to offer the same conveniences, e.g. button and modifier key states. When handling click, down, and up events would the existing mousedown, mouseup be used? If so, they would provide .clientX/Y and .screenX/Y with no useful data, but would lack the convenience of containing the current movement data. Or, new events would also be required for when the mouse is locked.</p>
+
+      <p>Also, movementX/Y are convenient even when the mouse is not locked. This spec requires movement members to always be valid, even when the mouse cursor exists. This reduces code required to track the last cursor state and mouseover/mouseout transitions if applications wish to make use of delta motion of the mouse.</p>
+
+      <p>The only negative of adding movementX/Y to MouseEvent appears to be the unused values in clientX/Y and screenX/Y when under pointer lock. This does not seem to be a significant problem.</p>
+
+      <p>Therefore the minimal change to add movementX/Y to MouseEvent is selected to reduce API and implementation complexity.</p>
+    </section>
+
+    <section id="why-separate-targets-for-mouse-events-under-pointer-lock-and-keyboard-input-focus" typeof="bibo:Chapter" resource="#why-separate-targets-for-mouse-events-under-pointer-lock-and-keyboard-input-focus" property="bibo:hasPart">
+      <h3 id="h-why-separate-targets-for-mouse-events-under-pointer-lock-and-keyboard-input-focus" resource="#h-why-separate-targets-for-mouse-events-under-pointer-lock-and-keyboard-input-focus"><span property="xhv:role" resource="xhv:heading"><span class="secno">12.7 </span>Why separate targets for mouse events under pointer lock and keyboard
+        input focus?</span></h3>
+
+      <p>Consider a game with a 3D view controlled by moving the mouse cursor, while the user may still chat with other users via a text console. It is reasonable for the application to accept text input to an element that is different than where mouse events are being dispatched. This is similar to pre-existing behavior of receiving mousemove events over any element while typing into a form on a page.</p>
+    </section>
+
+  </section>
+
+  <section class="appendix informative" id="acknowledgments" typeof="bibo:Chapter" resource="#acknowledgments" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-acknowledgments" resource="#h-acknowledgments"><span property="xhv:role" resource="xhv:heading"><span class="secno">A. </span>Acknowledgments</span></h2>
+    <p><em>This section is non-normative.</em></p>
+
+    <p>Many have made contributions to the discussions of this specification:
+    </p>
+
+    <ul>
+      <li>Adam Barth</li>
+      <li>Alexey Proskuryakov</li>
+      <li>Aryeh Gregor</li>
+      <li>Boris Zbarsky</li>
+      <li>Brandon Andrews</li>
+      <li>Darin Fisher</li>
+      <li>Dimitri Glazkov</li>
+      <li>Glenn Maynard</li>
+      <li>Gregg Tavares</li>
+      <li>John Villar</li>
+      <li>Jonas Sicking</li>
+      <li>Klaas Heidstra</li>
+      <li>Léonie Watson</li>
+      <li>Ms2ger</li>
+      <li>Olli Pettay</li>
+      <li>Philip Jägenstedt</li>
+      <li>Robert O'Callahan</li>
+      <li>Tab Atkins Jr.</li>
+      <li>Timeless</li>
+      <li>Xiaoqian Wu</li>
+    </ul>
+  </section>
+
+
+  <section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-references" resource="#h-references"><span property="xhv:role" resource="xhv:heading"><span class="secno">B. </span>References</span></h2>
+
+    <section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" property="bibo:hasPart">
+      <h3 id="h-normative-references" resource="#h-normative-references"><span property="xhv:role" resource="xhv:heading"><span class="secno">B.1 </span>Normative references</span></h3>
+      <dl class="bibliography" resource=""><dt id="bib-DOM4">[DOM4]</dt>
+        <dd>Anne van Kesteren; Aryeh Gregor; Ms2ger; Alex Russell; Robin Berjon. W3C. <a href="https://www.w3.org/TR/dom/" property="dc:requires"><cite>W3C DOM4</cite></a>. 19 November 2015. W3C Recommendation. URL: <a href="https://www.w3.org/TR/dom/" property="dc:requires">https://www.w3.org/TR/dom/</a>
+        </dd><dt id="bib-HTML51">[HTML51]</dt>
+        <dd>Steve Faulkner; Arron Eicholz; Travis Leithead; Alex Danilo. W3C. <a href="https://www.w3.org/TR/html51/" property="dc:requires"><cite>HTML 5.1</cite></a>. 15 September 2016. W3C Proposed Recommendation. URL: <a href="https://www.w3.org/TR/html51/" property="dc:requires">https://www.w3.org/TR/html51/</a>
+        </dd><dt id="bib-RFC2119">[RFC2119]</dt>
+        <dd>S. Bradner. IETF. <a href="https://tools.ietf.org/html/rfc2119" property="dc:requires"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119" property="dc:requires">https://tools.ietf.org/html/rfc2119</a>
+        </dd><dt id="bib-UIEVENTS">[UIEVENTS]</dt>
+        <dd>Gary Kacmarcik; Travis Leithead. W3C. <a href="https://www.w3.org/TR/uievents/" property="dc:requires"><cite>UI Events Specification</cite></a>. 4 August 2016. W3C Working Draft. URL: <a href="https://www.w3.org/TR/uievents/" property="dc:requires">https://www.w3.org/TR/uievents/</a>
+        </dd><dt id="bib-WEBIDL">[WEBIDL]</dt>
+        <dd>Cameron McCormack; Boris Zbarsky. W3C. <a href="https://www.w3.org/TR/WebIDL-1/" property="dc:requires"><cite>WebIDL Level 1</cite></a>. 8 March 2016. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/WebIDL-1/" property="dc:requires">https://www.w3.org/TR/WebIDL-1/</a>
+        </dd>
+      </dl>
+    </section>
+
+    <section id="informative-references" typeof="bibo:Chapter" resource="#informative-references" property="bibo:hasPart">
+      <h3 id="h-informative-references" resource="#h-informative-references"><span property="xhv:role" resource="xhv:heading"><span class="secno">B.2 </span>Informative references</span></h3>
+      <dl class="bibliography" resource=""><dt id="bib-FULLSCREEN">[FULLSCREEN]</dt>
+        <dd>Anne van Kesteren; Tantek Çelik. W3C. <a href="https://www.w3.org/TR/fullscreen/" property="dc:references"><cite>Fullscreen</cite></a>. 18 November 2014. W3C Note. URL: <a href="https://www.w3.org/TR/fullscreen/" property="dc:references">https://www.w3.org/TR/fullscreen/</a>
+        </dd><dt id="bib-MDN-SETCAPTURE">[MDN-SETCAPTURE]</dt>
+        <dd>Shepherd, Eric; et. al. <a href="https://developer.mozilla.org/en/DOM/element.setCapture" property="dc:references"><cite>element.setCapture</cite></a> 12 Nov 2010. Mozilla Developer Network. URL: <a href="https://developer.mozilla.org/en/DOM/element.setCapture" property="dc:references">https://developer.mozilla.org/en/DOM/element.setCapture</a>
+        </dd><dt id="bib-MSDN-SETCAPTURE">[MSDN-SETCAPTURE]</dt>
+        <dd>Microsoft Corporation. <a href="http://msdn.microsoft.com/en-us/library/ms536742.aspx" property="dc:references"><cite>setCapture method</cite></a>. URL: <a href="http://msdn.microsoft.com/en-us/library/ms536742.aspx" property="dc:references">http://msdn.microsoft.com/en-us/library/ms536742.aspx</a>
+        </dd>
+      </dl>
+    </section>
+  </section>
+  <p role="navigation" id="back-to-top"><a href="#toc"><abbr title="Back to Top">↑</abbr></a></p>
+  <script async="" defer="" src="https://www.w3.org/scripts/TR/2016/fixup.js"></script>
+</body>
+</html>
