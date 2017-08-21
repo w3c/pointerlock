@@ -6,6 +6,8 @@ Submit a feature request by filing a [Pointer Lock Issue](https://github.com/w3c
 
 ## Pointer Clip: Limiting movement of the cursor without hiding it
 
+https://github.com/w3c/pointerlock/issues/27
+
 * Restrict pointer to a rectangle (while either windowed or in fullscreen (relevant for multi-display))
 * Suppress any user agent or operating system UI elements that appear when hovering cursor in a region. This prevents e.g. a "hover near top of screen to bring down fullscreen exit instruction reminder" or the Mac OSX Dock that appears at screen edges.
 * Security issues would then be essentially the same as pointer lock, the difference being that a) the pointer is not hidden, b) the pointer is not warped, c) the pointer is bounded by the area specified by the web app - not the user agent selected rectangle used as an implementation detail of pointer lock.
