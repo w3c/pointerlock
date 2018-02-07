@@ -204,7 +204,7 @@
         processed by the user agent to interact with the page. e.g. <code>click</code>, but not
         <code>mousemove</code>.
         Engagement gestures are any events included in the definition of being
-        <a href="http://www.whatwg.org/specs/web-apps/current-work/#allowed-to-show-a-popup">
+        <a href="https://html.spec.whatwg.org/multipage/interaction.html#allowed-to-show-a-popup">
           allowed to show a popup</a>
         with the addition of <code>keypress</code> and <code>keyup</code>.
         Note that operating system level accessibility and internationalization
@@ -226,14 +226,14 @@
 
       <p><a>User agent</a>s
       must deliver these events by <a
-      href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">
+      href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">
       queuing a task</a> to <a class="external"
-      href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire">
+      href="https://dom.spec.whatwg.org/#concept-event-fire">
       fire an event</a> of the appropriate name with its
       <code>bubbles</code> attribute [[!DOM4]]
       set to false to the pointer lock
       <a>target</a> element's <a
-      href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document">
+      href="https://dom.spec.whatwg.org/#concept-node-document">
       node document</a>.</p>
 
       <p class="note">Magnification software increases the size of content on
@@ -267,22 +267,22 @@
           event respectively.
 
           <p>Pointer lock must not succeed if the document object's
-          <a href="https://developers.whatwg.org/origin-0.html#active-sandboxing-flag-set">
+          <a href="https://html.spec.whatwg.org/multipage/origin.html#active-sandboxing-flag-set">
           active sandboxing flag set</a> has the <a
-          href="https://developers.whatwg.org/origin-0.html#sandboxed-pointer-lock-browsing-context-flag">
+          href="https://html.spec.whatwg.org/multipage/origin.html#sandboxed-pointer-lock-browsing-context-flag">
           sandboxed pointer lock browsing context flag</a> set.
 
           <p>Pointer lock must not succeed unless the <a>target</a>'s
           <a href="https://dom.spec.whatwg.org/#concept-shadow-including-root">shadow-including root</a>
           is the
-          <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#active-document">active document</a>
+          <a href="https://html.spec.whatwg.org/multipage/browsers.html#active-document">active document</a>
           of a
-          <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a>
+          <a href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a>
           which is (or has an
-          <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>
+          <a href="https://html.spec.whatwg.org/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>
           which is) in focus by a window which is in focus by the
           operating system's window manager. The <a>target</a> element and its
-          <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a>
+          <a href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a>
           need not be in focus.</p>
 
           <p>If a user has exited pointer lock via the <a>default unlock
@@ -352,13 +352,13 @@
       <dl>
         <dt><dfn>onpointerlockchange</dfn></dt>
         <dd>
-          <p>An <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#event-handlers">event handler</a>
+          <p>An <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handler</a>
           for <a>pointerlockchange</a> events.</p>
         </dd>
 
         <dt><dfn>onpointerlockerror</dfn></dt>
         <dd>
-          <p>An <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#event-handlers">event handler</a>
+          <p>An <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handler</a>
           for <a>pointerlockerror</a> events.</p>
         </dd>
 
@@ -529,9 +529,9 @@
       <a href="https://html.spec.whatwg.org/#node-is-disconnected">is disconnected</a>,
       or the <a>user agent</a>,
       window, or tab loses focus. Moving focus between elements of
-      <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#active-document">active documents</a>,
+      <a href="https://html.spec.whatwg.org/multipage/browsers.html#active-document">active documents</a>,
       including between
-      <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing contexts</a>,
+      <a href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing contexts</a>,
       does not exit pointer lock. E.g. using the keyboard
       to move focus between contents of frames or iframes will not exit.</p>
 
