@@ -33,9 +33,6 @@
         previousPublishDate:  "2016-11-22",
         previousMaturity:  "FPWD",
 
-        // if there a publicly available Editor's Draft, this is the link
-        edDraftURI:           "https://w3c.github.io/pointerlock/",
-
         testSuiteURI: "https://github.com/web-platform-tests/wpt/tree/master/pointerlock",
 
         // if this is a LCWD, uncomment and set the end of its review period
@@ -45,44 +42,19 @@
         // only "name" is required
         editors:  [
             { name: "Navid Zolghadr",
-        company: "Google", companyURL: "http://www.google.com/" },
-            { name: "Vincent Scheib (Former editor)", url: "http://www.scheib.net",
-        company: "Google", companyURL: "http://www.google.com/" },
+        company: "Google", companyURL: "http://www.google.com/" },,
         ],
-        otherLinks: [{
-        key: 'Participate',
-          data: [{
-                value: 'We are on Github.',
-                href: 'https://github.com/w3c/pointerlock'
-            }, {
-                value: 'Bugzilla Bug list.',
-                href: 'https://www.w3.org/Bugs/Public/buglist.cgi?component=Pointer%20Lock&list_id=58701&product=WebAppsWG&resolution=---'
-            }, {
-                value: 'Github Issues.',
-                href: 'https://github.com/w3c/pointerlock/issues'
-            }, {
-                value: 'Commit history.',
-                href: 'https://github.com/w3c/pointerlock/commits'
-            }, {
-                value: 'Mailing list.',
-                href: 'http://lists.w3.org/Archives/Public/public-webapps/'
-          }]
-        }],
-        // authors, add as many as you like.
-        // This is optional, uncomment if you have authors as well as editors.
-        // only "name" is required. Same format as editors.
-
-        //authors:  [
-        //    { name: "Your Name", url: "http://example.org/",
-        //      company: "Your Company", companyURL: "http://example.com/" },
-        //],
-
+        formerEditor: [
+          {
+            name: "Vincent Scheib", url: "http://www.scheib.net",
+            company: "Google", companyURL: "http://www.google.com/" }
+        ],
+        github: "w3c/pointerlock",
         // name of the WG
-        wg:           "Web Platform Working Group",
+        wg:           "Web Applications Working Group",
 
         // WG's URI and license
         wgURI:        "http://www.w3.org/WebPlatform/WG/",
-        license:      "w3c-software-doc",
 
         // name (with the @w3c.org) of the public mailing to which comments are due
         wgPublicList: "public-webapps",
@@ -92,7 +64,7 @@
         // This is important for Rec-track documents, do not copy a patent URI from a random
         // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
         // Team Contact.
-        wgPatentURI:  "https://www.w3.org/2004/01/pp-impl/83482/status",
+        wgPatentURI:  "https://www.w3.org/2004/01/pp-impl/114929/status",
       };
     </script>
 
@@ -484,7 +456,7 @@
 
       <p>Large movement values must not appear in situations when mouse input
       is interupted, such as the mouse cursor leaving the window and then
-      re-entering at another location. 
+      re-entering at another location.
       If a <a>User agent</a> experiences a gap in receiving mouse input data from
       the operating system then the next generated <code>mousemove</code>
       event must have <code>movementX</code>/<code>Y</code> set to
@@ -818,7 +790,7 @@
         to implement.  Direct APIs do not exist on major desktop platforms
         (Windows, Mac OS X, Linux)
         to bound the cursor to a specific rectangle, and prototypes have not yet
-        been developed to demonstrate building that behavior by e.g. 
+        been developed to demonstrate building that behavior by e.g.
         <a href="http://tronche.com/gui/x/xlib/window/attributes/">
         invisible windows</a>
         with <a href="http://en.wikipedia.org/wiki/Xlib">Xlib</a>
@@ -842,7 +814,7 @@
       <section>
         <h2>High resolution deltas / High frequency updates?</h2>
 
-        <p>Not yet, for the same reasons in the previous question: 
+        <p>Not yet, for the same reasons in the previous question:
         <a href="#why-bundle">"Why bundle all
         functionality (hiding cursor, providing mouse deltas) instead of using CSS
         to hide the cursor, always providing delta values, and offering an API to
