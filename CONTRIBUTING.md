@@ -1,5 +1,3 @@
-# Web Platform Working Group
-
 Contributions to this repository are intended to become part of Recommendation-track documents governed by the
 [W3C Patent Policy](http://www.w3.org/Consortium/Patent-Policy-20040205/) and
 [Software and Document License](http://www.w3.org/Consortium/Legal/copyright-software). To make substantive contributions to specifications, you must either participate
