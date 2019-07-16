@@ -212,7 +212,7 @@
       </pre>
       <dl>
         <dt>
-          <dfn>requestPointerLock</dfn> method
+          <dfn>requestPointerLock()</dfn> method
         </dt>
         <dd>
           <p>
@@ -241,7 +241,7 @@
             gesture</a>, or pointer lock has not previously been entered for
             this document, an event generated as a result of an <a>engagement
             gesture</a> must be received by the document before
-            <a>requestPointerLock</a> will succeed.
+            {{requestPointerLock()}} will succeed.
           </p>
           <aside class="note" data-link-for="Document">
             <p>
@@ -251,7 +251,7 @@
               re-engages directly with the document.
             </p>
             <p>
-              Conversely, if pointer lock is exited via <a>exitPointerLock</a>
+              Conversely, if pointer lock is exited via {{exitPointerLock()}}
               no <a>engagement gesture</a> is required to reenter pointer lock.
               This enables applications that frequently move between
               interaction modes, and ones that may do so based on a timer or
@@ -260,7 +260,7 @@
             <p data-link-for="Element">
               Pointer lock is commonly combined with fullscreen [[FULLSCREEN]],
               and if an <a>engagement gesture</a> is used to enter fullscreen
-              it is sufficient for a subsequent <a>requestPointerLock</a>.
+              it is sufficient for a subsequent {{requestPointerLock()}}.
             </p>
           </aside>
           <p>
@@ -327,7 +327,7 @@
           </p>
         </dd>
         <dt>
-          <dfn>exitPointerLock</dfn> method
+          <dfn>exitPointerLock()</dfn> method
         </dt>
         <dd>
           <p>
