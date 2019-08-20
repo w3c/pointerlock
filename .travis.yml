@@ -10,7 +10,7 @@ cache:
     - node_modules
 env:
   global:
-    - URL="http://w3c.github.io/pointerlock/ECHIDNA"
+    - URL="https://w3c.github.io/pointerlock/ECHIDNA"
     - DECISION="https://lists.w3.org/Archives/Public/public-webapps/2014JulSep/0627.html"
     - secure: "vHv5OjHMKcK1QzGgMbNKgxEEyYCeSRmox3V+6nCYjF3n9ZK9uDEkX0GEm2jQu6xnPZomOxevcMt1GQwo/zUle7cPNYvp8nrmjXckVOJlSVFIobmr9gqZ11JEOz/kJUNUwNufVrzRHICwq1iTpoxjGqz60Uqj0IsfMEs6HdiPmAqRnBpsVFU+FYKIniSF5GqI7ewPQmiSS+sS1KQoVlz8yfq67o2kiziHFYJz4fV0Q70zW7wPVfTv8t2Yurl301x3U8cwwGkrVrz825L3mZ/v/I4RCgkkNgdN2Rnm9gc4Exozh2QGJcEhQagmBcLKN/Bxw7Y/6GfJpx2zF1WhIOKnkIKQRce7Y4F9jTFEy8enc5h1ahUUb32FKdi/hpl1si7MU+WqYBYnHaOfBWYWMVL1LXxU9uQJPfGsfoSNNJS3qEu1yruwr2HUmtSV74ixr5qCM6XgbtAyX1+Q9p7cPb9jGYroUxiXhMAqJsFcZB11z8SLm6A/QfUaI9evoV+y8OofWW1OQXFn4ZHFZeDSrDYoAmEwrcAHb20f2rzy5u8oSfxkmI6pmIVzmXuRZUo5Rpqj2Qp3a4X0KR3VUheWYa2QJ11Kw6JlRtpafmXHZNoNkzcsa61ziSLxmgilv/yknqtkq09YsnpgIrKeYXqtdSQRtY6bh0ut3jQyAjGk00QRMZQ="
 
