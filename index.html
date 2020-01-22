@@ -173,30 +173,107 @@
     </section>
     <section>
       <h2>
-        <code>pointerlockchange</code> and <code>pointerlockerror</code> Events
+        Pointer Lock and Interfaces
       </h2>
-      <p>
-        Two events are used to communicate pointer lock state change or an
-        error in changing state. They are named <dfn>pointerlockchange</dfn>
-        and <dfn>pointerlockerror</dfn>. If pointer lock is entered or exited
-        for any reason a <a>pointerlockchange</a> event must be sent.
-      </p>
-      <p>
-        <a>User agents</a> must deliver these events by <a data-lt=
-        "queue a task">queuing a task</a> to <a>fire an event</a> of the
-        appropriate name with its <code>bubbles</code> attribute [[DOM]] set to
-        false to the pointer lock <a>target</a> element's [=Node/node
-        document=].
-      </p>
-      <p class="note">
-        Magnification software increases the size of content on the screen. It
-        uses the mouse to move the magnified point of focus around. When a
-        pointer lock is initiated, the magnification software needs to switch
-        to using the keyboard to move the magnified point of focus around
-        instead. When a pointerlockchange event is fired, web browsers
-        therefore need to make sure the event is communicated to assistive
-        technologies like screen magnifiers.
-      </p>
+      <section>
+        <h3>
+          The <dfn>Pointer Lock State</dfn> Definition
+        </h3>
+          <p><a>Pointer Lock State</a> is the state where a single DOM element, which
+            we will call the <dfn>target</dfn>, receives all mouse events and the cursor
+            is hidden.</p>
+          <p>
+            Once in the <a>Pointer Lock State</a> the <a>user agent</a> must fire all
+            relevant user generated {{MouseEvent}} events (for example:
+            `mousemove`, `mousedown`, `mouseup`, `click`, and `wheel`)
+            [[ui-events]] to the <a>target</a> of pointer lock, and not fire
+            mouse events to other elements. Events that require the concept of
+            a mouse cursor must not be dispatched (for example: `mouseover`,
+            `mouseout`, `drag`, and `drop`).
+          </p>
+          <p>
+            <dl data-dfn-for="PointerLockOptions" data-link-for=
+            "PointerLockOptions">
+              While in the <a>Pointer Lock State</a> if <a>unadjustedMovement</a> is
+              <code>true</code> the event coordinates must not be affected by the
+              underlying platform behaviors such as mouse acceleration. In other
+              words, UA must use the APIs provided by the underlying platform to
+              guaranteee getting the raw events. If <a>unadjustedMovement</a>
+              is <code>undefined</code> or <code>false</code> UA must rely on the
+              default behavior of the underlying platform regarding the mouse
+              acceleration.
+            </dl>
+          </p>
+          <p>
+            In the <a>Pointer Lock State</a> the system mouse cursor must be hidden.
+            Movement and button presses of the mouse must not cause the window
+            to lose focus.
+          </p>
+          <p>
+            Synthetic mouse events created by application script act the same
+            regardless of lock state.
+          </p>
+        </p>
+      </section>
+      <section>
+        <h3>
+          `PointerLockOptions` dictionary
+        </h3>
+        <pre class="idl">
+          dictionary PointerLockOptions {
+            boolean unadjustedMovement = false;
+          };
+        </pre>
+        <dl data-dfn-for="PointerLockOptions" data-link-for=
+        "PointerLockOptions">
+          <dt>
+            <dfn>PointerLockOptions</dfn> dictionary
+          </dt>
+          <dd>
+            <p>
+              The options dictionary to customize how the pointer behaves in
+              the locked mode.
+            </p>
+          </dd>
+          <dt>
+            <dfn>unadjustedMovement</dfn> member
+          </dt>
+          <dd>
+            <p>
+              If this value is set to `true`, then the pointer movements will
+              not be affected by the underlying platform modications such as
+              mouse accelaration.
+            </p>
+          </dd>
+        </dl>
+      </section>
+      <section>
+        <h3>
+          `"pointerlockchange"` and `"pointerlockerror"` Events
+        </h3>
+        <p>
+          Two events are used to communicate pointer lock state change or an
+          error in changing state. They are named <dfn>pointerlockchange</dfn>
+          and <dfn>pointerlockerror</dfn>. If pointer lock is entered or exited
+          for any reason a <a>pointerlockchange</a> event must be sent.
+        </p>
+        <p>
+          <a>User agents</a> must deliver these events by <a data-lt=
+          "queue a task">queuing a task</a> to <a>fire an event</a> of the
+          appropriate name with its <code>bubbles</code> attribute [[DOM]] set
+          to false to the pointer lock <a>target</a> element's [=Node/node
+          document=].
+        </p>
+        <p class="note">
+          Magnification software increases the size of content on the screen.
+          It uses the mouse to move the magnified point of focus around. When a
+          pointer lock is initiated, the magnification software needs to switch
+          to using the keyboard to move the magnified point of focus around
+          instead. When a pointerlockchange event is fired, web browsers
+          therefore need to make sure the event is communicated to assistive
+          technologies like screen magnifiers.
+        </p>
+      </section>
     </section>
     <section data-dfn-for="Element" data-link-for="Element">
       <h2>
@@ -208,91 +285,136 @@
       </p>
       <pre class="idl">
         partial interface Element {
-          void requestPointerLock();
+          Promise&lt;void> requestPointerLock(optional PointerLockOptions options = {});
         };
       </pre>
+      <pre class='example' id="example-synthetic-cursor">
+        let lock_element = document.getElementById("lock_element");
+        let lock_button = document.getElementById("lock");
+        lock_button.addEventListener("click", (event) => {
+          lock_element.requestPointerLock({"unadjustedMovement":true}).then(()=>{
+            console.log('successfully locked!');
+          }).catch((e) => {
+            console.log('lock failed with error: ', e);
+          })
+        })
+    </pre>
       <dl>
         <dt>
           <dfn>requestPointerLock()</dfn> method
         </dt>
         <dd>
           <p>
-            Requests that the pointer be locked to a DOM element
-            <dfn>target</dfn>. The <a>user agent</a> determines if pointer lock
-            state will be entered and upon lock state change or error must send
-            either a <a>pointerlockchange</a> or <a>pointerlockerror</a> event
-            respectively.
-          </p>
-          <p>
-            Pointer lock must not succeed if the document object's
-            <a data-cite="html/origin.html#active-sandboxing-flag-set">active
-            sandboxing flag set</a> has the <a>sandboxed pointer lock browsing
-            context flag</a> set.
-          </p>
-          <p>
-            Pointer lock must not succeed unless the <a>target</a>'s
-            <a>shadow-including root</a> is the <a>active document</a> of a
-            [=Document/browsing context=] which is (or has an <a>ancestor
-            browsing context</a> which is) in focus by a window which is in
-            focus by the operating system's window manager. The <a>target</a>
-            element and its [=Document/browsing context=] need not be in focus.
-          </p>
-          <p>
-            If a user has exited pointer lock via the <a>default unlock
-            gesture</a>, or pointer lock has not previously been entered for
-            this document, an event generated as a result of an <a>engagement
-            gesture</a> must be received by the document before
-            {{requestPointerLock()}} will succeed.
-          </p>
-          <aside class="note" data-link-for="Document">
-            <p>
-              This ensures a user can leave a document that constantly attempts
-              to lock the pointer. The document will be blocked from locking
-              upon initial navigation or re-acquiring lock unless the user
-              re-engages directly with the document.
-            </p>
-            <p>
-              Conversely, if pointer lock is exited via {{exitPointerLock()}}
-              no <a>engagement gesture</a> is required to reenter pointer lock.
-              This enables applications that frequently move between
-              interaction modes, and ones that may do so based on a timer or
-              remote network activity.
-            </p>
-            <p data-link-for="Element">
-              Pointer lock is commonly combined with fullscreen [[FULLSCREEN]],
-              and if an <a>engagement gesture</a> is used to enter fullscreen
-              it is sufficient for a subsequent {{requestPointerLock()}}.
-            </p>
-          </aside>
-          <p>
-            If any element (including this one), whose <a>shadow-including
-            root</a> is same as this element's <a>shadow-including root</a>, is
-            already locked (or pending lock) the pointer lock <a>target</a>
-            must be updated to this element and a <a>pointerlockchange</a>
-            event sent.
-          </p>
-          <p>
-            If any element, whose <a>shadow-including root</a> is a different
-            document, is already locked the request must fail and a
-            <a>pointerlockerror</a> event be sent.
-          </p>
-          <p>
-            Once in the locked state the <a>user agent</a> must fire all
-            relevant user generated {{MouseEvent}} events (for example:
-            `mousemove`, `mousedown`, `mouseup`, `click`, and `wheel`)
-            [[ui-events]] to the <a>target</a> of pointer lock, and not fire
-            mouse events to other elements. Events that require the concept of
-            a mouse cursor must not be dispatched (for example: `mouseover`,
-            `mouseout`, `drag`, and `drop`).
-          </p>
-          <p>
-            In the locked state the system mouse cursor must be hidden.
-            Movement and button presses of the mouse must not cause the window
-            to lose focus.
-          </p>
-          <p>
-            Synthetic mouse events created by application script act the same
-            regardless of lock state.
+            RequestPointerLock() will follow these steps
+            <ol>
+              <li>
+                If the the <a>target</a>'s
+                <a>shadow-including root</a> is the <a>active document</a> of a
+                [=Document/browsing context=] which is (or has an <a>ancestor
+                browsing context</a> which is) in focus by a window which is in
+                focus by the operating system's window manager queue <a>pointerlockerror</a> 
+                and <a href="https://heycam.github.io/webidl/#reject">reject</a> the promise with a
+                "{{WrongDocumentError}}" {{DOMException}}.
+              </li>
+              <li>
+                If the pointer is already locked by an element whose <a>shadow-including root</a> is a different
+                document queue <a>pointerlockerror</a> and <a href="https://heycam.github.io/webidl/#reject">reject</a> 
+                the promise with a "{{InUseAttributeError}}" {{DOMException}}.
+              </li>
+              <li>
+                If the pointer is already locked by an element whose <a>shadow-including root</a> is a different
+                document queue <a>pointerlockerror</a> and <a href="https://heycam.github.io/webidl/#reject">reject</a> 
+                the promise with a "{{InUseAttributeError}}" {{DOMException}}.
+              </li>
+              <li>
+                If any element (including this one), whose <a>shadow-including
+                root</a> is same as this element's <a>shadow-including root</a>, is
+                already locked (or pending lock) follow these steps:
+                <ol>
+                  <li>
+                    If the <a>pointerLockOptions</a> have not changed the pointer lock <a>target</a>
+                    must be updated to this element, a <a>pointerlockchange</a>
+                    event sent, and the promise must <a>resolve</a>.
+                  </li>
+                  <li>
+                    If the options have changed and the new options are not supported queue <a>pointerLockError</a>
+                    and <a href="https://heycam.github.io/webidl/#reject">reject</a> the promise with a
+                    "{{NotSupportedError}}" {{DOMException}}
+                  </li>
+                  <li>
+                    If the options have changed and the new options are supported the pointer lock <a>target</a>
+                    must be updated to this element, the new options must be used, a <a>pointerlockchange</a>
+                    event sent, and the promise must <a>resolve</a>.
+                  </li>
+                </ol>
+              </li>
+              <li>
+                If any element (including this one), whose <a>shadow-including
+                root</a> is same as this element's <a>shadow-including root</a>, is
+                already locked (or pending lock) the pointer lock <a>target</a>
+                must be updated to this element, a <a>pointerlockchange</a>
+                event sent and the promise must <a>Resolve</a>.
+              </li>
+              <li data-link-for="Document">
+                If the request was not started from an <a>engagement gesture</a> and 
+                the Document has not previously released a successful Pointer Lock with 
+                {{exitPointerLock()}} queue <a>pointerlockerror</a> and 
+                <a href="https://heycam.github.io/webidl/#reject">reject</a> the promise 
+                with a "{{ConstraintError}}" {{DOMException}}.
+                <aside class="note" data-link-for="Document">
+                  <p>
+                    This ensures a user can leave a document that constantly attempts
+                    to lock the pointer. The document will be blocked from locking
+                    upon initial navigation or re-acquiring lock unless the user
+                    re-engages directly with the document.
+                  </p>
+                  <p>
+                    Conversely, if pointer lock is exited via {{exitPointerLock()}}
+                    no <a>engagement gesture</a> is required to reenter pointer lock.
+                    This enables applications that frequently move between
+                    interaction modes, and ones that may do so based on a timer or
+                    remote network activity.
+                  </p>
+                  <p data-link-for="Element">
+                    Pointer lock is commonly combined with fullscreen [[FULLSCREEN]],
+                    and if an <a>engagement gesture</a> is used to enter fullscreen
+                    it is sufficient for a subsequent {{requestPointerLock()}}.
+                  </p>
+                </aside>
+              </li>
+              <li>
+                if the document object's
+                <a data-cite="html/origin.html#active-sandboxing-flag-set">active
+                sandboxing flag set</a> has the <a>sandboxed pointer lock browsing
+                context flag</a> set queue <a>pointerlockerror</a> and 
+                <a href="https://heycam.github.io/webidl/#reject">reject</a> the 
+                promise with a "{{SecurityError}}" {{DOMException}}.
+              </li>
+              <li>
+                <dl data-dfn-for="PointerLockOptions" data-link-for=
+                "PointerLockOptions">
+                  If if <a>unadjustedMovement</a> is true and the platform does not 
+                  support <a>unadjustedMovement</a> queue <a>pointerlockerror</a> and 
+                  <a href="https://heycam.github.io/webidl/#reject">reject</a> the 
+                  promise with a "{{NotSupportedError}}" {{DOMException}}.
+                </dl>
+                <aside class="note" data-link-for="Document">
+                  "{{NotSupportedError}}" {{DOMException}} should be reserved for 
+                  unsupported options in future iterations of this spec.
+                </aside>
+              </li>
+              <li>
+                <dl data-dfn-for="PointerLockOptions" data-link-for=
+                "PointerLockOptions">
+                  If none of the above errors have occured hide the pointer and send 
+                  all mouse events to the requesting element. Will Enter 
+                  <a>Pointer Lock State</a> with <a>unadjustedMovement</a> set to what 
+                  was pass into the <a>PointerLockOptions</a> object. Then queue 
+                  <a>pointerlockchange</a>PointerLockOptions</a>> and <a>resolve</a>
+                  the promise.
+                </dl>
+              </li>
+            </ol>
           </p>
         </dd>
       </dl>
@@ -332,7 +454,7 @@
         </dt>
         <dd>
           <p>
-            Initiates an exit from pointer lock state if currently locked to a
+            Initiates an exit from <a>pointer lock state</a> if currently locked to a
             target whose <a>shadow-including root</a> is this document, and
             sends a <a>pointerlockchange</a> event when the lock state has been
             exited.
