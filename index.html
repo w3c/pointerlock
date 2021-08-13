@@ -73,7 +73,7 @@
 
     </script>
   </head>
-  <body>
+  <body data-cite="uievents">
     <section id='abstract'>
       This specification defines an API that provides scripted access to raw
       mouse movement data while locking the target of mouse events to a single
@@ -355,8 +355,8 @@
           <p>
             While the pointer is locked, returns the result of
             <a>retargeting</a> the element, which is the target for mouse
-            events, against the <a>context object</a> if the result and the
-            <a>context object</a> are in the same tree, otherwise returns null.
+            events, against [=this=] element if the result and [=this=] element
+            are in the same tree, otherwise returns null.
           </p>
           <p>
             Returns null if lock is pending or if pointer is unlocked.
