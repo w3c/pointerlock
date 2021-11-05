@@ -226,7 +226,7 @@
             possibly through a timer or remote network activity.
           </p>
           <aside class="note">
-            When a single user activation initiates both pointer lock and
+            When a single <a>user activation</a> initiates both pointer lock and
             fullscreen [[FULLSCREEN]], the {{requestPointerLock()}} call
             succeeds only when it is made before a fullscreen request because
             fullscreen is a <a>transient activation consuming api</a>.
@@ -633,10 +633,10 @@
         <p>
           Games that use pointer lock may desire a traditional UI and system
           cursor while players prepare in a game lobby. Games usually start
-          after a short timer when all players are ready. Ideally the game
-          could then switch to pointer lock mode without requiring an
-          <a>engagement gesture</a>. Players should be able to seamlessly move
-          from the game lobby into game navigation.
+          after a short timer when all players are ready. Ideally the game could
+          then switch to pointer lock mode without a <a>user
+          activation</a>. Players should be able to seamlessly move from the
+          game lobby into game navigation.
         </p>
       </section>
       <section>
