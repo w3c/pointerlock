@@ -209,7 +209,7 @@
             element and its [=Document/browsing context=] need not be in focus.
           </p>
           <p>
-            Pointer lock is a <a>transient activation gated api</a>, therefore a
+            Pointer lock is a <a>transient activation-gated API</a>, therefore a
             {{requestPointerLock()}} call MUST fail if <a>transient
             activation</a> is not available.  This prevents locking upon initial
             navigation or re-acquiring lock without user's attention.
@@ -403,7 +403,7 @@
             equivalent to the sum of all {{movementX}} {{movementY}}/code&gt;
             events after <code>earlierEvent</code>, with the exception of when
             screenX can not be updated because the pointer is clipped by the
-            user agent screen boundaries.
+            <a>user agent</a> screen boundaries.
           </p>
           <p>
             {{movementX}}/{{movementY}} must be updated regardless of pointer
@@ -663,7 +663,7 @@
         to interact with.
         </li>
         <li>Pointer Lock will remove the ability of a user to interact with
-        user agent and operating system controls
+        <a>user agent</a> and operating system controls
         </li>
         <li>Pointer Lock can be called repeated by script after user exits
         pointer lock, blocking user from meaningful progress.
@@ -690,16 +690,15 @@
         </li>
         <li>Persistent display of escape instructions can be provided.
         </li>
-        <li>Repeated escapes of pointer lock can signal <a>user agent</a> to
-        not re-lock the pointer without more specific <a>engagement
-        gesture</a>, e.g. similar to how Chrome suppresses repeated alert()
-        calls.
+        <li>Repeated escapes of pointer lock can signal <a>user agent</a> to not
+        re-lock the pointer without more specific user action, e.g. similar to
+        how Chrome suppresses repeated alert() calls.
         </li>
         <li>Changing to new tabs, windows, or any other action that causes a
         page to lose focus will exit pointer lock.
         </li>
         <li>Pointer lock can only be engaged when the window is in focus in the
-        user agent and operating system.
+        <a>user agent</a> and operating system.
         </li>
       </ul>
       <p>
