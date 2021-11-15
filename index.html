@@ -210,9 +210,10 @@
           </p>
           <p>
             Pointer lock is a <a>transient activation-gated API</a>, therefore a
-            {{requestPointerLock()}} call MUST fail if <a>transient
-            activation</a> is not available.  This prevents locking upon initial
-            navigation or re-acquiring lock without user's attention.
+            {{requestPointerLock()}} call MUST fail if the <a>relevant global
+            object</a> of [=this=] does not have <a>transient activation</a>.
+            This prevents locking upon initial navigation or re-acquiring lock
+            without user's attention.
           </p>
           <p>
             A {{requestPointerLock()}} call immediately after the <a>default
@@ -229,7 +230,7 @@
             When a single <a>user activation</a> initiates both pointer lock and
             fullscreen [[FULLSCREEN]], the {{requestPointerLock()}} call
             succeeds only when it is made before a fullscreen request because
-            fullscreen is a <a>transient activation-consuming api</a>.
+            fullscreen is a <a>transient activation-consuming API</a>.
           </aside>
           <p>
             If any element (including this one), whose <a>shadow-including
