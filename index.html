@@ -149,9 +149,9 @@
       </h2>
       <p>
         Two events are used to communicate pointer lock state change or an
-        error in changing state. They are named <dfn>pointerlockchange</dfn>
-        and <dfn>pointerlockerror</dfn>. If pointer lock is entered or exited
-        for any reason a <a>pointerlockchange</a> event must be sent.
+        error in changing state. They are named <dfn data-dfn-for="Document" data-dfn-type="event">pointerlockchange</dfn>
+        and <dfn data-dfn-for="Document" data-dfn-type="event">pointerlockerror</dfn>. If pointer lock is entered or exited
+        for any reason a {{Document/pointerlockchange}} event must be sent.
       </p>
       <p>
         <a>User agents</a> must deliver these events by <a data-lt=
@@ -192,7 +192,7 @@
             Requests that the pointer be locked to a DOM element
             <dfn>target</dfn>. The <a>user agent</a> determines if pointer lock
             state will be entered, and upon lock state change or error MUST send
-            either a <a>pointerlockchange</a> or <a>pointerlockerror</a> event
+            either a {{Document/pointerlockchange}} or {{Document/pointerlockerror}} event
             respectively.
           </p>
           <p>
@@ -236,13 +236,13 @@
             If any element (including this one), whose <a>shadow-including
             root</a> is same as this element's <a>shadow-including root</a>, is
             already locked (or pending lock) the pointer lock <a>target</a>
-            must be updated to this element and a <a>pointerlockchange</a>
+            must be updated to this element and a {{Document/pointerlockchange}}
             event sent.
           </p>
           <p>
             If any element, whose <a>shadow-including root</a> is a different
             document, is already locked the request must fail and a
-            <a>pointerlockerror</a> event be sent.
+            {{Document/pointerlockerror}} event be sent.
           </p>
           <p>
             Once in the locked state the <a>user agent</a> must fire all
@@ -282,7 +282,7 @@
         </dt>
         <dd>
           <p>
-            An <a>event handler idl attribute</a> for <a>pointerlockchange</a>
+            An <a>event handler idl attribute</a> for {{Document/pointerlockchange}}
             events.
           </p>
         </dd>
@@ -291,7 +291,7 @@
         </dt>
         <dd>
           <p>
-            An <a>event handler idl attribute</a> for <a>pointerlockerror</a>
+            An <a>event handler idl attribute</a> for {{Document/pointerlockerror}}
             events.
           </p>
         </dd>
@@ -302,7 +302,7 @@
           <p>
             Initiates an exit from pointer lock state if currently locked to a
             target whose <a>shadow-including root</a> is this document, and
-            sends a <a>pointerlockchange</a> event when the lock state has been
+            sends a {{Document/pointerlockchange}} event when the lock state has been
             exited.
           </p>
           <p>
