@@ -120,8 +120,8 @@
       </p>
       <p>
         Pointer Lock is related to Mouse Capture [[MDN-SETCAPTURE]] (Mouse
-        Capture is unspecified:
-        bug <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=14600">14600</a>).
+        Capture is unspecified: bug <a href=
+        "https://www.w3.org/Bugs/Public/show_bug.cgi?id=14600">14600</a>).
         Capture provides continued event delivery to a target element while a
         mouse is being dragged, but ceases when the mouse button is released.
         Pointer Lock differs by being persistent, not limited by screen
@@ -149,9 +149,11 @@
       </h2>
       <p>
         Two events are used to communicate pointer lock state change or an
-        error in changing state. They are named <dfn data-dfn-for="Document" data-dfn-type="event">pointerlockchange</dfn>
-        and <dfn data-dfn-for="Document" data-dfn-type="event">pointerlockerror</dfn>. If pointer lock is entered or exited
-        for any reason a {{Document/pointerlockchange}} event must be sent.
+        error in changing state. They are named <dfn data-dfn-for="Document"
+        data-dfn-type="event">pointerlockchange</dfn> and <dfn data-dfn-for=
+        "Document" data-dfn-type="event">pointerlockerror</dfn>. If pointer
+        lock is entered or exited for any reason a
+        {{Document/pointerlockchange}} event must be sent.
       </p>
       <p>
         <a>User agents</a> must deliver these events by <a data-lt=
@@ -191,9 +193,9 @@
           <p>
             Requests that the pointer be locked to a DOM element
             <dfn>target</dfn>. The <a>user agent</a> determines if pointer lock
-            state will be entered, and upon lock state change or error MUST send
-            either a {{Document/pointerlockchange}} or {{Document/pointerlockerror}} event
-            respectively.
+            state will be entered, and upon lock state change or error MUST
+            send either a {{Document/pointerlockchange}} or
+            {{Document/pointerlockerror}} event respectively.
           </p>
           <p>
             Pointer lock MUST fail if the document object's [=Document/active
@@ -209,8 +211,8 @@
             element and its [=Document/browsing context=] need not be in focus.
           </p>
           <p>
-            Pointer lock is a <a>transient activation-gated API</a>, therefore a
-            {{requestPointerLock()}} call MUST fail if the <a>relevant global
+            Pointer lock is a <a>transient activation-gated API</a>, therefore
+            a {{requestPointerLock()}} call MUST fail if the <a>relevant global
             object</a> of [=this=] does not have <a>transient activation</a>.
             This prevents locking upon initial navigation or re-acquiring lock
             without user's attention.
@@ -219,16 +221,16 @@
             A {{requestPointerLock()}} call immediately after the <a>default
             unlock gesture</a> MUST fail even when <a>transient activation</a>
             is available, to prevent malicious sites from acquiring an
-            unescapable locked state through repeated lock attempts.  On the
+            unescapable locked state through repeated lock attempts. On the
             other hand, a {{requestPointerLock()}} call immediately after a
             programmatic lock exit (through a {{Document/exitPointerLock()}}
-            call) MUST succeed when <a>transient activation</a> is available, to
-            enable applications to move frequently between interaction modes,
-            possibly through a timer or remote network activity.
+            call) MUST succeed when <a>transient activation</a> is available,
+            to enable applications to move frequently between interaction
+            modes, possibly through a timer or remote network activity.
           </p>
           <aside class="note">
-            When a single <a>user activation</a> initiates both pointer lock and
-            fullscreen [[FULLSCREEN]], the {{requestPointerLock()}} call
+            When a single <a>user activation</a> initiates both pointer lock
+            and fullscreen [[FULLSCREEN]], the {{requestPointerLock()}} call
             succeeds only when it is made before a fullscreen request because
             fullscreen is a <a>transient activation-consuming API</a>.
           </aside>
@@ -236,8 +238,8 @@
             If any element (including this one), whose <a>shadow-including
             root</a> is same as this element's <a>shadow-including root</a>, is
             already locked (or pending lock) the pointer lock <a>target</a>
-            must be updated to this element and a {{Document/pointerlockchange}}
-            event sent.
+            must be updated to this element and a
+            {{Document/pointerlockchange}} event sent.
           </p>
           <p>
             If any element, whose <a>shadow-including root</a> is a different
@@ -282,8 +284,8 @@
         </dt>
         <dd>
           <p>
-            An <a>event handler idl attribute</a> for {{Document/pointerlockchange}}
-            events.
+            An <a>event handler idl attribute</a> for
+            {{Document/pointerlockchange}} events.
           </p>
         </dd>
         <dt>
@@ -291,8 +293,8 @@
         </dt>
         <dd>
           <p>
-            An <a>event handler idl attribute</a> for {{Document/pointerlockerror}}
-            events.
+            An <a>event handler idl attribute</a> for
+            {{Document/pointerlockerror}} events.
           </p>
         </dd>
         <dt>
@@ -302,8 +304,8 @@
           <p>
             Initiates an exit from pointer lock state if currently locked to a
             target whose <a>shadow-including root</a> is this document, and
-            sends a {{Document/pointerlockchange}} event when the lock state has been
-            exited.
+            sends a {{Document/pointerlockchange}} event when the lock state
+            has been exited.
           </p>
           <p>
             The system mouse cursor must be displayed again and positioned at
@@ -634,8 +636,8 @@
         <p>
           Games that use pointer lock may desire a traditional UI and system
           cursor while players prepare in a game lobby. Games usually start
-          after a short timer when all players are ready. Ideally the game could
-          then switch to pointer lock mode without a <a>user
+          after a short timer when all players are ready. Ideally the game
+          could then switch to pointer lock mode without a <a>user
           activation</a>. Players should be able to seamlessly move from the
           game lobby into game navigation.
         </p>
@@ -663,8 +665,8 @@
         <li>User actions may be misdirected to elements the user did not intend
         to interact with.
         </li>
-        <li>Pointer Lock will remove the ability of a user to interact with
-        <a>user agent</a> and operating system controls
+        <li>Pointer Lock will remove the ability of a user to interact with <a>
+          user agent</a> and operating system controls
         </li>
         <li>Pointer Lock can be called repeated by script after user exits
         pointer lock, blocking user from meaningful progress.
@@ -691,9 +693,9 @@
         </li>
         <li>Persistent display of escape instructions can be provided.
         </li>
-        <li>Repeated escapes of pointer lock can signal <a>user agent</a> to not
-        re-lock the pointer without more specific user action, e.g. similar to
-        how Chrome suppresses repeated alert() calls.
+        <li>Repeated escapes of pointer lock can signal <a>user agent</a> to
+        not re-lock the pointer without more specific user action, e.g. similar
+        to how Chrome suppresses repeated alert() calls.
         </li>
         <li>Changing to new tabs, windows, or any other action that causes a
         page to lose focus will exit pointer lock.
