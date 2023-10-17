@@ -811,7 +811,7 @@
       </h2>
       <p>
         A <dfn>default unlock gesture</dfn> must always be available that will
-        [=Exit pointer lock=] with the user agent's [=pointer-lock target=].
+        [=exit pointer lock=] with the [=user agent=]'s [=pointer-lock target=].
       </p>
       <aside class="note">
         <p>
@@ -825,7 +825,7 @@
         "become disconnected">becomes disconnected</a>, or the [=user agent=], 
         window, or tab loses focus. Moving focus between elements of
         [=navigable/active document=], including between [=Document/browsing
-        contexts=] , does not exit pointer lock. E.g. using the keyboard to
+        contexts=] , does not [=exit pointer lock=]. E.g. using the keyboard to
         move focus between contents of frames or iframes will not exit.
       </p>
       <p>
@@ -1002,7 +1002,7 @@
         pointer lock, blocking user from meaningful progress.
         </li>
         <li>Full screen exit instructions are displayed in some [=user
-        agent=]'s when the pointer is moved to the top of the screen. During
+        agent=]s when the pointer is moved to the top of the screen. During
         pointer lock that gesture is not possible.
         </li>
       </ul>
@@ -1011,11 +1011,11 @@
       </p>
       <ul>
         <li>
-          [=user agents=] may limit what security origins may lock the
+          The [=user agents=] may limit what security origins may lock the
           pointer.
         </li>
         <li>
-          [=user agents=] may prompt for confirmation before locking, this
+          The [=user agents=] may prompt for confirmation before locking, this
           preference may be saved as a content setting.
         </li>
         <li>Escape will always be provided by a [=default unlock gesture=],
@@ -1028,7 +1028,7 @@
         to how Chrome suppresses repeated alert() calls.
         </li>
         <li>Changing to new tabs, windows, or any other action that causes a
-        page to lose focus will [=Exit pointer lock=] with the user agent's [=pointer-lock target=].
+        page to lose focus will [=exit pointer lock=] with the [=user agent=]'s [=pointer-lock target=].
         </li>
         <li>Pointer lock can only be engaged when the window is in focus in the
         [=user agent=] and operating system.
@@ -1038,7 +1038,7 @@
         Recommendations:
       </p>
       <ul>
-        <li>Esc key should [=Exit pointer lock=] with the user agent's [=pointer-lock target=].
+        <li>Esc key should [=exit pointer lock=] with the user agent's [=pointer-lock target=].
         </li>
         <li>Preferences per sub-domain can be used to allow or block pointer
         lock, similar to pop-up, geolocation, and fullscreen.
@@ -1049,7 +1049,7 @@
         application types, but carries a usability concern if maliciously used.
         An attacker could remove the ability for a user to control their mouse
         cursor on their system. [=user agents=] will prevent this by always
-        providing a mechanism to exit pointer lock, by informing the user of
+        providing a mechanism to [=exit pointer lock=], by informing the user of
         how, and by limiting how pointer lock can be entered.
       </p>
       <p>
