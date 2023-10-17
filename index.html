@@ -306,7 +306,7 @@
       </p>
       <pre class="idl">
         partial interface Element {
-          Promise&lt;undefined> requestPointerLock(optional PointerLockOptions options = {});
+          Promise&lt;undefined&gt; requestPointerLock(optional PointerLockOptions options = {});
         };
       </pre>
       <pre class='example' id="example-synthetic-cursor">
@@ -322,11 +322,11 @@
     </pre>
       <dl>
         <dt>
-          <dfn>requestPointerLock({{PointerLockOptions}} <dfn>options</dfn>)</dfn> method
+          requestPointerLock({{PointerLockOptions}} <dfn>options</dfn>) method
         </dt>
         <dd>
           <p>
-            Perform the following steps:
+            <br> When <dfn>requestPointerLock</dfn> invoked, perform the following steps:
             <ol>
               <li>
                 Let <var>promise</var> be [=a new promise=].</li>
@@ -720,26 +720,26 @@
         </dt>
         <dd>
           <p>
-            The attributes {{movementX}} {{movementY}} must provide the change
+            The attributes {{movementX}} and {{movementY}} must provide the change
             in position of the pointer, as if the values of
             `screenX`, `screenY`, were stored between two
             subsequent `mousemove` events `eNow` and
             `ePrevious` and the difference taken `movementX =
-            eNow.screenX-ePrevious.screenX`.
+            eNow.screenX - ePrevious.screenX`.
           </p>
           <p>
-            {{movementX}}/{{movementY}} must be zero for all mouse events
+            {{movementX}} and {{movementY}} must be zero for all mouse events
             except `mousemove`. All motion data must be delivered
             via `mousemove` events such that between any two mouse
             events `earlierEvent` and `currentEvent` the
-            value of `currentEvent.screenX-earlierEvent.screenX` is
-            equivalent to the sum of all {{movementX}} {{movementY}}/code&gt;
+            value of `currentEvent.screenX - earlierEvent.screenX` is
+            equivalent to the sum of all {{movementX}} in the
             events after `earlierEvent`, with the exception of when
             screenX can not be updated because the pointer is clipped by the
             [=user agent=] screen boundaries.
           </p>
           <p>
-            {{movementX}}/{{movementY}} must be updated regardless of pointer
+            {{movementX}} and {{movementY}} must be updated regardless of pointer
             lock state.
           </p>
           <p>
@@ -755,15 +755,15 @@
             `clientY`, `screenX`, and
             `screenY` must hold constant values as if the pointer
             did not move at all once pointer lock was entered. But
-            {{movementX}}/{{movementY}} must continue to provide the change in
+            {{movementX}} and {{movementY}} must continue to provide the change in
             position of the pointer as when the pointer is unlocked. There will
-            be no limit to {{movementX}}/{{movementY}} values if the mouse is
+            be no limit to {{movementX}} and {{movementY}} values if the mouse is
             continuously moved in a single direction. The concept of the mouse
             cursor will have been removed, and it will not move off the window
             or be clamped by a screen edge.
           </p>
           <p>
-            The un-initialized value of {{movementX}}/{{movementY}} must be
+            The un-initialized value of {{movementX}} and {{movementY}} must be
             `0`.
           </p>
           <p>
@@ -772,7 +772,7 @@
             and then re-entering at another location. If a [=user agent=]
             experiences a gap in receiving mouse input data from the operating
             system then the next generated `mousemove` event must
-            have {{movementX}}/{{movementY}} set to `0`. These gaps
+            have {{movementX}} and {{movementY}} set to `0`. These gaps
             may appear for example when the [=user agent=] receives a mouse
             leaving event at the window system API. As an exception mouse
             capture may allow the [=user agent=] to continue receiving mouse
