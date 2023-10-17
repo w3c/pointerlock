@@ -176,7 +176,7 @@
         <h3>
           The <dfn>pointer lock state</dfn> definition
         </h3>
-          <p>[=pointer lock state=] is the state where a single DOM element, which
+          <p>The [=pointer lock state=] is the state where a single DOM element, which
             we will call the <dfn>pointer-lock target</dfn>, receives all mouse events and the cursor
             is hidden.</p>
           <p>
@@ -256,8 +256,8 @@
           {{Document/pointerlockchange}} event must be sent.
         </p>
         <p>
-          [=user agents=] must deliver these events by <a data-lt=
-          "queue a task">queuing a task</a> to [=Fire an event=] of the
+          The [=user agents=] must deliver these events by <a data-lt=
+          "queue a task">queuing a task</a> to [=fire an event=] of the
           appropriate name with its `bubbles` attribute [[DOM]] set to
           false to the pointer lock [=Event/target=] element's [=Node/node
           document=].
@@ -281,7 +281,7 @@
               The system mouse cursor must be displayed again and positioned at [=cursor position=]
             </li>
             <li>
-              [=Queue an element task=], given this element, on the [=User Interaction task source=] to do the following:
+              [=Queue an element task=], given this element, on the [=user interaction task source=] to do the following:
                   <ol><li>
                     [=Fire an event=] named 
                     {{pointerlockchange}} at the given element's 
@@ -338,7 +338,7 @@
                 <ol>
                   <li>
                     [=Queue an element task=] on the
-                    [=User Interaction task source=], given this, to perform the following steps:
+                    [=user interaction task source=], given this, to perform the following steps:
                     <ol>
                       <li>
                         [=Fire an event=] named
@@ -361,7 +361,7 @@
                 <ol>
                   <li>
                     [=Queue an element task=] on the 
-                    [=User Interaction task source=], given this, to perform the following steps:
+                    [=user interaction task source=], given this, to perform the following steps:
                     <ol type='i'>
                       <li>
                         [=Fire an event=] named
@@ -390,7 +390,7 @@
                       </li>
                       <li>
                         [=Queue an element task=] on the 
-                        [=User Interaction task source=], given this, to perform the following steps:
+                        [=user interaction task source=], given this, to perform the following steps:
                         <ol>
                           <li>
                             [=Fire an event=] named
@@ -410,7 +410,7 @@
                     <ol>
                       <li>
                         [=Queue an element task=] on the 
-                        [=User Interaction task source=], given this, to perform the following steps:
+                        [=user interaction task source=], given this, to perform the following steps:
                         <ol type='i'>
                           <li>
                             [=Reject=] <var>promise</var> with a "{{NotSupportedError}}" {{DOMException}}.
@@ -434,7 +434,7 @@
                       </li>
                       <li>
                         [=Queue an element task=] on the 
-                          [=User Interaction task source=], given this, to perform the following steps:
+                          [=user interaction task source=], given this, to perform the following steps:
                           <ol type='i'>
                             <li>
                               [=Fire an event=] named 
@@ -460,7 +460,7 @@
                 <ol>
                   <li>
                     [=Queue an element task=] on the 
-                    [=User Interaction task source=], given this, to perform the following steps:
+                    [=user interaction task source=], given this, to perform the following steps:
                     <ol type='i'>
                       <li>
                         [=Fire an event=] named 
@@ -505,7 +505,7 @@
                 <ol>
                   <li>
                     [=Queue an element task=] on the 
-                    [=User Interaction task source=], given this, to perform the following steps:
+                    [=user interaction task source=], given this, to perform the following steps:
                     <ol type='i'>
                       <li>
                         [=Fire an event=] named 
@@ -530,7 +530,7 @@
                   <ol>
                     <li>
                       [=Queue an element task=] on the 
-                      [=User Interaction task source=], given this, to perform the following steps:
+                      [=user interaction task source=], given this, to perform the following steps:
                       <ol type='i'>
                         <li>
                           [=Fire an event=] named 
@@ -575,7 +575,7 @@
                     </ol>
                     <li>
                       [=Queue an element task=] on the 
-                      [=User Interaction task source=], given this, to perform the following steps:
+                      [=user interaction task source=], given this, to perform the following steps:
                       <ol>
                         <li>
                           [=Fire an event=] named 
