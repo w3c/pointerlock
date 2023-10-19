@@ -311,7 +311,7 @@
           Promise&lt;undefined&gt; requestPointerLock(optional PointerLockOptions options = {});
         };
       </pre>
-      <pre class='example' id="example-synthetic-cursor">
+      <pre class='example'>
         let lock_element = document.getElementById("lock_element");
         let lock_button = document.getElementById("lock");
         lock_button.addEventListener("click", (event) =&gt; {
@@ -883,7 +883,7 @@
           interact with DOM. E.g. the following code should permit a custom
           cursor to send click events while the pointer is locked:
         </p>
-        <pre class='example' id="example-synthetic-cursor">
+        <pre class='example'>
             document.addEventListener("click", function (e) {
               if (e._isSynthetic)
                 return;
