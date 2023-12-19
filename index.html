@@ -186,30 +186,31 @@
           a {{PointerLockOptions}} and a <dfn>cursor position</dfn> which is a
           pair of numbers representing the location of the system mouse cursor
           when the Pointer Lock State was entered (the same location that is
-          reported in `screenX`, `screenY`). The [=pointer-lock target=] must
-          receive all relevant user generated {{MouseEvent}} events: namely,
+          reported in `screenX`, `screenY`). The [=pointer-lock target=]
+          receives all relevant user generated {{MouseEvent}} events: namely,
           all user-generated `mousemove`, `mousedown`, `mouseup`, `click`,
           `dblclick`, `auxclick`, and `wheel` [[ui-events]]. No other elements
-          may receive these events while in [=pointer lock state=]. There will
-          be no dispatching of events that require the concept of a mouse
-          cursor: namely, `mouseenter`, `mouseleave`, `mouseover`, `mouseout`,
-          `drag`, and `drop`.
+          receive these events while in [=pointer lock state=]. There will be
+          no dispatching of events that require the concept of a mouse cursor:
+          namely, `mouseenter`, `mouseleave`, `mouseover`, `mouseout`, `drag`,
+          and `drop`.
         </p>
         <p>
           While in the [=pointer lock state=] if the [=pointer-lock options=]'
           {{PointerLockOptions/unadjustedMovement}} member is `true` the event
-          coordinates must not be affected by the underlying platform behaviors
-          such as mouse acceleration. In other words, UA must use the APIs
-          provided by the underlying platform to guarantee getting the raw
-          events. If the {{PointerLockOptions}}'
-          {{PointerLockOptions/unadjustedMovement}} member is `false` UA must
-          rely on the default behavior of the underlying platform regarding the
-          mouse acceleration.
+          coordinates shall not be affected by the underlying platform
+          behaviors such as mouse acceleration. In other words, the user agent
+          uses the APIs provided by the underlying platform to guarantee
+          getting the raw events. If the {{PointerLockOptions}}'
+          {{PointerLockOptions/unadjustedMovement}} member is `false` The user
+          agent relies on the default behavior of the underlying platform
+          regarding the mouse acceleration.
         </p>
         <p>
-          In the [=pointer lock state=] the system mouse cursor must be hidden.
-          Movement and button presses of the mouse must not cause the window to
-          lose focus.
+          In the [=pointer lock state=], the system mouse cursor is hidden and
+          the window is prevented from losing focus, regardless of mouse
+          movement or button presses. This is directly or indirectly achieved
+          utilizing the underlying operating system API.
         </p>
         <p class="note">
           Synthetic mouse events created by application script act the same
@@ -241,7 +242,7 @@
           <dd>
             <p>
               If this value is set to `true`, then the pointer movements will
-              not be affected by the underlying platform modications such as
+              not be affected by the underlying platform modifications such as
               mouse accelaration.
             </p>
           </dd>
@@ -253,15 +254,17 @@
         </h3>
         <p>
           Two events are used to communicate pointer lock state change or an
-          error in changing state. They are named <dfn>pointerlockchange</dfn>
-          and <dfn>pointerlockerror</dfn>. If pointer lock is entered or exited
+          error in changing state. They are named <dfn class=
+          "event">pointerlockchange</dfn> and <dfn class=
+          "event">pointerlockerror</dfn>. If pointer lock is entered or exited
           for any reason a {{Document/pointerlockchange}} event must be sent.
         </p>
         <p>
           The [=user agents=] must deliver these events by <a data-lt=
           "queue a task">queuing a task</a> to [=fire an event=] of the
-          appropriate name with its `bubbles` attribute [[DOM]] set to false to
-          the pointer lock [=Event/target=] element's [=Node/node document=].
+          appropriate name with its {{Event/bubbles}} set to false to the
+          pointer lock [=Event/target=] element's [=Node/node document=]. Refer
+          to algorithm of [[[#requestPointerLock]]] for detail.
         </p>
         <p class="note">
           Magnification software increases the size of content on the screen.
@@ -278,19 +281,16 @@
           <dfn>Exit Pointer Lock</dfn>
         </h3>
         <p>
-          The process of exiting pointer lock, given an element, is as follows:
+          The process of exiting pointer lock, given an |element:Element|, is
+          as follows:
         </p>
-        <ol>
+        <ol class="algorithm">
           <li>The system mouse cursor must be displayed again and positioned at
-          [=cursor position=]
+          [=cursor position=].
           </li>
-          <li>[=Queue an element task=], given this element, on the [=user
-          interaction task source=] to do the following:
-            <ol>
-              <li>[=Fire an event=] named {{pointerlockchange}} at the given
-              element's [=Node/node document=]
-              </li>
-            </ol>
+          <li>[=Queue an element task=] on the [=user interaction task source=]
+          to [=fire an event=] named {{pointerlockchange}} at the given
+          |element:Element|'s [=Node/node document=].
           </li>
           <li>Exit the [=pointer lock state=] by setting [=pointer-lock
           target=], [=pointer-lock options=], and [=cursor position=] to null.
@@ -298,7 +298,8 @@
         </ol>
       </section>
     </section>
-    <section data-dfn-for="Element" data-link-for="Element">
+    <section data-dfn-for="Element" data-link-for="Element" id=
+    "requestPointerLock">
       <h2>
         Extensions to the `Element` Interface
       </h2>
@@ -314,7 +315,7 @@
       <pre class='example'>
         const lock_element = document.getElementById("lock_element");
         const lock_button = document.getElementById("lock");
-        lock_button.addEventListener("click", async (event) => {
+        lock_button.addEventListener("click", async (event) =&gt; {
             try {
                 await lock_element.requestPointerLock({ unadjustedMovement: true });
                 console.log("successfully locked!");
@@ -335,10 +336,10 @@
           <ol class="algorithm">
             <li>Let |promise:Promise| be [=a new promise=].
             </li>
-            <li>When a window is in focus, if the [=this=]'s [=shadow-including
-            root=] is the [=navigable/active document=] of a [=Document/browsing
-            context=] (or has an [=tree/ancestor=] [=browsing context=]) which is not in
-            focus:
+            <li>When a {{Window/window}} is in [=Window/focus=], if the [=this=]'s
+            [=shadow-including root=] is the [=navigable/active document=] of a
+            [=Document/browsing context=] (or has an [=tree/ancestor=]
+            [=browsing context=]) which is not in focus:
               <ol>
                 <li>[=Queue an element task=] on the [=user interaction task
                 source=], given [=this=], to perform the following steps:
@@ -346,8 +347,8 @@
                     <li>[=Fire an event=] named {{pointerlockerror}} at
                     [=this=]'s [=Node/node document=].
                     </li>
-                    <li>[=Reject=] |promise| with a
-                    {{"WrongDocumentError"}} {{DOMException}}.
+                    <li>[=Reject=] |promise| with a {{"WrongDocumentError"}}
+                    {{DOMException}}.
                     </li>
                   </ol>
                 </li>
@@ -423,7 +424,7 @@
                     </li>
                     <li>[=Queue an element task=] on the [=user interaction
                     task source=], given this, to perform the following steps:
-                      <ol type='i'>
+                      <ol>
                         <li>[=Fire an event=] named {{pointerlockchange}} at
                         [=this=]'s [=Node/node document=].
                         </li>
@@ -438,8 +439,8 @@
               </ol>
             </li>
             <li>If the request was not started from an [=engagement gesture=]
-            and the {{Document}} has not previously released a successful Pointer
-            Lock with {{Document/exitPointerLock()}}:
+            and the {{Document}} has not previously released a successful
+            Pointer Lock with {{Document/exitPointerLock()}}:
               <ol>
                 <li>[=Queue an element task=] on the [=user interaction task
                 source=], given this, to perform the following steps:
@@ -477,9 +478,9 @@
                 </p>
               </aside>
             </li>
-            <li>If [=this=]'s [=Node/node document=]'s [=active sandboxing
-            flag set=] has the [=sandboxed pointer lock browsing context
-            flag=] set:
+            <li>If [=this=]'s [=Node/node document=]'s [=Document/active
+            sandboxing flag set=] has the [=sandboxed pointer lock browsing
+            context flag=] set:
               <ol>
                 <li>[=Queue an element task=] on the [=user interaction task
                 source=], given this, to perform the following steps:
