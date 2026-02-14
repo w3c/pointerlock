@@ -169,7 +169,7 @@
           reported in `screenX`, `screenY`). The [=pointer-lock target=]
           receives all relevant user generated {{MouseEvent}} events: namely,
           all user-generated `mousemove`, `mousedown`, `mouseup`, `click`,
-          `dblclick`, `auxclick`, and `wheel` [[ui-events]]. No other elements
+          `dblclick`, `auxclick`, and `wheel` [[POINTEREVENTS]]. No other elements
           receive these events while in [=pointer lock state=]. There will be
           no dispatching of events that require the concept of a mouse cursor:
           namely, `mouseenter`, `mouseleave`, `mouseover`, `mouseout`, `drag`,
@@ -599,8 +599,7 @@
         </dd>
       </dl>
     </section>
-    <section data-dfn-for="MouseEvent" data-link-for="MouseEvent" data-cite=
-    "ui-events">
+    <section data-dfn-for="MouseEvent" data-link-for="MouseEvent">
       <h2>
         Extensions to the `MouseEvent` Interface
       </h2>
@@ -677,8 +676,7 @@
         </dd>
       </dl>
     </section>
-    <section data-dfn-for="MouseEventInit" data-link-for="MouseEventInit"
-    data-cite="ui-events">
+    <section data-dfn-for="MouseEventInit" data-link-for="MouseEventInit">
       <h2>
         Extensions to the `MouseEventInit` Dictionary
       </h2>
@@ -1005,9 +1003,7 @@
         <p>
           When the pointer is locked 'wheel' events should be sent to the
           [=pointer-lock target=] element just as 'mousemove' events are. There
-          is a naming conflict with .deltaX/Y/Z as defined in <a href=
-          "https://w3c.github.io/uievents/#events-wheelevents">DOM 3 'wheel'
-          event</a>.
+          is a naming conflict with {{WheelEvent/deltaX}}/{{WheelEvent/deltaY}}/{{WheelEvent/deltaZ}} [[POINTEREVENTS]].
         </p>
       </section>
       <section id="why-bundle">
